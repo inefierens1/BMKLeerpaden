@@ -145,7 +145,12 @@ body { font-family: var(--font-body); background: var(--kdg-achtergrond); color:
 .flipkaart-achter { background: var(--acc1-licht); color: var(--kdg-donkergrijs); border: 2px solid var(--acc1); transform: rotateY(180deg); font-size: 0.78rem; line-height: 1.5; }
 .flip-hint { font-size: 0.72rem; color: #999; text-align: center; margin-top: 6px; }
 
-/* TABEL */
+/* AFBEELDINGEN */
+  .kdg-img { margin: 16px 0; }
+  .kdg-img img { max-width: 100%; height: auto; display: block; border: 1px solid var(--kdg-lichtgrijs); }
+  .kdg-img figcaption { font-size: 0.75rem; color: var(--kdg-midgrijs); margin-top: 6px; font-style: italic; }
+
+  /* TABEL */
 .kdg-tabel { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 12px; }
 .kdg-tabel th { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 10px 14px; text-align: left; font-family: var(--font-titel); font-weight: 600; font-size: 0.8rem; }
 .kdg-tabel td { padding: 9px 14px; border-bottom: 1px solid var(--kdg-lichtgrijs); vertical-align: top; }
@@ -386,6 +391,10 @@ body { font-family: var(--font-body); background: var(--kdg-achtergrond); color:
         <div class="kaart-titel"><span class="kaart-icoon">🗂</span>Het compartimentenmodel</div>
         <p>Het lichaam wordt in de farmacokinetiek schematisch voorgesteld als een verzameling <strong>compartimenten</strong>: het centrale compartiment (bloedbaan), het doelorgaan, de depotorganen en de metabole organen.</p>
         <p>Een geneesmiddel doorloopt steeds dezelfde weg: <strong>absorptie → distributie → metabolisme → excretie</strong> (ADME).</p>
+        <figure class="kdg-img">
+          <img src="6.1 compartimentenmodel.png" alt="Schema van het compartimentenmodel in de farmacokinetiek">
+          <figcaption>Figuur 6.1 — Het compartimentenmodel: de weg van een geneesmiddel door het lichaam</figcaption>
+        </figure>
       </div>
 
       <div class="kdg-kaart kdg-kaart-zwart">
@@ -397,6 +406,10 @@ body { font-family: var(--font-body); background: var(--kdg-achtergrond); color:
           <li>Via de huid (pleisters, crèmes)</li>
         </ul>
         <div class="kdg-info-zwart"><strong>First-pass effect:</strong> Bij orale inname passeert het geneesmiddel eerst de lever via het poortsysteem. De lever breekt een deel af vóór het de grote circulatie bereikt → lagere biologische beschikbaarheid. Sublinguaal en rectaal ontwijken dit first-pass effect.</div>
+        <figure class="kdg-img">
+          <img src="6.2 first-pass-effect.png" alt="Schema van het first-pass effect via het poortsysteem en de lever">
+          <figcaption>Figuur 6.2 — Het first-pass effect: orale medicatie passeert eerst de lever via het poortsysteem</figcaption>
+        </figure>
       </div>
 
       <div class="kdg-kaart">
@@ -411,14 +424,30 @@ body { font-family: var(--font-body); background: var(--kdg-achtergrond); color:
         <div id="pk-biologisch" class="kdg-tab-inhoud actief">
           <p>De <strong>biologische beschikbaarheid</strong> is het gedeelte van de dosis dat onveranderd in de circulatie terechtkomt. Bij intraveneuze toediening is dit 100%. Bij orale inname is dit lager door het first-pass effect.</p>
           <p><em>Voorbeeld: Biologische beschikbaarheid van 70% wil zeggen dat bij 100mg inname slechts 70mg effectief in de bloedbaan beschikbaar is.</em></p>
+          <figure class="kdg-img">
+            <img src="6.3 biologische-beschikbaarheid.png" alt="Curve die de biologische beschikbaarheid weergeeft in functie van de tijd">
+            <figcaption>Figuur 6.3 — Biologische beschikbaarheid: resorptiefase, piekwaarde en afbraak</figcaption>
+          </figure>
         </div>
         <div id="pk-halfwaardetijd" class="kdg-tab-inhoud">
           <p>De <strong>halfwaardetijd</strong> is de tijdsduur die het lichaam nodig heeft om de plasmaconcentratie te halveren. Ze is specifiek voor elk geneesmiddel.</p>
           <p>Klinisch belang: bepaalt wanneer een nieuwe dosis nodig is. Slaapmedicatie midden in de nacht innemen is zinloos als de halfwaardetijd kort is.</p>
+          <figure class="kdg-img">
+            <img src="6.4 halfwaardetijd-klaring.png" alt="Grafiek van halfwaardetijd en klaring van een geneesmiddel">
+            <figcaption>Figuur 6.4 — Halfwaardetijd en klaring: de plasmaconcentratie halveert telkens na één halfwaardetijd</figcaption>
+          </figure>
         </div>
         <div id="pk-therapeutisch" class="kdg-tab-inhoud">
           <p>Het <strong>therapeutisch venster</strong> is de zone tussen de minimale en maximale bloedspiegel waarbij het geneesmiddel effectief is zonder toxische effecten.</p>
           <p>De breedte van dit venster verschilt sterk per geneesmiddel. Een smal therapeutisch venster vereist strikte opvolging (bv. digoxine, lithium).</p>
+          <figure class="kdg-img">
+            <img src="6.6 therapeutisch-venster.png" alt="Grafiek van het therapeutisch venster en therapeutische breedte">
+            <figcaption>Figuur 6.6 — Therapeutisch venster: de zone tussen subtherapeutisch en toxisch</figcaption>
+          </figure>
+          <figure class="kdg-img">
+            <img src="6.5 steady-state.png" alt="Grafiek van de optimale effectieve spiegel en steady state concentratie">
+            <figcaption>Figuur 6.5 — Optimale effectieve spiegel (steady state): evenwicht tussen absorptie en excretie</figcaption>
+          </figure>
         </div>
         <div id="pk-toxisch" class="kdg-tab-inhoud">
           <p><strong>Subtherapeutische dosis:</strong> het geneesmiddel is aanwezig in de bloedbaan maar in te lage concentratie om effectief te zijn.</p>
@@ -427,6 +456,10 @@ body { font-family: var(--font-body); background: var(--kdg-achtergrond); color:
         <div id="pk-cumulatie" class="kdg-tab-inhoud">
           <p><strong>Cumulatie (opstapeling)</strong> treedt op als de absorptie sneller gaat dan de excretie. De concentratie stijgt geleidelijk totdat de toxische zone bereikt wordt.</p>
           <p>Als hulpverlener moet je bedacht zijn op late bijwerkingen — die kunnen pas na weken optreden (bv. digoxine/Lanoxin®).</p>
+          <figure class="kdg-img">
+            <img src="6.7 cumulatie.png" alt="Grafiek van cumulatie: opstapeling van geneesmiddel tot in de toxische zone">
+            <figcaption>Figuur 6.7 — Cumulatie: geleidelijke opstapeling tot in de toxische zone</figcaption>
+          </figure>
         </div>
       </div>
 
