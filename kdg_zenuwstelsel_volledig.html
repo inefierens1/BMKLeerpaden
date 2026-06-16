@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomedisch Kader — Deel 4: Zenuwstelsel | KdG</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kdg-zwart:       #000000;
+  --kdg-wit:         #ffffff;
+  --kdg-donkergrijs: #282828;
+  --kdg-midgrijs:    #555555;
+  --kdg-lichtgrijs:  #e6e6e6;
+  --kdg-achtergrond: #f5f5f5;
+  --acc1:            #37be87;
+  --acc1-licht:      #e0f8ee;
+  --acc1-donker:     #239966;
+  --acc2:            #5aaab4;
+  --acc2-licht:      #e0f2f4;
+  --acc2-donker:     #3d8a94;
+  --font-titel: 'Nunito', 'Century Gothic', sans-serif;
+  --font-body:  'Open Sans', 'Arial', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--kdg-achtergrond); color: var(--kdg-zwart); font-size: 16px; line-height: 1.65; }
+.kdg-header { background: var(--kdg-zwart); color: var(--kdg-wit); position: sticky; top: 0; z-index: 200; }
+.kdg-header-inner { max-width: 1140px; margin: 0 auto; padding: 13px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.kdg-logo-mark { background: var(--acc1); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 700; font-size: 1rem; padding: 5px 11px; }
+.kdg-logo-area { display: flex; align-items: center; gap: 14px; }
+.kdg-header-title { font-family: var(--font-titel); font-weight: 300; font-size: 0.95rem; }
+.kdg-header-sub { font-size: 0.72rem; color: #aaa; margin-top: 1px; }
+.kdg-progress-wrap { display: flex; align-items: center; gap: 12px; }
+.kdg-progress-bar { width: 200px; height: 3px; background: #333; }
+.kdg-progress-fill { height: 100%; background: var(--acc1); width: 0%; transition: width 0.4s; }
+.kdg-progress-label { font-size: 0.72rem; color: #aaa; white-space: nowrap; }
+.kdg-layout { max-width: 1140px; margin: 0 auto; padding: 28px 32px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+.kdg-sidebar { position: sticky; top: 68px; background: var(--kdg-wit); border-top: 3px solid var(--acc1); }
+.kdg-sidebar-kop { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 10px 16px; font-family: var(--font-titel); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.kdg-nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 16px; cursor: pointer; border-bottom: 1px solid var(--kdg-lichtgrijs); font-size: 0.85rem; color: var(--kdg-midgrijs); text-decoration: none; transition: background 0.15s; }
+.kdg-nav-item:hover { background: var(--acc1-licht); color: var(--kdg-zwart); }
+.kdg-nav-item.actief { background: var(--acc1-licht); color: var(--kdg-zwart); font-weight: 600; border-left: 3px solid var(--acc1); padding-left: 13px; }
+.nav-bal { width: 24px; height: 24px; border-radius: 50%; background: var(--kdg-lichtgrijs); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; font-family: var(--font-titel); color: var(--kdg-midgrijs); transition: background 0.2s; }
+.kdg-nav-item.gedaan .nav-bal { background: var(--acc2); color: var(--kdg-wit); }
+.nav-naam { flex: 1; }
+.nav-sub { font-size: 0.72rem; color: #999; margin-top: 1px; }
+.kdg-content { min-width: 0; }
+.module { display: none; animation: fadeIn 0.25s ease; }
+.module.actief { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.module-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 28px 32px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.module-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--acc1); font-weight: 600; margin-bottom: 8px; }
+.module-titel { font-family: var(--font-titel); font-size: 1.9rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+.module-intro { font-size: 0.9rem; color: #ccc; max-width: 580px; font-weight: 300; line-height: 1.65; }
+.module-pills { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.pill { border: 1px solid #444; color: #ccc; padding: 3px 10px; font-size: 0.72rem; }
+.kdg-kaart { background: var(--kdg-wit); border-top: 3px solid var(--acc1); padding: 22px 26px; margin-bottom: 16px; }
+.kdg-kaart-acc2 { border-top-color: var(--acc2); }
+.kdg-kaart-zwart { border-top-color: var(--kdg-zwart); }
+.kaart-titel { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; color: var(--kdg-zwart); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.kaart-icoon { width: 30px; height: 30px; background: var(--acc1); color: var(--kdg-wit); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.kaart-icoon.acc2 { background: var(--acc2); }
+.kdg-kaart p { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 10px; line-height: 1.65; }
+.kdg-kaart p:last-child { margin-bottom: 0; }
+.kdg-kaart strong { color: var(--kdg-zwart); font-weight: 600; }
+.kdg-kaart ul, .kdg-kaart ol { margin: 10px 0 10px 20px; }
+.kdg-kaart li { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 6px; line-height: 1.6; }
+.kdg-info { background: var(--acc1-licht); border-left: 4px solid var(--acc1); padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-info strong { color: var(--kdg-zwart); }
+.kdg-info2 { background: var(--acc2-licht); border-left: 4px solid var(--acc2); padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-info2 strong { color: var(--kdg-zwart); }
+.kdg-warn { background: #fff8e0; border-left: 4px solid #e8c200; padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-tabel { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
+.kdg-tabel th { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 9px 14px; text-align: left; font-weight: 600; font-size: 0.8rem; }
+.kdg-tabel td { padding: 8px 14px; border-bottom: 1px solid var(--kdg-lichtgrijs); color: var(--kdg-donkergrijs); vertical-align: top; }
+.kdg-tabel tr:hover td { background: var(--acc1-licht); }
+.kdg-img { background: var(--kdg-lichtgrijs); padding: 16px; margin: 16px 0; text-align: center; }
+.kdg-img img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.kdg-img figcaption { font-size: 0.78rem; color: var(--kdg-midgrijs); margin-top: 8px; font-style: italic; }
+.kdg-video { margin: 20px 0; background: var(--kdg-zwart); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.kdg-video-info { display: flex; align-items: center; gap: 12px; flex: 1; }
+.kdg-video-label { background: var(--acc1); color: var(--kdg-wit); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; white-space: nowrap; flex-shrink: 0; }
+.kdg-video-titel { font-family: var(--font-titel); font-size: 0.92rem; font-weight: 600; color: var(--kdg-wit); }
+.kdg-video-knop { display: inline-flex; align-items: center; gap: 8px; background: var(--acc1); color: var(--kdg-wit); padding: 10px 20px; font-size: 0.85rem; font-weight: 700; font-family: var(--font-body); text-decoration: none; white-space: nowrap; transition: background 0.15s; }
+.kdg-video-knop:hover { background: var(--acc1-donker); }
+.kdg-tabs { display: flex; border-bottom: 2px solid var(--kdg-lichtgrijs); flex-wrap: wrap; }
+.kdg-tab-knop { padding: 9px 18px; border: none; background: transparent; font-size: 0.83rem; cursor: pointer; font-family: var(--font-body); color: var(--kdg-midgrijs); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+.kdg-tab-knop:hover { color: var(--kdg-zwart); }
+.kdg-tab-knop.actief { color: var(--kdg-zwart); border-bottom-color: var(--acc1); font-weight: 600; }
+.kdg-tab-inhoud { display: none; padding: 16px 0 0; }
+.kdg-tab-inhoud.actief { display: block; }
+.begrip-kaart { border: 1px solid var(--kdg-lichtgrijs); cursor: pointer; transition: border-color 0.15s; margin-bottom: 8px; }
+.begrip-kaart:hover { border-color: var(--acc1); }
+.begrip-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 10px 14px; font-size: 0.88rem; font-weight: 600; font-family: var(--font-titel); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.begrip-kop span:last-child { flex-shrink: 0; font-size: 1.1rem; }
+.begrip-body { display: none; padding: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); line-height: 1.65; background: var(--kdg-wit); }
+.begrip-body strong { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--acc1-donker); display: block; margin-bottom: 4px; }
+.begrip-body p { margin-bottom: 8px; font-size: 0.86rem; }
+.flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 10px; }
+.flipkaart { height: 120px; perspective: 600px; cursor: pointer; }
+.flipkaart-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
+.flipkaart.gekeerd .flipkaart-inner { transform: rotateY(180deg); }
+.flipkaart-voor, .flipkaart-achter { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; font-size: 0.85rem; }
+.flipkaart-voor { background: var(--kdg-zwart); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 600; }
+.flipkaart-achter { background: var(--acc1-licht); color: var(--kdg-donkergrijs); border: 2px solid var(--acc1); transform: rotateY(180deg); font-size: 0.78rem; line-height: 1.5; }
+.flip-hint { font-size: 0.72rem; color: #999; text-align: center; margin-top: 6px; }
+.kdg-knop { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: var(--font-body); border: none; transition: background 0.15s; }
+.kdg-knop-acc1 { background: var(--acc1); color: var(--kdg-wit); }
+.kdg-knop-acc1:hover { background: var(--acc1-donker); }
+.kdg-knop-acc2 { background: var(--acc2); color: var(--kdg-wit); }
+.kdg-knop-acc2:hover { background: var(--acc2-donker); }
+.kdg-knop-omlijnd { background: transparent; color: var(--kdg-zwart); border: 1px solid var(--kdg-zwart); }
+.kdg-knop-omlijnd:hover { background: var(--kdg-lichtgrijs); }
+.module-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--kdg-lichtgrijs); }
+.welkom-hero { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 40px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.welkom-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--acc1); font-weight: 600; margin-bottom: 10px; }
+.welkom-titel { font-family: var(--font-titel); font-size: 2.4rem; font-weight: 700; line-height: 1.1; margin-bottom: 12px; }
+.welkom-tekst { color: #ccc; font-size: 0.9rem; max-width: 500px; font-weight: 300; line-height: 1.7; }
+.module-overzicht { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 12px; }
+.module-tegel { background: var(--kdg-wit); padding: 20px; cursor: pointer; transition: all 0.15s; border-top: 3px solid var(--kdg-lichtgrijs); }
+.module-tegel:hover { border-top-color: var(--acc1); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.tegel-nummer { font-family: var(--font-titel); font-size: 2rem; font-weight: 700; color: var(--acc1); line-height: 1; }
+.tegel-naam { font-weight: 700; font-size: 0.88rem; color: var(--kdg-zwart); font-family: var(--font-titel); margin-top: 6px; }
+.tegel-sub { font-size: 0.77rem; color: var(--kdg-midgrijs); margin-top: 3px; }
+.tegel-status { font-size: 0.7rem; color: #aaa; margin-top: 8px; }
+.vraag-kaart { background: var(--kdg-wit); border-top: 3px solid var(--kdg-lichtgrijs); padding: 20px 24px; margin-bottom: 14px; }
+.vraag-kaart.beantwoord { border-top-color: var(--acc1); }
+.vraag-num { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--acc1-donker); font-weight: 600; margin-bottom: 6px; }
+.vraag-tekst { font-size: 0.92rem; font-weight: 600; color: var(--kdg-zwart); margin-bottom: 14px; line-height: 1.5; font-family: var(--font-titel); }
+.opties { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.optie-knop { width: 100%; text-align: left; padding: 10px 14px; border: 1px solid var(--kdg-lichtgrijs); background: #fafafa; cursor: pointer; font-size: 0.85rem; color: var(--kdg-donkergrijs); transition: all 0.15s; font-family: var(--font-body); line-height: 1.4; }
+.optie-knop:hover:not(:disabled) { border-color: var(--acc1); background: var(--acc1-licht); color: var(--kdg-zwart); }
+.optie-knop.juist { background: #d4f4e8; border-color: var(--acc1); color: var(--kdg-zwart); font-weight: 600; }
+.optie-knop.fout { background: #fde8e8; border-color: #cc3333; color: #cc3333; }
+.optie-knop:disabled { cursor: default; }
+.feedback { display: none; margin-top: 10px; padding: 9px 13px; font-size: 0.83rem; }
+.feedback.toon { display: block; }
+.feedback.juist { background: #d4f4e8; color: var(--kdg-zwart); border-left: 3px solid var(--acc1); }
+.feedback.fout { background: #fde8e8; color: #990000; border-left: 3px solid #cc3333; }
+.quiz-resultaat { display: none; background: var(--kdg-zwart); color: var(--kdg-wit); padding: 32px; text-align: center; margin-top: 20px; }
+.quiz-resultaat.toon { display: block; }
+.resultaat-score { font-family: var(--font-titel); font-size: 3.5rem; font-weight: 700; color: var(--acc1); }
+.resultaat-sterren { font-size: 1.4rem; margin: 8px 0; }
+.resultaat-bericht { color: #ccc; font-size: 0.9rem; }
+.kdg-quiz-intro { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+.quiz-intro-icoon { font-size: 2rem; }
+.quiz-intro-tekst h3 { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; color: var(--acc1); }
+.quiz-intro-tekst p { font-size: 0.85rem; color: #ccc; font-weight: 300; }
+@media (max-width: 768px) {
+  .kdg-layout { grid-template-columns: 1fr; padding: 14px; }
+  .kdg-sidebar { position: static; }
+  .welkom-titel { font-size: 1.8rem; }
+  .module-titel { font-size: 1.5rem; }
+  .kdg-header-inner { padding: 12px 16px; }
+  .kdg-progress-wrap { display: none; }
+}
+
+/* LEERDOEL BANNERS */
+.leerdoel-banner, .leerdoel-banner2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-left: 5px solid var(--acc1);
+  background: var(--acc1-licht, #e0f2f4);
+}
+.leerdoel-banner2 {
+  border-left-color: var(--acc2, #37be87);
+  background: var(--acc2-licht, #d4f4e8);
+  margin-top: -8px;
+}
+.leerdoel-icoon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.leerdoel-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--acc1-donker, #3d8a94);
+  margin-bottom: 4px;
+  font-family: var(--font-titel);
+}
+.leerdoel-banner2 .leerdoel-label {
+  color: var(--acc2-donker, #289969);
+}
+.leerdoel-inhoud {
+  font-size: 0.9rem;
+  color: var(--kdg-donkergrijs, #282828);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+</style>
+</head>
+<body>
+
+<header class="kdg-header">
+  <div class="kdg-header-inner">
+    <div class="kdg-logo-area">
+      <div class="kdg-logo-mark">KdG</div>
+      <div>
+        <div class="kdg-header-title">Biomedisch Kader</div>
+        <div class="kdg-header-sub">Deel 4 — Zenuwstelsel · 1ste jaar Orthopedagogie</div>
+      </div>
+    </div>
+    <div class="kdg-progress-wrap">
+      <div class="kdg-progress-bar"><div class="kdg-progress-fill" id="progressFill"></div></div>
+      <div class="kdg-progress-label" id="progressLabel">0 / 6 voltooid</div>
+    </div>
+  </div>
+</header>
+
+<div class="kdg-layout">
+  <nav class="kdg-sidebar">
+    <div class="kdg-sidebar-kop">Inhoud</div>
+    <a class="kdg-nav-item actief" onclick="toonModule('welkom')" href="#">
+      <span class="nav-bal">⌂</span>
+      <div class="nav-naam"><div>Overzicht</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-1" onclick="toonModule('m1')" href="#">
+      <span class="nav-bal" id="bal-1">1</span>
+      <div class="nav-naam"><div>Indeling &amp; ontwikkeling</div><div class="nav-sub">Anatomisch &amp; functioneel</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-2" onclick="toonModule('m2')" href="#">
+      <span class="nav-bal" id="bal-2">2</span>
+      <div class="nav-naam"><div>Cellen van het ZS</div><div class="nav-sub">Neuronen &amp; gliacellen</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-3" onclick="toonModule('m3')" href="#">
+      <span class="nav-bal" id="bal-3">3</span>
+      <div class="nav-naam"><div>Centrale zenuwstelsel</div><div class="nav-sub">Hersenen &amp; ruggenmerg</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-4" onclick="toonModule('m4')" href="#">
+      <span class="nav-bal" id="bal-4">4</span>
+      <div class="nav-naam"><div>Prikkeloverdracht</div><div class="nav-sub">Synaps &amp; neurotransmitters</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-5" onclick="toonModule('m5')" href="#">
+      <span class="nav-bal" id="bal-5">5</span>
+      <div class="nav-naam"><div>Aandoeningen</div><div class="nav-sub">CP, NAH, Parkinson, CVA…</div></div>
+    </a>
+    
+    <a class="kdg-nav-item" id="nav-7" onclick="toonModule('m7')" href="#">
+      <span class="nav-bal" id="bal-06">6</span>
+      <div class="nav-naam"><div>Sleutelbegrippen</div><div class="nav-sub">Begrippen herhalen</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-6" onclick="toonModule('m6')" href="#">
+      <span class="nav-bal" id="bal-6">✓</span>
+      <div class="nav-naam"><div>Zelftoets</div><div class="nav-sub">Test je kennis</div></div>
+    </a>
+  </nav>
+
+  <main class="kdg-content">
+
+    <!-- WELKOM -->
+    <div class="module actief" id="welkom">
+      <div class="welkom-hero">
+        <div class="welkom-tag">Karel de Grote Hogeschool · Orthopedagogie · 1ste jaar</div>
+        <div class="welkom-titel">Deel 4: Zenuwstelsel</div>
+        <div class="welkom-tekst">Het zenuwstelsel is het snelste communicatiesysteem van het lichaam. Via miljarden neuronen en synapsen stuurt het elke beweging aan, verwerkt het alle zintuiglijke informatie en maakt het leren, herinneren en denken mogelijk.</div>
+      </div>
+      <div class="leerdoel-banner">
+        <div class="leerdoel-icoon">🎯</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel</div>
+          <div class="leerdoel-inhoud">Je beschrijft de werking van het zenuwstelsel en herkent de rol van reflexen, hersengebieden en neurotransmitters bij gedrag en functioneren.</div>
+        </div>
+      </div>
+      <div class="leerdoel-banner2">
+        <div class="leerdoel-icoon">🏥</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel — Aandoeningen</div>
+          <div class="leerdoel-inhoud">Je past basis medische kennis toe op orthopedagogische situaties en herkent signalen die wijzen op lichamelijke oorzaken van gedrag of klachten.</div>
+        </div>
+      </div>
+
+      <div class="module-overzicht">
+        <div class="module-tegel" onclick="toonModule('m1')">
+          <div class="tegel-nummer">01</div>
+          <div class="tegel-naam">Indeling &amp; ontwikkeling</div>
+          <div class="tegel-sub">Anatomisch, functioneel, prenataal</div>
+          <div class="tegel-status" id="status-1">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m2')">
+          <div class="tegel-nummer">02</div>
+          <div class="tegel-naam">Cellen van het ZS</div>
+          <div class="tegel-sub">Neuronen, axon, myeline, gliacellen</div>
+          <div class="tegel-status" id="status-2">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m3')">
+          <div class="tegel-nummer">03</div>
+          <div class="tegel-naam">Centrale zenuwstelsel</div>
+          <div class="tegel-sub">Ruggenmerg, hersenstam, grote hersenen</div>
+          <div class="tegel-status" id="status-3">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m4')">
+          <div class="tegel-nummer">04</div>
+          <div class="tegel-naam">Prikkeloverdracht</div>
+          <div class="tegel-sub">Synaps, neurotransmitters, reflex</div>
+          <div class="tegel-status" id="status-4">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m5')">
+          <div class="tegel-nummer">05</div>
+          <div class="tegel-naam">Aandoeningen</div>
+          <div class="tegel-sub">CP, NAH, Parkinson, Alzheimer, CVA…</div>
+          <div class="tegel-status" id="status-5">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m7')">
+          <div class="tegel-nummer">06</div>
+          <div class="tegel-naam">Sleutelbegrippen</div>
+          <div class="tegel-sub">Begrippen herhalen</div>
+          <div class="tegel-status" id="status-06">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m6')">
+          <div class="tegel-nummer">✓</div>
+          <div class="tegel-naam">Zelftoets</div>
+          <div class="tegel-sub">10 vragen over alle modules</div>
+          <div class="tegel-status" id="status-6">Nog niet gemaakt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 1: INDELING & ONTWIKKELING -->
+    <div class="module" id="m1">
+      <div class="module-kop">
+        <div class="module-tag">Module 1</div>
+        <div class="module-titel">Indeling &amp; ontwikkeling van het zenuwstelsel</div>
+        <div class="module-intro">Het zenuwstelsel kan zowel anatomisch (naar bouw) als functioneel (naar werking) worden ingedeeld. Het begint al tijdens de derde week van de zwangerschap te ontwikkelen en is pas volledig volgroeid rond het 25ste levensjaar.</div>
+        <div class="module-pills"><span class="pill">🧠 Anatomie</span><span class="pill">⚙️ Functie</span><span class="pill">🌱 Ontwikkeling</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Zenuwstelsel — anatomische en functionele indeling</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/mcVnfY-fPTk?si=gcxxjkc72qwctpgE" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🗺️</span>Anatomische indeling — naar bouw</div>
+        <p>Wat betreft <strong>anatomie (bouw)</strong> wordt het zenuwstelsel verdeeld in:</p>
+        <table class="kdg-tabel">
+          <tr><th>Deel</th><th>Bestaat uit</th><th>Bescherming</th></tr>
+          <tr><td><strong>Centraal zenuwstelsel (CZS)</strong></td><td>Hersenen + ruggenmerg</td><td>Schedel en wervelkolom (benig omhulsel)</td></tr>
+          <tr><td><strong>Perifeer zenuwstelsel (PZS)</strong></td><td>Alle zenuwen buiten het CZS</td><td>Verbindt organen met hersenen en ruggenmerg</td></tr>
+        </table>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="4.1 indeling-zenuwstelsel.png" alt="Schema indeling zenuwstelsel: perifeer en centraal, autonoom en somatisch, sympathisch en parasympathisch"><figcaption>Figuur 1 — Overzicht indeling van het zenuwstelsel</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">⚙️</span>Functionele indeling — naar werking</div>
+        <p>Naar <strong>fysiologie (functie)</strong> wordt het zenuwstelsel verdeeld in:</p>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('func','som',this)">Somatisch ZS (willekeurig)</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('func','auto',this)">Autonoom ZS (onwillekeurig)</button>
+        </div>
+        <div id="func-som" class="kdg-tab-inhoud actief">
+          <p>Het <strong>somatisch zenuwstelsel</strong> regelt de wisselwerking tussen het individu en de omgeving. Het stuurt <strong>dwarsgestreepte skeletspieren</strong> aan — dit zijn bewuste, willekeurige handelingen.</p>
+          <div class="kdg-info">Voorbeelden: bewust je arm optillen, een bal gooien, praten.</div>
+        </div>
+        <div id="func-auto" class="kdg-tab-inhoud">
+          <p>Het <strong>autonoom zenuwstelsel</strong> regelt en coördineert organen die te maken hebben met het levensonderhoud van de cellen — automatisch, zonder dat je er over nadenkt. Doelwitten: gladde spieren, klieren en hartspier.</p>
+          <table class="kdg-tabel" style="margin-top:10px;">
+            <tr><th>Deel</th><th>Werking</th><th>Analogie</th></tr>
+            <tr><td><strong>Sympathisch ZS</strong></td><td>ACTIE — inspanning, stress, gevaar. Verhoogt hartslag, bloeddruk, verwijd pupillen, remt spijsvertering.</td><td>Het gaspedaal</td></tr>
+            <tr><td><strong>Parasympathisch ZS</strong></td><td>RUST — ontspanning, herstel. Verlaagt hartslag, stimuleert spijsvertering, vernauwt pupillen.</td><td>De rem</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🌱</span>Ontwikkeling van het zenuwstelsel</div>
+        <p>Al in de <strong>derde week van de zwangerschap</strong> begint het zenuwstelsel te ontwikkelen vanuit het <strong>ectoderm</strong> — een schijfje weefsel dat de <strong>neurale plaat</strong> wordt. Die krult op tot een <strong>neurale buis</strong>:</p>
+        <ul>
+          <li>Voorste deel → ontwikkelt tot <strong>hersenen</strong></li>
+          <li>Rest → ontwikkelt tot <strong>ruggenmerg</strong></li>
+        </ul>
+        <figure class="kdg-img"><img src="4.2 neurale-buis-ontwikkeling.png" alt="Vorming neurale buis: neurale plaat krult op vanuit ectoderm, dag 19-23 embryo + schema fasen + hersenontwikkeling 3 weken tot pasgeboren baby"><figcaption>Figuur 2 — Van neurale plaat naar neurale buis: embryonale hersenontwikkeling (dag 19–23) en verdere groei</figcaption></figure>
+        <p>Voordat je geboren wordt, zijn bijna alle neuronen al aanwezig. Doorgroei daarna verloopt via <strong>gliacellen</strong> die het isolerende <strong>myeline</strong>laagje vormen om de axonen — vergelijk met het plastic om een stroomdraad. Zo worden zandweggetjes supersnelle vierbaans snelwegen.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="4.3 hersenontwikkeling-fasen.png" alt="Tabel germinale, embryonale en foetale periode met kenmerken per fase"><figcaption>Figuur 3 — Ontwikkelingsperioden: germinaal, embryonaal en foetaal</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="4.3 prenatale-ontwikkeling.png" alt="Tijdlijn prenatale ontwikkeling: CZS, hart, armen, ogen, benen, tanden, gehemelte, oor, uitwendige geslachtsdelen"><figcaption>Figuur 4 — Prenatale ontwikkeling: kritische periodes per orgaan</figcaption></figure>
+        </div>
+        <table class="kdg-tabel" style="margin-top:12px;">
+          <tr><th>Fase</th><th>Periode</th><th>Wat gebeurt er</th></tr>
+          <tr><td>Germinale periode</td><td>Bevruchting → week 2</td><td>Eerste celdeling en innesteling</td></tr>
+          <tr><td>Embryonale fase</td><td>Week 3–8</td><td>Neurale buis vormt zich, hersenen en ruggenmerg beginnen</td></tr>
+          <tr><td>Foetale fase</td><td>Week 9 → geboorte</td><td>Neuronen groeien snel; myelinisering begint</td></tr>
+          <tr><td>Neonatale fase</td><td>Eerste 4 weken na geboorte</td><td>Snelle synapsvorming en myelinisering</td></tr>
+        </table>
+        <div class="kdg-info2" style="margin-top:12px;"><strong>Prefrontale cortex:</strong> Het voorste deel van de grote hersenen — verantwoordelijk voor redeneren, plannen en abstract denken — is pas volledig ontwikkeld rond het <strong>25ste levensjaar</strong>. In de puberteit vindt een echte groeispurt plaats.</div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">← Overzicht</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m1','m2','1')">Volgende: Cellen van het ZS →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 2: CELLEN VAN HET ZS -->
+    <div class="module" id="m2">
+      <div class="module-kop">
+        <div class="module-tag">Module 2</div>
+        <div class="module-titel">Cellen van het zenuwstelsel</div>
+        <div class="module-intro">Het zenuwstelsel bestaat uit twee soorten cellen: neuronen die informatie doorgeven en gliacellen die de neuronen ondersteunen en beschermen. Er zijn drie types neuronen, elk met een eigen functie.</div>
+        <div class="module-pills"><span class="pill">🔵 Neuron</span><span class="pill">⚡ Axon &amp; myeline</span><span class="pill">🔧 Gliacellen</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Cellen van het zenuwstelsel</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/kV6dHxFb-ME?si=V6b2E0E6fGOOy3q_" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔵</span>Bouw van een neuron</div>
+        <p>Hoewel er verschillende types neuronen zijn, is de basisstructuur steeds dezelfde:</p>
+        <table class="kdg-tabel">
+          <tr><th>Onderdeel</th><th>Functie</th><th>Richting</th></tr>
+          <tr><td><strong>Cellichaam</strong></td><td>Relatief groot, bevat de kern</td><td>—</td></tr>
+          <tr><td><strong>Dendrieten</strong></td><td>Korte uitlopers die impulsen opvangen</td><td>→ naar het cellichaam</td></tr>
+          <tr><td><strong>Axon</strong></td><td>Één (meestal lange) uitloper die impulsen wegvoert</td><td>→ weg van het cellichaam</td></tr>
+          <tr><td><strong>Myelineschede</strong></td><td>Vettige isolerende laag om het axon — versnelt geleiding</td><td>—</td></tr>
+          <tr><td><strong>Insnoering van Ranvier</strong></td><td>Onderbreking in de myelineschede — zorgt voor saltatorische geleiding</td><td>—</td></tr>
+        </table>
+        <div class="kdg-info"><strong>Eénrichtingverkeer:</strong> In een neuronuitloper gaat de impuls altijd in één richting — van dendriet via cellichaam naar axon.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="4.5 motorisch-neuron.png" alt="Gedetailleerd neuron met dendrite, cell body, nucleus, Schwann cell, myelin sheath, node of Ranvier, axon, axon terminal"><figcaption>Figuur 5 — Bouw van een neuron: alle onderdelen gelabeld</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="4.4 neuron-bouw.png" alt="Drie neurotypes: motorische zenuwcel, sensorische zenuwcel en schakelcel met dendrieten, cellichaam, axon en impulsrichting"><figcaption>Figuur 6 — Drie types neuronen met impulsrichting</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🎯</span>Drie types neuronen</div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('neur','mot',this)">Motorische neuronen</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('neur','sen',this)">Sensorische neuronen</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('neur','scha',this)">Schakelneuronen</button>
+        </div>
+        <div id="neur-mot" class="kdg-tab-inhoud actief">
+          <p><strong>Vervoeren impulsen van het CZS naar de rest van het lichaam.</strong></p>
+          <p>Verbinden het centraal zenuwstelsel met de uitvoerders: spieren en klieren. Groot cellichaam, meerdere korte dendrieten, één lang axon dat eindigt in een verbreding of vertakking.</p>
+          <div class="kdg-info2">Richting: CZS → spieren/klieren (efferent = afvoerend)</div>
+        </div>
+        <div id="neur-sen" class="kdg-tab-inhoud">
+          <p><strong>Vervoeren impulsen van de sensoren in het lichaam naar het CZS.</strong></p>
+          <p>Hebben maar één dendriet die heel lang kan zijn. Het axon stuurt de impulsen naar het CZS (meestal het ruggenmerg). Dendriet en axon lijken op elkaar — het onderscheid zit in de richting.</p>
+          <div class="kdg-info2">Richting: zintuigen → CZS (afferent = aanvoerend)</div>
+        </div>
+        <div id="neur-scha" class="kdg-tab-inhoud">
+          <p><strong>Dragen impulsen over van het ene op het andere neuron.</strong></p>
+          <p>Dendrieten en axon zijn meestal kort. De meeste neuronen in het ruggenmerg en in de hersenen zijn schakelneuronen. Ze vormen complexe netwerken voor informatieverwerking.</p>
+          <div class="kdg-info2">Verbinding: neuron ↔ neuron (interneuron)</div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔧</span>Gliacellen — de ondersteunende cellen</div>
+        <p>Naast neuronen bevat het zenuwstelsel ook <strong>gliacellen</strong>. Zij groeien na de geboorte door en spelen een cruciale rol:</p>
+        <ul>
+          <li>Vormen het <strong>myeline</strong>laagje om axonen → isolatie en versnelling van signaalgeleiding</li>
+          <li>Ondersteunen, voeden en beschermen de neuronen</li>
+          <li>Ruimen afvalstoffen op in de hersenen</li>
+          <li>Helpen bij herstel na beschadiging</li>
+        </ul>
+        <div class="kdg-info">De hersenen bevatten meer gliacellen dan neuronen. Ze zijn essentieel voor het goed functioneren van het zenuwstelsel.</div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🃏</span>Kernbegrippen — draai de kaart om</div>
+        <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+        <div class="flip-grid">
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Dendriet</div><div class="flipkaart-achter">Korte uitloper van een neuron die impulsen opvangt en naar het cellichaam stuurt.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Axon</div><div class="flipkaart-achter">Lange uitloper van een neuron die impulsen wegvoert van het cellichaam naar de volgende cel.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Myeline</div><div class="flipkaart-achter">Vettige isolerende schede om het axon. Versnelt de geleiding van impulsen — vergelijk met plastic om een stroomdraad.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Afferent</div><div class="flipkaart-achter">Aanvoerend — van periferie naar CZS. Sensorische neuronen zijn afferent.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Efferent</div><div class="flipkaart-achter">Afvoerend — van CZS naar periferie. Motorische neuronen zijn efferent.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Gliacel</div><div class="flipkaart-achter">Ondersteunende cel van het zenuwstelsel. Vormt myeline, voedt en beschermt neuronen.</div></div></div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m1')">← Indeling &amp; ontwikkeling</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m2','m3','2')">Volgende: Centraal zenuwstelsel →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 3: CENTRAAL ZENUWSTELSEL -->
+    <div class="module" id="m3">
+      <div class="module-kop">
+        <div class="module-tag">Module 3</div>
+        <div class="module-titel">Het centraal zenuwstelsel</div>
+        <div class="module-intro">Het CZS bestaat uit het ruggenmerg en de hersenen. We bekijken de structuren van onderaan naar boven: ruggenmerg, hersenstam, kleine hersenen, tussenhersenen, limbisch systeem en de grote hersenen met hun kwabben.</div>
+        <div class="module-pills"><span class="pill">🦴 Ruggenmerg</span><span class="pill">🧠 Hersenstam</span><span class="pill">🔬 Grote hersenen</span><span class="pill">❤️ Limbisch systeem</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Het ruggenmerg</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/9OUX_t7A3NU?si=ufCYolEokZ7R73Fw" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🗺️</span>Overzicht — het centraal zenuwstelsel</div>
+        <p>We bekijken de structuren van onder naar boven. Alle onderdelen werken nauw samen.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="4.6 overzicht-hersenen.png" alt="Zijaanzicht hersenen met labels: hersenschors, grote hersenen, thalamus, hypothalamus, hypofyse, middenhersenen, pons, verlengde merg, kleine hersenen, ruggenmerg"><figcaption>Figuur 7 — Overzicht centraal zenuwstelsel: alle structuren gelabeld</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="4.9 cerebellum.png" alt="Locatie grote hersenen, kleine hersenen en hersenstam in het hoofd — voor- en zijaanzicht"><figcaption>Figuur 8 — Locatie grote hersenen (a), kleine hersenen (b) en hersenstam (c)</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🦴</span>Ruggenmerg</div>
+        <p>Het ruggenmerg verbindt de hersenstam met het perifere zenuwstelsel en loopt door de wervelkolom. Het bestaat uit <strong>opstijgende</strong> (afferente) en <strong>dalende</strong> (efferente) zenuwbundels.</p>
+        <table class="kdg-tabel">
+          <tr><th>Baan</th><th>Richting</th><th>Functie</th></tr>
+          <tr><td><strong>Opstijgende banen</strong></td><td>Zintuigen → hersenen</td><td>Sensorische informatie aanvoeren (afferent)</td></tr>
+          <tr><td><strong>Dalende banen</strong></td><td>Hersenen → spieren</td><td>Motorische opdrachten sturen (efferent)</td></tr>
+        </table>
+        <p style="margin-top:10px;">Het ruggenmerg heeft een vlindervormige grijze kern (neuronen) omringd door witte zenuwbundels. De <strong>achterste hoornen</strong> bevatten sensorische neuronen; de <strong>voorste hoornen</strong> bevatten motorische neuronen.</p>
+        <figure class="kdg-img" style="margin-top:12px;"><img src="4.7 ruggenmerg-dwarsdoorsnede.png" alt="Dwarsdoorsnede ruggenmerg: witte stof, grijze stof, motorische voorhoorn, sensorische achterhoorn, zenuwknoop, motorische en sensorische zenuwen"><figcaption>Figuur 9 — Dwarsdoorsnede ruggenmerg: sensorische achterhoorn (blauw) en motorische voorhoorn (rood)</figcaption></figure>
+        <div class="kdg-warn"><strong>Bij een ruggenmergletsel:</strong> Hoe hoger de beschadiging, hoe groter de verlamming. Het ruggenmerg kan ook zelf eenvoudige reflexen aansturen — zonder tussenkomst van de hersenen.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔗</span>Hersenstam — vitale functies</div>
+        <p>De hersenstam is essentieel voor <strong>vitale levensfuncties</strong>: lichaamstemperatuur, hartslag, ademhaling, bloeddruk, slaapritme, urineren, kauwen en pupilgrootte. Ze bestaat uit 3 delen:</p>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('hstam','med',this)">Medulla (verlengde merg)</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('hstam','pons',this)">Pons (brug van Varol)</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('hstam','mid',this)">Middenhersenen</button>
+        </div>
+        <div id="hstam-med" class="kdg-tab-inhoud actief">
+          <p>Verbonden met het ruggenmerg. Stuurt signalen van de hersenen naar het lichaam. Betrokken bij hartslag, bloeddruk, spijsvertering en lichaamstemperatuur.</p>
+        </div>
+        <div id="hstam-pons" class="kdg-tab-inhoud">
+          <p>Verbindt kleine en grote hersenen. Voorste deel: stuurt sensorische (bewegings)informatie naar grote hersenen. Achterste deel: helpt bij ademhaling, smaak en slaap.</p>
+        </div>
+        <div id="hstam-mid" class="kdg-tab-inhoud">
+          <p>Betrokken bij zintuiglijke en motorische functies, visuele en auditieve reflexen, pupilreflex en gehoor.</p>
+        </div>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="4.8 hersenstam-schema.png" alt="Hersenstam schema met grote hersenen, thalamus, hypothalamus, middenhersenen, pons, verlengde merg en kleurcodes voor functies: ademhaling, hartslag, honger, oogbewegingen, lichaamstemperatuur, slaap"><figcaption>Figuur 10 — Hersenstam: structuren en functies per deel</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">⚖️</span>Kleine hersenen (cerebellum) — coördinatie</div>
+        <p>Het cerebellum bevat <strong>meer neuronen dan de rest van de hersenen bij elkaar</strong>. Het is verantwoordelijk voor <strong>balans, coördinatie en voortbeweging</strong>.</p>
+        <p>De functie is <strong>indirect</strong>: het houdt in de gaten of het doel van bepaalde bewegingen bereikt wordt en zorgt voor aanpassing. Na verwijdering kunnen spieren nog even krachtig aanspannen — maar de beweging is ongecoördineerd.</p>
+        <div class="kdg-info"><strong>Samenwerking:</strong> Kleine hersenen + basale ganglia + grote hersenen werken samen bij elke beweging.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🔀</span>Tussenhersenen: thalamus &amp; hypothalamus</div>
+        <table class="kdg-tabel">
+          <tr><th>Structuur</th><th>Functie</th></tr>
+          <tr><td><strong>Thalamus</strong></td><td>Schakelstation voor sensorische impulsen. Geeft voorrang aan bepaalde informatie (bv. bij het lezen hoor je niets om je heen). Reguleert geconcentreerdheid.</td></tr>
+          <tr><td><strong>Hypothalamus</strong></td><td>Regelcentrum voor homeostase: bloeddruk, temperatuur, dorst, honger. Stuurt ook de hypofyse aan (zie Deel 3 Hormoonstelsel).</td></tr>
+        </table>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="4.10 thalamus-hypothalamus.png" alt="Locatie thalamus en hypothalamus in de hersenen: zijaanzicht en vooraanzicht met kleurcodering"><figcaption>Figuur 11 — Thalamus (groen) en hypothalamus (oranje) in de tussenhersenen</figcaption></figure>
+      </div>
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">⚙️</span>Basale ganglia — bewegingscontrole</div>
+        <p>De basale ganglia zijn een groep hersenstructuren rondom de thalamus. Ze zorgen ervoor dat bepaalde bewegingen <strong>gemakkelijker verlopen</strong> en andere worden <strong>onderdrukt</strong>. Ze werken samen met het cerebellum via de thalamus naar de cortex.</p>
+        <div class="kdg-info2"><strong>Substantia nigra:</strong> onderdeel van de basale ganglia (ligt in de hersenstam). Produceert dopamine. Bij de ziekte van Parkinson sterven deze cellen af → bewegingsstoornissen.</div>
+        <figure class="kdg-img" style="margin-top:12px;"><img src="4.11 basale-ganglia.png" alt="Basale ganglia: putamen, nucleus caudatus, globus pallidus, subthalamic nucleus, substantia nigra, thalamus — zijaanzicht en vooraanzicht hersenen"><figcaption>Figuur 12 — Basale ganglia: structuren rondom de thalamus (links zijaanzicht, rechts vooraanzicht)</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">❤️</span>Limbisch systeem: hippocampus &amp; amygdala</div>
+
+        <div class="kdg-video" style="margin-bottom:14px;">
+          <div class="kdg-video-info">
+            <span class="kdg-video-label">▶ Video</span>
+            <span class="kdg-video-titel">Het limbisch systeem</span>
+          </div>
+          <a class="kdg-video-knop" href="https://youtu.be/iEzr2u5xlPc?si=8_LCnhh8aVJa7ZdM" target="_blank">▶ Bekijk op YouTube</a>
+        </div>
+
+        <p>Het limbisch systeem ligt in het binnenste deel van de grote hersenen en speelt een cruciale rol bij <strong>emotie, emotioneel geheugen, motivatie en genot</strong>.</p>
+        <table class="kdg-tabel">
+          <tr><th>Structuur</th><th>Functie</th></tr>
+          <tr><td><strong>Hippocampus</strong></td><td>Slaat kennis en herinneringen op in het langetermijngeheugen. Haalt herinneringen op. Codeert de <em>context</em> (wie, wat, waar).</td></tr>
+          <tr><td><strong>Amygdala</strong></td><td>Speelt een centrale rol bij angst en emotionele verwerking. Codeert de <em>emotie</em> bij een herinnering. Helpt te onderscheiden wanneer er gevaar is.</td></tr>
+        </table>
+        <div class="kdg-info">We hebben meer kans om informatie te onthouden als we er een gevoel of emotie bij hebben. Adrenaline bij angst kan herinneringen als het ware "inbranden" — wat bij trauma heel problematisch kan zijn.</div>
+        <figure class="kdg-img" style="margin-top:12px;"><img src="4.12 limbisch-systeem.png" alt="Limbisch systeem: amygdala en hippocampus in de hersenen — vooraanzicht en zijaanzicht"><figcaption>Figuur 13 — Limbisch systeem: amygdala (emotie) en hippocampus (geheugen)</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">💧</span>Hersenventrikels &amp; cerebrospinale vloeistof</div>
+        <p>De hersenen bevatten 4 <strong>ventrikels</strong> (holtes) gevuld met <strong>cerebrospinale vloeistof</strong> (hersenvocht). Ze zijn verbonden met het ruggenmerg en met elkaar.</p>
+        <ul>
+          <li>Laterale ventrikels (1 &amp; 2): in de hersenhelften van de cortex</li>
+          <li>3e ventrikel: op de middenlijn, onder de laterale ventrikels</li>
+          <li>4e ventrikel: tussen hersenstam en cerebellum</li>
+        </ul>
+        <p>Het hersenvocht <strong>beschermt</strong> de hersenen tegen schokken, geeft stevigheid, voert voedingsstoffen aan en verwijdert afvalstoffen. Op MRI zijn vergrote ventrikels te zien bij <strong>hersenatrofie</strong>.</p>
+        <figure class="kdg-img" style="margin-top:12px;"><img src="4.13 hersenventrikels.png" alt="Hersenventrikels in doorsnede: laterale ventrikels, derde ventrikel, vierde ventrikel, aqueduct en interventriculair foramen"><figcaption>Figuur 14 — De 4 hersenventrikels: laterale ventrikels (blauw), 3e en 4e ventrikel</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🧠</span>Grote hersenen (cerebrum) — de 4 kwabben</div>
+
+        <div class="kdg-video" style="margin-bottom:14px;">
+          <div class="kdg-video-info">
+            <span class="kdg-video-label">▶ Video</span>
+            <span class="kdg-video-titel">Hersenen: functies en stoornissen</span>
+          </div>
+          <a class="kdg-video-knop" href="https://youtu.be/GB0alp3liYQ?si=iEdVKwUt1vAlmuf1" target="_blank">▶ Bekijk op YouTube</a>
+        </div>
+
+        <p>De grote hersenen ontvangen en verwerken alle sensorische informatie en sturen de spieren aan. Ze bestaan uit een linker en rechter <strong>hersenhelft (hemisfeer)</strong>, verbonden door de <strong>hersenbalk (corpus callosum)</strong>.</p>
+        <div class="kdg-info2"><strong>Kruisverbinding:</strong> De linkerhersenhelft ontvangt informatie van de rechterlichaamszijde en stuurt deze aan — en omgekeerd.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="4.14 grote-hersenen.jpg" alt="Zijaanzicht grote hersenen (cerebrum) met cerebellum en brain stem zichtbaar"><figcaption>Figuur 15 — Grote hersenen (cerebrum), kleine hersenen en hersenstam</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="4.15 hersenkwabben.jpg" alt="De 4 hersenkwabben met kleurcodes: frontaal (blauw), pariëtaal (geel), occipitaal (roze), temporaal (groen)"><figcaption>Figuur 16 — De 4 hersenkwabben: frontaal, pariëtaal, occipitaal, temporaal</figcaption></figure>
+        </div>
+
+        <table class="kdg-tabel" style="margin-top:14px;">
+          <tr><th>Kwab</th><th>Naam</th><th>Functies</th></tr>
+          <tr><td><strong>Frontaalkwab</strong></td><td>Voorhoofdskwab</td><td>Denken, gedrag, emoties, spreken (gebied van <strong>Broca</strong>), plannen, motivatie, motoriek</td></tr>
+          <tr><td><strong>Occipitaalkwab</strong></td><td>Achterhoofdskwab</td><td>Visuele verwerking — beelden begrijpen die via het netvlies binnenkomen</td></tr>
+          <tr><td><strong>Pariëtaalkwab</strong></td><td>Wandbeenkwab</td><td>Voelen, proeven, lezen, rekenen, ruimtelijk inzicht</td></tr>
+          <tr><td><strong>Temporaalkwab</strong></td><td>Slaapbeenkwab</td><td>Auditieve verwerking, kortetermijngeheugen, taal begrijpen (gebied van <strong>Wernicke</strong> in linker temporaalkwab)</td></tr>
+        </table>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="4.16 motorische-sensorische-schors.jpg" alt="Hersenkwabben met motorische centra, sensorische centra, spraak, reuk, horen, zien en complexe bewegingen"><figcaption>Figuur 17 — Motorische en sensorische schorsgebieden per lichaamsdeel</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="4.17 broca-wernicke.jpg" alt="Schorsgebieden: motorische cortex, sensorische cortex, prefrontale cortex, gebied van Broca, gebied van Wernicke, auditief centrum, visueel centrum, smaakcentrum"><figcaption>Figuur 18 — Schorsgebieden: Broca (spreken), Wernicke (begrijpen) en andere centra</figcaption></figure>
+        </div>
+
+        <div class="kdg-info" style="margin-top:14px;">
+          <strong>Grijze stof vs. witte stof:</strong><br>
+          <strong>Grijze stof</strong> (hersenschors) = zenuwcellen en dendrieten → verwerkt informatie.<br>
+          <strong>Witte stof</strong> (onder de schors) = axonen → zorgt voor communicatie tussen hersengebieden.
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m2')">← Cellen van het ZS</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m3','m4','3')">Volgende: Prikkeloverdracht →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 4: PRIKKELOVERDRACHT -->
+    <div class="module" id="m4">
+      <div class="module-kop">
+        <div class="module-tag">Module 4</div>
+        <div class="module-titel">Prikkeloverdracht</div>
+        <div class="module-intro">Het zenuwstelsel werkt in een vast patroon: sensorische input → verwerking → motorische output. Aan de basis van dit alles liggen synapsen en neurotransmitters — de chemische boodschappers die neuronen laten communiceren.</div>
+        <div class="module-pills"><span class="pill">⚡ Synaps</span><span class="pill">🧪 Neurotransmitters</span><span class="pill">🔄 Reflex</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">De synaps</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/XIQ0vJpzwPQ?si=zadPGje2gUt8Q6RO" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔄</span>Sensorische input → Verwerking → Motorische output</div>
+        <p>Het zenuwstelsel verloopt in 3 functionele fasen:</p>
+        <table class="kdg-tabel">
+          <tr><th>Fase</th><th>Wat</th><th>Wie</th></tr>
+          <tr><td><strong>Sensorische input</strong></td><td>Zintuigen vangen prikkels op → vertalen naar impulsen → sturen naar CZS</td><td>Sensoren &amp; sensorische neuronen</td></tr>
+          <tr><td><strong>Verwerking</strong></td><td>CZS ontvangt, beoordeelt en bepaalt de reactie</td><td>Hersenen &amp; ruggenmerg</td></tr>
+          <tr><td><strong>Motorische output</strong></td><td>CZS stuurt impulsen naar effectoren (spieren of klieren)</td><td>Motorische neuronen</td></tr>
+        </table>
+        <div class="kdg-info" style="margin-top:10px;"><strong>Voorbeeld verfijnde beweging:</strong> Stap 1: sensorische prikkel → primaire sensorische schors. Stap 2: aftoetsen in secundair sensorisch gebied. Stap 3: motorisch antwoord naar primaire motorische cortex. Stap 4: verfijning in secundaire motorische cortex → efferente baan → spier.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">⚡</span>De synaps — communicatie tussen neuronen</div>
+        <p>Een <strong>synaps</strong> is het punt waarop twee neuronen met elkaar communiceren. Neuronen raken elkaar niet fysiek — er is een kleine ruimte: de <strong>synaptische spleet</strong>.</p>
+        <ul>
+          <li><strong>Pre-synaptisch neuron:</strong> verstuurt het signaal</li>
+          <li><strong>Post-synaptisch neuron:</strong> ontvangt het signaal</li>
+        </ul>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="4.17 synaps.png" alt="Synaps schema: axon, neurotransmitters, synaptische spleet, receptoren, pre- en post-synaptisch neuron — gedetailleerde doorsnede"><figcaption>Figuur 19 — Synaps: pre-synaptisch neuron, spleet en receptoren van post-synaptisch neuron</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="4.18 synaps-stappen.png" alt="Synaptische overdracht stap voor stap: axon, eindknopje, synatisch blaasje, neurotransmitter, synaptische spleet, membraanreceptor, dendriet — elektrisch naar chemisch naar elektrisch signaal"><figcaption>Figuur 20 — Synaptische overdracht: van elektrisch signaal naar chemisch naar elektrisch</figcaption></figure>
+        </div>
+        <p style="margin-top:10px;font-weight:600;font-family:var(--font-titel);">De 4 stappen van synaptische overdracht:</p>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Stap 1 — Aanmaak neurotransmitters</span><span>+</span></div>
+          <div class="begrip-body"><p>In het cellichaam en axon van de pre-synaptische cel worden neurotransmitters geproduceerd. Via een impuls worden ze overgebracht naar de synaps aan het uiteinde van het axon.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Stap 2 — Vrijlating in de spleet</span><span>+</span></div>
+          <div class="begrip-body"><p>Een actiepotentiaal bereikt de synaps → calcium stroomt de pre-synaptische cel in → neurotransmitters worden vrijgelaten in de synaptische spleet.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Stap 3 — Binding aan receptoren</span><span>+</span></div>
+          <div class="begrip-body"><p>De neurotransmitters binden zich aan receptoren van de post-synaptische cel → de lading van deze cel verandert → een nieuw signaal kan gestart worden (of geblokkeerd).</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Stap 4 — Recycling &amp; stopzetting</span><span>+</span></div>
+          <div class="begrip-body"><p>De neurotransmitters laten los van de receptoren en raken inactief. Restanten lossen op of worden gerecycleerd. De post-synaptische cel stuurt een stopstofje terug → pre-synaptische cel stopt met vrijlaten van neurotransmitter.</p></div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🧪</span>Neurotransmitters — te kennen: 4 sleutelspelers</div>
+        <p>Neurotransmitters zijn biochemische stofjes die signalen doorgeven in het brein en het lichaam. Als ze uit balans zijn, werkt lichaam en geest niet meer goed samen.</p>
+        <table class="kdg-tabel">
+          <tr><th>Neurotransmitter</th><th>Werking</th><th>Functie</th></tr>
+          <tr><td><strong>Dopamine</strong></td><td>Stimulerend</td><td>Kracht, zelfvertrouwen, libido, ondernemingszin. Tekort → Parkinson, depressie</td></tr>
+          <tr><td><strong>Acetylcholine</strong></td><td>Stimulerend</td><td>Reactiesnelheid, souplesse, nieuwsgierigheid, geheugen, creativiteit</td></tr>
+          <tr><td><strong>Serotonine</strong></td><td>Rustgevend</td><td>Geduld, stressbestendigheid, positieve levenshouding, slaapritme, emotioneel evenwicht</td></tr>
+          <tr><td><strong>GABA</strong></td><td>Rustgevend</td><td>Remt overactiviteit in het brein. Kalmerend en ontspannend effect</td></tr>
+        </table>
+        <div class="kdg-warn" style="margin-top:12px;"><strong>Verstoorde neurotransmitters</strong> kunnen leiden tot: te veel gedachten, slaapproblemen, concentratieproblemen, libidoproblemen, energieproblemen, huidklachten, darmproblemen.</div>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="4.19 neurotransmitters.png" alt="Overzicht structuren van neurotransmitters: adrenaline, noradrenaline, dopamine, serotonine, GABA, acetylcholine, glutamaat, endorfines — molecuulstructuren en functies"><figcaption>Figuur 21 — Overzicht neurotransmitters: molecuulstructuren, functies en effecten</figcaption></figure>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m3')">← Centraal zenuwstelsel</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m4','m5','4')">Volgende: Aandoeningen →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 5: AANDOENINGEN -->
+    <div class="module" id="m5">
+      <div class="module-kop">
+        <div class="module-tag">Module 5</div>
+        <div class="module-titel">Neurologische aandoeningen</div>
+        <div class="module-intro">Hersenaandoeningen kunnen groot zijn in gevolgen op dagelijks leven, gedrag, geheugen, beweging en emoties. We onderscheiden aangeboren hersenletsel (CP) en niet-aangeboren hersenletsel (NAH), en bekijken de meest voorkomende aandoeningen.</div>
+        <div class="module-pills"><span class="pill">👶 Aangeboren</span><span class="pill">🔨 NAH</span><span class="pill">🧠 Aandoeningen</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">👶</span>Aangeboren hersenletsel — Cerebrale Parese (CP)</div>
+        <p>Bij aangeboren hersenletsel is schade aan de hersenen ontstaan <strong>vóór, tijdens of kort na de geboorte</strong>. Een veelvoorkomende vorm is <strong>cerebrale parese (CP)</strong> — letterlijk hersenverlamming. De beschadiging is blijvend maar kan doorheen het leven anders tot uiting komen.</p>
+        <p><strong>Mogelijke oorzaken:</strong> infectie bij de moeder (rubella), zuurstoftekort, hersenbloeding, drugs/medicatie, vroeggeboorte, zwangerschapsvergiftiging. Vaak onbekend.</p>
+
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('cp','spas',this)">Spastische CP (70–80%)</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('cp','dysk',this)">Dyskinetische CP</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('cp','atac',this)">Atactische CP</button>
+        </div>
+        <div id="cp-spas" class="kdg-tab-inhoud actief">
+          <p>Spieren zijn voortdurend gespannen (<strong>hypertonie</strong>) → stijve en krampachtige bewegingen. Spieren die normaal moeten ontspannen, blijven actief.</p>
+          <ul>
+            <li><strong>Unilateraal (hemiparese):</strong> één lichaamszijde aangedaan</li>
+            <li><strong>Bilateraal (diplegie/tetraparese):</strong> beide zijden aangedaan, vaak vooral de benen</li>
+          </ul>
+        </div>
+        <div id="cp-dysk" class="kdg-tab-inhoud">
+          <p>Onwillekeurige, ongecontroleerde bewegingen van het lichaam — vaak in armen, benen of gezicht.</p>
+          <ul>
+            <li><strong>Athetose:</strong> trage, draaiende bewegingen</li>
+            <li><strong>Chorea:</strong> snelle, schokkende bewegingen</li>
+            <li><strong>Dystonie:</strong> wisselende spierspanning, neemt toe bij stress</li>
+          </ul>
+        </div>
+        <div id="cp-atac" class="kdg-tab-inhoud">
+          <p>Komt zelden voor. Evenwicht en coördinatie zijn verstoord. Onzekere, waggelende gang, moeite met fijne motoriek.</p>
+        </div>
+
+        <div class="kdg-info2" style="margin-top:14px;"><strong>Begrippenkader verlamming:</strong> Hemiplegie (één zijde) | Monoplegie (één ledemaat) | Diplegie (twee gelijke lichaamsdelen) | Paraplegie (benen + onderste romp) | Triplegie (drie ledematen) | Tetraplegie (alle vier de ledematen)</div>
+        <figure class="kdg-img" style="margin-top:12px;"><img src="4.20 cerebrale-parese.jpg" alt="Types de paralysie: monoplégie, hémiplégie, diplégie, paraplégie, quadriplégie — aangedane lichaamsdelen in oranje gemarkeerd"><figcaption>Figuur 22 — Types verlamming bij cerebrale parese: van monoplegie tot tetraplegie</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔨</span>Niet-aangeboren hersenletsel (NAH)</div>
+        <p>Bij NAH is er hersenschade <strong>na de geboorte</strong> ontstaan — op elke leeftijd. Er is een "breuk in de levenslijn": iemand functioneerde normaal maar ervaart plots veranderingen in denken, gedrag of beweging.</p>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('nah','trauma',this)">Traumatisch hersenletsel</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('nah','ntrauma',this)">Niet-traumatisch</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('nah','soorten',this)">Soorten letsel</button>
+        </div>
+        <div id="nah-trauma" class="kdg-tab-inhoud actief">
+          <p><strong>Van buitenaf:</strong> verkeersongeval, zware val, sportletsel, geweld. Kan leiden tot hersenschudding, bloeding, schedelbreuk of zwelling.</p>
+        </div>
+        <div id="nah-ntrauma" class="kdg-tab-inhoud">
+          <p><strong>Van binnenuit:</strong> beroerte (CVA), hersentumor, hersenvliesontsteking, epileptische aanval, zuurstoftekort, degeneratieve aandoening (bv. Alzheimer).</p>
+        </div>
+        <div id="nah-soorten" class="kdg-tab-inhoud">
+          <p><strong>Focaal letsel:</strong> schade op één specifieke plaats (bv. klap op het hoofd → blauwe plek of bloeding).</p>
+          <p><strong>Diffuus letsel:</strong> schade verspreid over de hersenen (bv. hersenen botsen tegen schedel bij harde schok). Komt voor bij auto-ongelukken en valpartijen.</p>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🧠</span>Veelvoorkomende hersenaandoeningen</div>
+        <p style="font-size:0.82rem;color:#777;margin-bottom:12px;">Klik op een aandoening voor oorzaak en symptomen.</p>
+
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Parkinson</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Cellen in de <strong>substantia nigra</strong> sterven af → tekort aan dopamine → verstoorde signaaloverdracht in de basale ganglia.</p><strong>Symptomen</strong><p>Motorisch: tremor (beven), stijfheid, maskergelaat (uitdrukkingsloos gezicht), voorovergebogen houding. Neurologisch: speekselvloed, transpiratie. Psychisch: depressie, vermoeidheid, dementie.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Alzheimer</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Degeneratieve aandoening: hersenen gaan snel achteruit in de vorm van dementeren. Ophoping van eiwitten (plaques en tangles) vernietigt zenuwcellen.</p><strong>Symptomen</strong><p>Vergeetachtigheid, problemen met dagelijkse handelingen, taalproblemen, kwijtraken van spullen, slecht beoordelingsvermogen, terugtrekken, gedragsveranderingen.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Multiple Sclerose (MS)</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Auto-immuunziekte: het eigen afweersysteem beschadigt de <strong>myelineschede</strong> rond zenuwvezels in de hersenen en het ruggenmerg. Geleiding van impulsen wordt verstoord.</p><strong>Symptomen</strong><p>Vermoeidheid, evenwichtsproblemen, spierkrampen en spasticiteit, gevoelsstoornissen, visusproblemen, cognitieve problemen, blaas- en darmklachten. Verloopt vaak in aanvallen en remissies.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Huntington</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Erfelijke, progressieve aandoening. Een fout in het HTT-gen leidt tot afbraak van zenuwcellen in de basale ganglia en cortex.</p><strong>Symptomen</strong><p>Onwillekeurige bewegingen (chorea), cognitieve achteruitgang, gedragsveranderingen, depressie. Begint typisch tussen 30–50 jaar.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>ALS (Amyotrofische Laterale Sclerose)</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Progressieve aandoening waarbij motorische neuronen afsterven. Oorzaak grotendeels onbekend; soms erfelijk.</p><strong>Symptomen</strong><p>Spierzwakte en -atrofie, slikproblemen, spraakproblemen, uiteindelijk verlamming van ademhalingsspieren. Intellect blijft lang intact.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>ADHD</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Neurobiologische aandoening met afwijkingen in de dopamine- en noradrenalinesystemen in de prefrontale cortex.</p><strong>Symptomen</strong><p>Concentratieproblemen, hyperactiviteit, impulsiviteit. Problemen met plannen, organiseren en emotieregulatie.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>CVA — Cerebrovasculair Accident (beroerte)</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Twee vormen: (1) <strong>Herseninfarct</strong> — bloedvat verstopt → zuurstoftekort. (2) <strong>Hersenbloeding</strong> — bloedvat barst open → bloeding in of rond de hersenen.</p><strong>Symptomen (FAST):</strong><p><strong>F</strong>ace (scheef gezicht), <strong>A</strong>rm (één arm krachteloos), <strong>S</strong>peech (spraakproblemen), <strong>T</strong>ime (bel onmiddellijk 112). Overige: verlamming, gevoelsstoornissen, visusproblemen, hoofdpijn.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>TIA — Transient Ischaemic Attack</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Tijdelijke afsluiting van een bloedvat in de hersenen — de doorbloeding herstelt vanzelf binnen 24 uur.</p><strong>Symptomen</strong><p>Gelijk aan CVA maar tijdelijk. Geldt als een <strong>waarschuwing</strong> voor een mogelijke echte beroerte — altijd snel medische hulp zoeken.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Afasie</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Beschadiging van taalgebieden in de hersenen (bv. na CVA, tumor of hersenletsel). Gebieden van Broca (spreken) en Wernicke (begrijpen) kunnen aangetast zijn.</p><strong>Symptomen</strong><p>Moeite met spreken, begrijpen, lezen of schrijven. Bij Broca-afasie: gebrekkig spreken. Bij Wernicke-afasie: vlotte maar onbegrijpelijke spraak.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Ataxie</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Beschadiging van het cerebellum of zijn verbindingen. Oorzaken: erfelijk, CVA, hersentumor, MS, alcohol.</p><strong>Symptomen</strong><p>Coördinatieproblemen, waggelende gang, moeite met fijne motoriek, spraakproblemen (dysartrie), evenwichtsproblemen.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Epilepsie</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Abnormale elektrische activiteit in de hersenen — een soort "elektrische storm" in neuronen. Oorzaken: erfelijk, hersenletsel, hersentumor, infectie.</p><strong>Symptomen</strong><p>Aanvallen variëren van korte absenties (wegezijn) tot tonisch-klonische aanvallen (stuipen). Bewustzijnsverlies mogelijk.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Verslaving</span><span>+</span></div>
+          <div class="begrip-body"><strong>Oorzaak</strong><p>Drugs en alcohol verstoren het dopaminesysteem (beloningssysteem) in de hersenen, vooral de nucleus accumbens. Het brein raakt afhankelijk van de kunstmatige dopaminepiek.</p><strong>Symptomen</strong><p>Dwangmatig gebruik ondanks negatieve gevolgen, ontwenningsverschijnselen, tolerantie (steeds meer nodig), verwaarlozing van sociale/professionele verantwoordelijkheden.</p></div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m4')">← Prikkeloverdracht</button>
+        <button class="kdg-knop kdg-knop-acc2" onclick="voltooiEnVolgende('m5','m6','5')">Naar de zelftoets →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 6: ZELFTOETS -->
+    
+    <!-- ======================== FLASHCARDS MODULE ======================== -->
+    <div class="module" id="m7">
+      <div class="module-kop">
+        <div class="module-tag">Sleutelbegrippen</div>
+        <div class="module-titel">Begrippen herhalen</div>
+        <div class="module-intro">Gebruik deze flashcards om de belangrijkste begrippen te herhalen. Klik op een kaart om de definitie te zien. Draai alle kaarten om om zeker te zijn dat je de stof beheerst.</div>
+        <div class="module-pills"><span class="pill">🃏 Begrippen</span><span class="pill">🔄 Interactief</span><span class="pill">✅ Herhaling</span></div>
+      </div>
+
+          <div class="kdg-kaart kdg-kaart-groen">
+            <div class="kaart-titel"><span class="kaart-icoon">🃏</span>Sleutelbegrippen zenuwstelsel — draai de kaart om</div>
+            <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+            <div class="flip-grid">
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Dendriet</div><div class="flipkaart-achter">Korte uitloper van een neuron die impulsen opvangt en naar het cellichaam stuurt.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Axon</div><div class="flipkaart-achter">Lange uitloper van een neuron die impulsen wegvoert van het cellichaam naar de volgende cel.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Myeline</div><div class="flipkaart-achter">Vettige isolerende schede om het axon. Versnelt de geleiding van impulsen — vergelijk met plastic om een stroomdraad.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Afferent</div><div class="flipkaart-achter">Aanvoerend — van periferie naar CZS. Sensorische neuronen zijn afferent.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Efferent</div><div class="flipkaart-achter">Afvoerend — van CZS naar spieren/klieren. Motorische neuronen zijn efferent.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Synaps</div><div class="flipkaart-achter">Verbindingspunt tussen twee neuronen. Signaal gaat via neurotransmitters over de synaptische spleet.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Dopamine</div><div class="flipkaart-achter">Neurotransmitter betrokken bij beloning, motivatie en beweging. Tekort bij de ziekte van Parkinson.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Serotonine</div><div class="flipkaart-achter">Neurotransmitter die stemming, slaap en eetlust regelt. Verlaagde niveaus gelinkt aan depressie.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Cerebellum</div><div class="flipkaart-achter">Kleine hersenen — verantwoordelijk voor balans, coördinatie en het bewaken van bewegingsprecisie.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">CVA</div><div class="flipkaart-achter">Cerebrovasculair accident (beroerte) — plotse hersenschade door verstopping of bloeding van een bloedvat.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">NAH</div><div class="flipkaart-achter">Niet-aangeboren hersenletsel — hersenbeschadiging na de geboorte door bv. CVA, trauma, tumor of infectie.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">TIA</div><div class="flipkaart-achter">Transient Ischemic Attack — tijdelijke afsluiting van een bloedvat. Symptomen verdwijnen binnen 24 uur maar zijn een ernstige waarschuwing voor CVA.</div></div></div>
+            </div>
+          </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">← Overzicht</button>
+      </div>
+    </div>
+
+    <div class="module" id="m6">
+      <div class="module-kop">
+        <div class="module-tag">Zelftoets</div>
+        <div class="module-titel">Test je kennis</div>
+        <div class="module-intro">Beantwoord de vragen om te controleren of je de stof van alle modules begrijpt. Na elke vraag zie je direct of je antwoord correct is.</div>
+        <div class="module-pills"><span class="pill">❓ 10 vragen</span><span class="pill">✅ Directe feedback</span><span class="pill">⭐ Eindscore</span></div>
+      </div>
+      <div class="kdg-quiz-intro">
+        <div class="quiz-intro-icoon">🎯</div>
+        <div class="quiz-intro-tekst">
+          <h3>Klaar voor de toets?</h3>
+          <p>Beantwoord alle 10 vragen. Na elke vraag zie je meteen of je antwoord correct is.</p>
+        </div>
+      </div>
+      <div id="quiz-container"></div>
+      <div class="quiz-resultaat" id="quizResultaat">
+        <div class="resultaat-score" id="resultaatScore"></div>
+        <div class="resultaat-sterren" id="resultaatSterren"></div>
+        <div class="resultaat-bericht" id="resultaatBericht"></div>
+        <br>
+        <button class="kdg-knop kdg-knop-acc1" onclick="herlaadQuiz()">Opnieuw proberen</button>
+      </div>
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m5')">← Aandoeningen</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">⌂ Overzicht</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const bezocht = {};
+const quizAntwoorden = {};
+
+function toonModule(id) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('actief'));
+  document.querySelectorAll('.kdg-nav-item').forEach(n => n.classList.remove('actief'));
+  document.getElementById(id).classList.add('actief');
+  const map = { welkom:0, m1:1, m2:2, m3:3, m4:4, m5:5, m6:6 , m7:7};
+  if (map[id] !== undefined) document.querySelectorAll('.kdg-nav-item')[map[id]].classList.add('actief');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const num = id.replace('m','');
+  if (!isNaN(num) && num) markeerBezocht(num);
+}
+function markeerBezocht(num) {
+  if (!bezocht[num]) {
+    bezocht[num] = true;
+    const el = document.getElementById('status-' + num);
+    if (el && !el.textContent.includes('Voltooid')) el.textContent = 'Bekeken';
+  }
+}
+function markeerVoltooid(num) {
+  const bal = document.getElementById('bal-' + num);
+  const nav = document.getElementById('nav-' + num);
+  const st  = document.getElementById('status-' + num);
+  if (bal) { bal.textContent = '✓'; bal.style.background = 'var(--acc2)'; bal.style.color = 'var(--kdg-wit)'; }
+  if (nav) nav.classList.add('gedaan');
+  if (st) st.textContent = 'Voltooid';
+  updateVoortgang();
+}
+function voltooiEnVolgende(huidig, volgend, num) {
+  markeerVoltooid(num);
+  toonModule(volgend);
+}
+function updateVoortgang() {
+  const n = document.querySelectorAll('.kdg-nav-item.gedaan').length;
+  document.getElementById('progressFill').style.width = (n / 6 * 100) + '%';
+  document.getElementById('progressLabel').textContent = n + ' / 6 voltooid';
+}
+function wisselBegrip(el) {
+  const body = el.querySelector('.begrip-body');
+  const kop = el.querySelector('.begrip-kop span:last-child');
+  const open = el.dataset.open === 'true';
+  el.dataset.open = open ? 'false' : 'true';
+  body.style.display = open ? 'none' : 'block';
+  kop.textContent = open ? '+' : '−';
+  el.style.borderColor = open ? 'var(--kdg-lichtgrijs)' : 'var(--acc1)';
+}
+function wisselTab(groep, tab, knop) {
+  document.querySelectorAll('[id^="' + groep + '-"]').forEach(el => el.classList.remove('actief'));
+  knop.closest('.kdg-kaart').querySelectorAll('.kdg-tab-knop').forEach(b => b.classList.remove('actief'));
+  document.getElementById(groep + '-' + tab).classList.add('actief');
+  knop.classList.add('actief');
+}
+
+const vragen = [
+  {
+    v: "Wat is het verschil tussen het centrale en het perifere zenuwstelsel?",
+    opties: ["Het CZS is het bewuste ZS, het PZS is het onbewuste ZS","Het CZS bestaat uit hersenen en ruggenmerg; het PZS bestaat uit alle zenuwen buiten het CZS","Het PZS is beschermd door botten, het CZS niet","Het CZS regelt alleen motoriek, het PZS alleen zintuigen"],
+    juist: 1,
+    uitleg: "Het CZS (centraal zenuwstelsel) bestaat uit hersenen en ruggenmerg en ligt beschermd in een benig omhulsel. Het PZS (perifeer zenuwstelsel) bestaat uit alle zenuwen die de organen van het lichaam verbinden met het CZS."
+  },
+  {
+    v: "Wat is het verschil tussen het sympathische en parasympathische zenuwstelsel?",
+    opties: ["Sympathisch = willekeurig, parasympathisch = onwillekeurig","Sympathisch zorgt voor actie en stress; parasympathisch voor rust en herstel","Sympathisch regelt de hersenen, parasympathisch het ruggenmerg","Ze hebben dezelfde functie maar werken op verschillende organen"],
+    juist: 1,
+    uitleg: "Het sympathische ZS is het 'gaspedaal': actie, inspanning en stress (versnelt hartslag, verhoogt bloeddruk). Het parasympathische ZS is de 'rem': rust en herstel (vertraagt hartslag, stimuleert spijsvertering). Beide zijn autonoom."
+  },
+  {
+    v: "Welke richting hebben sensorische neuronen?",
+    opties: ["Van het CZS naar de spieren (efferent)","Van de zintuigen naar het CZS (afferent)","Van het CZS naar de klieren","Van neuron naar neuron (schakelen)"],
+    juist: 1,
+    uitleg: "Sensorische neuronen zijn afferent: ze vervoeren impulsen van de sensoren (zintuigen) naar het centraal zenuwstelsel. Motorische neuronen zijn efferent: van het CZS naar spieren/klieren."
+  },
+  {
+    v: "Wat is de functie van de myelineschede?",
+    opties: ["Het verbindt neuronen met elkaar in een synaps","Het isoleert het axon en versnelt de geleiding van impulsen","Het produceert neurotransmitters in het cellichaam","Het ontvangt impulsen en stuurt ze door naar het cellichaam"],
+    juist: 1,
+    uitleg: "De myelineschede is een vettig isolerend laagje rond het axon, gevormd door gliacellen. Het verhoogt de geleidingssnelheid sterk (vergelijk: plastic om een stroomdraad). De insnoering van Ranvier maakt saltatorische geleiding mogelijk."
+  },
+  {
+    v: "Welke hersenstructuur is verantwoordelijk voor balans en coördinatie van bewegingen?",
+    opties: ["Thalamus","Hippocampus","Cerebellum (kleine hersenen)","Prefrontale cortex"],
+    juist: 2,
+    uitleg: "Het cerebellum (kleine hersenen) is verantwoordelijk voor balans, coördinatie en het bewaken of bewegingen hun doel bereiken. Opvallend: het cerebellum bevat meer neuronen dan de rest van de hersenen samen."
+  },
+  {
+    v: "In welke hersenkwab bevindt zich het gebied van Broca en wat is zijn functie?",
+    opties: ["Occipitaalkwab — visuele verwerking","Pariëtaalkwab — ruimtelijk inzicht","Frontaalkwab — spraakproductie","Temporaalkwab — taal begrijpen"],
+    juist: 2,
+    uitleg: "Het gebied van Broca ligt in de frontaalkwab (voorhoofdskwab) en is verantwoordelijk voor spraakproductie. Het gebied van Wernicke ligt in de linker temporaalkwab en is verantwoordelijk voor het begrijpen van taal."
+  },
+  {
+    v: "Wat is een synaps?",
+    opties: ["Het cellichaam van een neuron waar impulsen worden aangemaakt","De verbinding tussen dendrieten en axon van hetzelfde neuron","Het punt waarop twee neuronen met elkaar communiceren via neurotransmitters","De myelineschede die twee neuronen isoleert van elkaar"],
+    juist: 2,
+    uitleg: "Een synaps is het punt waarop twee neuronen communiceren. Ze raken elkaar niet fysiek — er is een synaptische spleet. Neurotransmitters overbruggen deze spleet chemisch en sturen het signaal door naar het post-synaptisch neuron."
+  },
+  {
+    v: "Welke neurotransmitter heeft een tekort bij de ziekte van Parkinson?",
+    opties: ["Serotonine","Acetylcholine","GABA","Dopamine"],
+    juist: 3,
+    uitleg: "Bij Parkinson sterven de cellen in de substantia nigra af — deze cellen produceren dopamine. Een tekort aan dopamine verstoort de signaaloverdracht in de basale ganglia, wat leidt tot tremor, stijfheid en bewegingsproblemen."
+  },
+  {
+    v: "Wat is het verschil tussen een CVA en een TIA?",
+    opties: ["CVA is altijd een hersenbloeding; TIA is altijd een verstopping","Bij CVA is de schade blijvend; bij TIA is de doorbloeding tijdelijk verstoord en herstelt vanzelf","CVA treft alleen ouderen; TIA kan ook jongeren treffen","Er is geen verschil — TIA is een mildere naam voor CVA"],
+    juist: 1,
+    uitleg: "Bij een CVA (beroerte) is er blijvende hersenschade door afsluiting of bloeding van een bloedvat. Bij een TIA is de afsluiting tijdelijk en herstelt de doorbloeding spontaan binnen 24 uur. Een TIA is een ernstige waarschuwing voor een mogelijk CVA."
+  },
+  {
+    v: "Wat is cerebrale parese (CP) en waardoor wordt het veroorzaakt?",
+    opties: ["Een degeneratieve hersenaandoening die begint na het 40ste jaar","Een aangeboren motorische stoornis door hersenbeschadiging vóór, tijdens of vlak na de geboorte","Een auto-immuunziekte van het ruggenmerg","Een erfelijke aandoening die de myelineschede aantast"],
+    juist: 1,
+    uitleg: "Cerebrale parese is aangeboren hersenletsel dat de motorische hersengebieden aantast. De beschadiging ontstaat vóór, tijdens of vlak na de geboorte (bv. zuurstoftekort, infectie, vroeggeboorte) en is blijvend maar kan veranderen in de loop van het leven."
+  }
+];
+
+function bouwQuiz() {
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = '';
+  vragen.forEach((v, i) => {
+    const d = document.createElement('div');
+    d.className = 'vraag-kaart';
+    d.id = 'vk-' + i;
+    d.innerHTML = `<div class="vraag-num">Vraag ${i+1} van ${vragen.length}</div>
+      <div class="vraag-tekst">${v.v}</div>
+      <ul class="opties">${v.opties.map((o,j)=>`<li><button class="optie-knop" onclick="kiesAntwoord(${i},${j})">${o}</button></li>`).join('')}</ul>
+      <div class="feedback" id="fb-${i}"></div>`;
+    c.appendChild(d);
+  });
+}
+function kiesAntwoord(vIdx, aIdx) {
+  if (quizAntwoorden[vIdx] !== undefined) return;
+  quizAntwoorden[vIdx] = aIdx;
+  const v = vragen[vIdx];
+  const kaart = document.getElementById('vk-' + vIdx);
+  kaart.classList.add('beantwoord');
+  kaart.querySelectorAll('.optie-knop').forEach((b, i) => {
+    b.disabled = true;
+    if (i === v.juist) b.classList.add('juist');
+    if (i === aIdx && i !== v.juist) b.classList.add('fout');
+  });
+  const fb = document.getElementById('fb-' + vIdx);
+  const ok = aIdx === v.juist;
+  fb.className = 'feedback toon ' + (ok ? 'juist' : 'fout');
+  fb.innerHTML = (ok ? '✓ Juist. ' : '✗ Niet juist. ') + v.uitleg;
+  if (Object.keys(quizAntwoorden).length === vragen.length) toonResultaat();
+}
+function toonResultaat() {
+  let goed = 0;
+  vragen.forEach((v,i) => { if (quizAntwoorden[i] === v.juist) goed++; });
+  const pct = Math.round(goed / vragen.length * 100);
+  document.getElementById('resultaatScore').textContent = goed + ' / ' + vragen.length;
+  document.getElementById('resultaatSterren').textContent = pct >= 80 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
+  document.getElementById('resultaatBericht').textContent = pct >= 80 ? 'Uitstekend. Je beheerst de stof goed.' : pct >= 60 ? 'Goed gedaan. Herhaal de modules waar je fouten maakte.' : 'Blijf oefenen. Doorloop de lesstof opnieuw.';
+  document.getElementById('quizResultaat').classList.add('toon');
+  markeerVoltooid('6');
+}
+function herlaadQuiz() {
+  Object.keys(quizAntwoorden).forEach(k => delete quizAntwoorden[k]);
+  document.getElementById('quizResultaat').classList.remove('toon');
+  bouwQuiz();
+}
+bouwQuiz();
+</script>
+</body>
+</html>

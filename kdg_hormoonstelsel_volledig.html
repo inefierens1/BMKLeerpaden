@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomedisch Kader — Deel 3: Hormoonstelsel | KdG</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kdg-zwart:       #000000;
+  --kdg-wit:         #ffffff;
+  --kdg-donkergrijs: #282828;
+  --kdg-midgrijs:    #555555;
+  --kdg-lichtgrijs:  #e6e6e6;
+  --kdg-achtergrond: #f5f5f5;
+  --acc1:            #ff873c;
+  --acc1-licht:      #fff1e8;
+  --acc1-donker:     #d96a1f;
+  --acc2:            #ff645a;
+  --acc2-licht:      #ffeeed;
+  --acc2-donker:     #cc3d33;
+  --font-titel: 'Nunito', 'Century Gothic', sans-serif;
+  --font-body:  'Open Sans', 'Arial', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--kdg-achtergrond); color: var(--kdg-zwart); font-size: 16px; line-height: 1.65; }
+
+/* HEADER */
+.kdg-header { background: var(--kdg-zwart); color: var(--kdg-wit); position: sticky; top: 0; z-index: 200; }
+.kdg-header-inner { max-width: 1140px; margin: 0 auto; padding: 13px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.kdg-logo-mark { background: var(--acc1); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 700; font-size: 1rem; padding: 5px 11px; }
+.kdg-logo-area { display: flex; align-items: center; gap: 14px; }
+.kdg-header-title { font-family: var(--font-titel); font-weight: 300; font-size: 0.95rem; }
+.kdg-header-sub { font-size: 0.72rem; color: #aaa; margin-top: 1px; }
+.kdg-progress-wrap { display: flex; align-items: center; gap: 12px; }
+.kdg-progress-bar { width: 200px; height: 3px; background: #333; }
+.kdg-progress-fill { height: 100%; background: var(--acc1); width: 0%; transition: width 0.4s; }
+.kdg-progress-label { font-size: 0.72rem; color: #aaa; white-space: nowrap; }
+
+/* LAYOUT */
+.kdg-layout { max-width: 1140px; margin: 0 auto; padding: 28px 32px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+
+/* SIDEBAR */
+.kdg-sidebar { position: sticky; top: 68px; background: var(--kdg-wit); border-top: 3px solid var(--acc1); }
+.kdg-sidebar-kop { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 10px 16px; font-family: var(--font-titel); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.kdg-nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 16px; cursor: pointer; border-bottom: 1px solid var(--kdg-lichtgrijs); font-size: 0.85rem; color: var(--kdg-midgrijs); text-decoration: none; transition: background 0.15s; }
+.kdg-nav-item:hover { background: var(--acc1-licht); color: var(--kdg-zwart); }
+.kdg-nav-item.actief { background: var(--acc1-licht); color: var(--kdg-zwart); font-weight: 600; border-left: 3px solid var(--acc1); padding-left: 13px; }
+.nav-bal { width: 24px; height: 24px; border-radius: 50%; background: var(--kdg-lichtgrijs); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; font-family: var(--font-titel); color: var(--kdg-midgrijs); transition: background 0.2s; }
+.kdg-nav-item.gedaan .nav-bal { background: var(--acc2); color: var(--kdg-wit); }
+.nav-naam { flex: 1; }
+.nav-sub { font-size: 0.72rem; color: #999; margin-top: 1px; }
+
+/* MODULES */
+.kdg-content { min-width: 0; }
+.module { display: none; animation: fadeIn 0.25s ease; }
+.module.actief { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* MODULE HEADER */
+.module-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 28px 32px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.module-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--acc1); font-weight: 600; margin-bottom: 8px; }
+.module-titel { font-family: var(--font-titel); font-size: 1.9rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+.module-intro { font-size: 0.9rem; color: #ccc; max-width: 580px; font-weight: 300; line-height: 1.65; }
+.module-pills { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.pill { border: 1px solid #444; color: #ccc; padding: 3px 10px; font-size: 0.72rem; }
+
+/* KAARTEN */
+.kdg-kaart { background: var(--kdg-wit); border-top: 3px solid var(--acc1); padding: 22px 26px; margin-bottom: 16px; }
+.kdg-kaart-acc2 { border-top-color: var(--acc2); }
+.kdg-kaart-zwart { border-top-color: var(--kdg-zwart); }
+.kaart-titel { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; color: var(--kdg-zwart); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.kaart-icoon { width: 30px; height: 30px; background: var(--acc1); color: var(--kdg-wit); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.kaart-icoon.acc2 { background: var(--acc2); }
+.kdg-kaart p { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 10px; line-height: 1.65; }
+.kdg-kaart p:last-child { margin-bottom: 0; }
+.kdg-kaart strong { color: var(--kdg-zwart); font-weight: 600; }
+.kdg-kaart ul, .kdg-kaart ol { margin: 10px 0 10px 20px; }
+.kdg-kaart li { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 6px; line-height: 1.6; }
+
+/* INFO BLOKKEN */
+.kdg-info { background: var(--acc1-licht); border-left: 4px solid var(--acc1); padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-info strong { color: var(--kdg-zwart); }
+.kdg-info2 { background: var(--acc2-licht); border-left: 4px solid var(--acc2); padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-info2 strong { color: var(--kdg-zwart); }
+.kdg-warn { background: #fff8e0; border-left: 4px solid #e8c200; padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+
+/* TABEL */
+.kdg-tabel { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
+.kdg-tabel th { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 9px 14px; text-align: left; font-weight: 600; font-size: 0.8rem; }
+.kdg-tabel td { padding: 8px 14px; border-bottom: 1px solid var(--kdg-lichtgrijs); color: var(--kdg-donkergrijs); vertical-align: top; }
+.kdg-tabel tr:hover td { background: var(--acc1-licht); }
+
+/* AFBEELDING */
+.kdg-img { background: var(--kdg-lichtgrijs); padding: 16px; margin: 16px 0; text-align: center; }
+.kdg-img img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.kdg-img figcaption { font-size: 0.78rem; color: var(--kdg-midgrijs); margin-top: 8px; font-style: italic; }
+
+/* VIDEO */
+.kdg-video { margin: 20px 0; background: var(--kdg-zwart); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.kdg-video-info { display: flex; align-items: center; gap: 12px; flex: 1; }
+.kdg-video-label { background: var(--acc1); color: var(--kdg-wit); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; white-space: nowrap; flex-shrink: 0; }
+.kdg-video-titel { font-family: var(--font-titel); font-size: 0.92rem; font-weight: 600; color: var(--kdg-wit); }
+.kdg-video-knop { display: inline-flex; align-items: center; gap: 8px; background: var(--acc1); color: var(--kdg-wit); padding: 10px 20px; font-size: 0.85rem; font-weight: 700; font-family: var(--font-body); text-decoration: none; white-space: nowrap; transition: background 0.15s; }
+.kdg-video-knop:hover { background: var(--acc1-donker); }
+
+/* TABS */
+.kdg-tabs { display: flex; border-bottom: 2px solid var(--kdg-lichtgrijs); flex-wrap: wrap; }
+.kdg-tab-knop { padding: 9px 18px; border: none; background: transparent; font-size: 0.83rem; cursor: pointer; font-family: var(--font-body); color: var(--kdg-midgrijs); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+.kdg-tab-knop:hover { color: var(--kdg-zwart); }
+.kdg-tab-knop.actief { color: var(--kdg-zwart); border-bottom-color: var(--acc1); font-weight: 600; }
+.kdg-tab-inhoud { display: none; padding: 16px 0 0; }
+.kdg-tab-inhoud.actief { display: block; }
+
+/* UITKLAPKAARTEN */
+.begrip-kaart { border: 1px solid var(--kdg-lichtgrijs); cursor: pointer; transition: border-color 0.15s; margin-bottom: 8px; }
+.begrip-kaart:hover { border-color: var(--acc1); }
+.begrip-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 10px 14px; font-size: 0.88rem; font-weight: 600; font-family: var(--font-titel); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.begrip-kop span:last-child { flex-shrink: 0; font-size: 1.1rem; }
+.begrip-body { display: none; padding: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); line-height: 1.65; background: var(--kdg-wit); }
+.begrip-body strong { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--acc1-donker); display: block; margin-bottom: 4px; }
+.begrip-body p { margin-bottom: 8px; font-size: 0.86rem; }
+
+/* FLIPKAARTEN */
+.flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 10px; }
+.flipkaart { height: 120px; perspective: 600px; cursor: pointer; }
+.flipkaart-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
+.flipkaart.gekeerd .flipkaart-inner { transform: rotateY(180deg); }
+.flipkaart-voor, .flipkaart-achter { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; font-size: 0.85rem; }
+.flipkaart-voor { background: var(--kdg-zwart); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 600; }
+.flipkaart-achter { background: var(--acc1-licht); color: var(--kdg-donkergrijs); border: 2px solid var(--acc1); transform: rotateY(180deg); font-size: 0.78rem; line-height: 1.5; }
+.flip-hint { font-size: 0.72rem; color: #999; text-align: center; margin-top: 6px; }
+
+/* REGELKRING DIAGRAM */
+.regelkring { background: var(--kdg-lichtgrijs); border: 1px solid #ccc; padding: 20px; margin: 16px 0; text-align: center; font-family: var(--font-titel); }
+.regelkring-stap { display: inline-block; background: var(--kdg-zwart); color: var(--kdg-wit); padding: 8px 16px; font-size: 0.82rem; font-weight: 600; margin: 4px; }
+.regelkring-stap.acc1 { background: var(--acc1); }
+.regelkring-stap.acc2 { background: var(--acc2); }
+.regelkring-pijl { display: inline-block; font-size: 1.2rem; color: var(--kdg-midgrijs); margin: 0 4px; vertical-align: middle; }
+.regelkring-rij { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+
+/* QUIZ */
+.kdg-quiz-intro { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+.quiz-intro-icoon { font-size: 2rem; }
+.quiz-intro-tekst h3 { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; color: var(--acc1); }
+.quiz-intro-tekst p { font-size: 0.85rem; color: #ccc; font-weight: 300; }
+.vraag-kaart { background: var(--kdg-wit); border-top: 3px solid var(--kdg-lichtgrijs); padding: 20px 24px; margin-bottom: 14px; }
+.vraag-kaart.beantwoord { border-top-color: var(--acc1); }
+.vraag-num { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--acc1-donker); font-weight: 600; margin-bottom: 6px; }
+.vraag-tekst { font-size: 0.92rem; font-weight: 600; color: var(--kdg-zwart); margin-bottom: 14px; line-height: 1.5; font-family: var(--font-titel); }
+.opties { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.optie-knop { width: 100%; text-align: left; padding: 10px 14px; border: 1px solid var(--kdg-lichtgrijs); background: #fafafa; cursor: pointer; font-size: 0.85rem; color: var(--kdg-donkergrijs); transition: all 0.15s; font-family: var(--font-body); line-height: 1.4; }
+.optie-knop:hover:not(:disabled) { border-color: var(--acc1); background: var(--acc1-licht); color: var(--kdg-zwart); }
+.optie-knop.juist { background: #d4f4e8; border-color: #37be87; color: var(--kdg-zwart); font-weight: 600; }
+.optie-knop.fout { background: var(--acc2-licht); border-color: var(--acc2); color: #cc3333; }
+.optie-knop:disabled { cursor: default; }
+.feedback { display: none; margin-top: 10px; padding: 9px 13px; font-size: 0.83rem; }
+.feedback.toon { display: block; }
+.feedback.juist { background: #d4f4e8; color: var(--kdg-zwart); border-left: 3px solid #37be87; }
+.feedback.fout { background: var(--acc2-licht); color: #990000; border-left: 3px solid var(--acc2); }
+.quiz-resultaat { display: none; background: var(--kdg-zwart); color: var(--kdg-wit); padding: 32px; text-align: center; margin-top: 20px; }
+.quiz-resultaat.toon { display: block; }
+.resultaat-score { font-family: var(--font-titel); font-size: 3.5rem; font-weight: 700; color: var(--acc1); }
+.resultaat-sterren { font-size: 1.4rem; margin: 8px 0; }
+.resultaat-bericht { color: #ccc; font-size: 0.9rem; }
+
+/* KNOPPEN */
+.kdg-knop { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: var(--font-body); border: none; transition: background 0.15s; }
+.kdg-knop-acc1 { background: var(--acc1); color: var(--kdg-wit); }
+.kdg-knop-acc1:hover { background: var(--acc1-donker); }
+.kdg-knop-acc2 { background: var(--acc2); color: var(--kdg-wit); }
+.kdg-knop-acc2:hover { background: var(--acc2-donker); }
+.kdg-knop-omlijnd { background: transparent; color: var(--kdg-zwart); border: 1px solid var(--kdg-zwart); }
+.kdg-knop-omlijnd:hover { background: var(--kdg-lichtgrijs); }
+.module-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--kdg-lichtgrijs); }
+
+/* WELKOMST */
+.welkom-hero { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 40px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.welkom-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--acc1); font-weight: 600; margin-bottom: 10px; }
+.welkom-titel { font-family: var(--font-titel); font-size: 2.4rem; font-weight: 700; line-height: 1.1; margin-bottom: 12px; }
+.welkom-tekst { color: #ccc; font-size: 0.9rem; max-width: 500px; font-weight: 300; line-height: 1.7; }
+.module-overzicht { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 12px; }
+.module-tegel { background: var(--kdg-wit); padding: 20px; cursor: pointer; transition: all 0.15s; border-top: 3px solid var(--kdg-lichtgrijs); }
+.module-tegel:hover { border-top-color: var(--acc1); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.tegel-nummer { font-family: var(--font-titel); font-size: 2rem; font-weight: 700; color: var(--acc1); line-height: 1; }
+.tegel-naam { font-weight: 700; font-size: 0.88rem; color: var(--kdg-zwart); font-family: var(--font-titel); margin-top: 6px; }
+.tegel-sub { font-size: 0.77rem; color: var(--kdg-midgrijs); margin-top: 3px; }
+.tegel-status { font-size: 0.7rem; color: #aaa; margin-top: 8px; }
+
+@media (max-width: 768px) {
+  .kdg-layout { grid-template-columns: 1fr; padding: 14px; }
+  .kdg-sidebar { position: static; }
+  .welkom-titel { font-size: 1.8rem; }
+  .module-titel { font-size: 1.5rem; }
+  .kdg-header-inner { padding: 12px 16px; }
+  .kdg-progress-wrap { display: none; }
+}
+
+/* LEERDOEL BANNERS */
+.leerdoel-banner, .leerdoel-banner2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-left: 5px solid var(--acc1);
+  background: var(--acc1-licht, #e0f2f4);
+}
+.leerdoel-banner2 {
+  border-left-color: var(--acc2, #37be87);
+  background: var(--acc2-licht, #d4f4e8);
+  margin-top: -8px;
+}
+.leerdoel-icoon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.leerdoel-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--acc1-donker, #3d8a94);
+  margin-bottom: 4px;
+  font-family: var(--font-titel);
+}
+.leerdoel-banner2 .leerdoel-label {
+  color: var(--acc2-donker, #289969);
+}
+.leerdoel-inhoud {
+  font-size: 0.9rem;
+  color: var(--kdg-donkergrijs, #282828);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="kdg-header">
+  <div class="kdg-header-inner">
+    <div class="kdg-logo-area">
+      <div class="kdg-logo-mark">KdG</div>
+      <div>
+        <div class="kdg-header-title">Biomedisch Kader</div>
+        <div class="kdg-header-sub">Deel 3 — Hormoonstelsel · 1ste jaar Orthopedagogie</div>
+      </div>
+    </div>
+    <div class="kdg-progress-wrap">
+      <div class="kdg-progress-bar"><div class="kdg-progress-fill" id="progressFill"></div></div>
+      <div class="kdg-progress-label" id="progressLabel">0 / 6 voltooid</div>
+    </div>
+  </div>
+</header>
+
+<div class="kdg-layout">
+  <!-- SIDEBAR -->
+  <nav class="kdg-sidebar">
+    <div class="kdg-sidebar-kop">Inhoud</div>
+    <a class="kdg-nav-item actief" onclick="toonModule('welkom')" href="#">
+      <span class="nav-bal">⌂</span>
+      <div class="nav-naam"><div>Overzicht</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-1" onclick="toonModule('m1')" href="#">
+      <span class="nav-bal" id="bal-1">1</span>
+      <div class="nav-naam"><div>Functie &amp; werking</div><div class="nav-sub">Hormonen &amp; receptoren</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-2" onclick="toonModule('m2')" href="#">
+      <span class="nav-bal" id="bal-2">2</span>
+      <div class="nav-naam"><div>Homeostase &amp; regelkringen</div><div class="nav-sub">Feedback­mechanismen</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-3" onclick="toonModule('m3')" href="#">
+      <span class="nav-bal" id="bal-3">3</span>
+      <div class="nav-naam"><div>Centrale regeling</div><div class="nav-sub">Hypothalamus &amp; hypofyse</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-4" onclick="toonModule('m4')" href="#">
+      <span class="nav-bal" id="bal-4">4</span>
+      <div class="nav-naam"><div>Perifere klieren</div><div class="nav-sub">Pancreas, bijschildklier, bijnier</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-5" onclick="toonModule('m5')" href="#">
+      <span class="nav-bal" id="bal-5">5</span>
+      <div class="nav-naam"><div>Aandoeningen</div><div class="nav-sub">Thyroid, bijnier, diabetes</div></div>
+    </a>
+    
+    <a class="kdg-nav-item" id="nav-7" onclick="toonModule('m7')" href="#">
+      <span class="nav-bal" id="bal-06">6</span>
+      <div class="nav-naam"><div>Sleutelbegrippen</div><div class="nav-sub">Begrippen herhalen</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-6" onclick="toonModule('m6')" href="#">
+      <span class="nav-bal" id="bal-6">✓</span>
+      <div class="nav-naam"><div>Zelftoets</div><div class="nav-sub">Test je kennis</div></div>
+    </a>
+  </nav>
+
+  <!-- INHOUD -->
+  <main class="kdg-content">
+
+    <!-- WELKOM -->
+    <div class="module actief" id="welkom">
+      <div class="welkom-hero">
+        <div class="welkom-tag">Karel de Grote Hogeschool · Orthopedagogie · 1ste jaar</div>
+        <div class="welkom-titel">Deel 3: Hormoonstelsel</div>
+        <div class="welkom-tekst">Hormonen zijn chemische boodschapperstoffen die via het bloed worden vervoerd. Ze sturen organen en cellen aan en zorgen ervoor dat ons lichaam in evenwicht blijft — van bloedsuiker tot voortplanting, van stress tot slaap.</div>
+      </div>
+      <div class="leerdoel-banner">
+        <div class="leerdoel-icoon">🎯</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel</div>
+          <div class="leerdoel-inhoud">Je verklaart hoe hormonen processen zoals groei, stress en homeostase beïnvloeden, en maakt de link met observaties bij cliënten.</div>
+        </div>
+      </div>
+      <div class="leerdoel-banner2">
+        <div class="leerdoel-icoon">🏥</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel — Aandoeningen</div>
+          <div class="leerdoel-inhoud">Je past basis medische kennis toe op orthopedagogische situaties en herkent signalen die wijzen op lichamelijke oorzaken van gedrag of klachten.</div>
+        </div>
+      </div>
+
+      <div class="module-overzicht">
+        <div class="module-tegel" onclick="toonModule('m1')">
+          <div class="tegel-nummer">01</div>
+          <div class="tegel-naam">Functie &amp; werking</div>
+          <div class="tegel-sub">Hormonen, receptoren, sleutel-slot</div>
+          <div class="tegel-status" id="status-1">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m2')">
+          <div class="tegel-nummer">02</div>
+          <div class="tegel-naam">Homeostase &amp; regelkringen</div>
+          <div class="tegel-sub">Feedback, directe &amp; indirecte terugkoppeling</div>
+          <div class="tegel-status" id="status-2">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m3')">
+          <div class="tegel-nummer">03</div>
+          <div class="tegel-naam">Centrale regeling</div>
+          <div class="tegel-sub">Hypothalamus, hypofyse, hormoonassen</div>
+          <div class="tegel-status" id="status-3">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m4')">
+          <div class="tegel-nummer">04</div>
+          <div class="tegel-naam">Perifere klieren</div>
+          <div class="tegel-sub">Pancreas, bijschildklier, bijniermerg</div>
+          <div class="tegel-status" id="status-4">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m5')">
+          <div class="tegel-nummer">05</div>
+          <div class="tegel-naam">Aandoeningen</div>
+          <div class="tegel-sub">Thyroid, bijnier, diabetes</div>
+          <div class="tegel-status" id="status-5">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m7')">
+          <div class="tegel-nummer">06</div>
+          <div class="tegel-naam">Sleutelbegrippen</div>
+          <div class="tegel-sub">Begrippen herhalen</div>
+          <div class="tegel-status" id="status-06">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m6')">
+          <div class="tegel-nummer">✓</div>
+          <div class="tegel-naam">Zelftoets</div>
+          <div class="tegel-sub">10 vragen over alle modules</div>
+          <div class="tegel-status" id="status-6">Nog niet gemaakt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 1: FUNCTIE & WERKING -->
+    <div class="module" id="m1">
+      <div class="module-kop">
+        <div class="module-tag">Module 1</div>
+        <div class="module-titel">Functie &amp; werking van hormonen</div>
+        <div class="module-intro">Hormonen zijn chemische boodschapperstoffen die via het bloed worden vervoerd. Ze geven lichaamscellen opdrachten en zorgen voor communicatie over grote afstanden in het lichaam.</div>
+        <div class="module-pills"><span class="pill">🔬 Hormonen</span><span class="pill">🔑 Sleutel-slot</span><span class="pill">⚖️ Homeostase</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Hormoonstelsel — de basis</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/EwqtJdR25gs?si=dWrVFWkiGdzFkra0" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">💬</span>Communicatie in het lichaam</div>
+        <p>In een gezond lichaam werken cellen, weefsels, organen en orgaanstelsels perfect samen. Hiervoor moeten ze voortdurend met elkaar <strong>communiceren</strong>. Dat gebeurt op twee manieren:</p>
+        <table class="kdg-tabel">
+          <tr><th>Systeem</th><th>Snelheid</th><th>Hoe</th><th>Via</th></tr>
+          <tr><td><strong>Zenuwstelsel</strong></td><td>Supersnel</td><td>Elektrische signalen</td><td>Neurotransmitters (bv. acetylcholine)</td></tr>
+          <tr><td><strong>Hormoonstelsel</strong></td><td>Trager</td><td>Chemische boodschappen</td><td>Hormonen via het bloed</td></tr>
+        </table>
+        <div class="kdg-info">Het hormoonstelsel is een <strong>endocrien systeem</strong> — het scheidt stoffen inwendig af. Hormonen kunnen zowel een algemene als een specifieke werking hebben. Het zenuwstelsel en hormoonstelsel werken nauw samen.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🎯</span>Functie van het hormoonstelsel</div>
+        <p>Het hormoonstelsel zorgt voor het <strong>in stand houden van de homeostase</strong> — het evenwicht in het lichaam. Het zenuwstelsel meet voortdurend belangrijke waarden en kan het hormoonstelsel aansturen wanneer dat nodig is.</p>
+        <p>Hormonen geven lichaamscellen opdrachten die nodig zijn om:</p>
+        <ul>
+          <li>het lichaam in stand te houden (bloeddruk, temperatuur, bloedsuiker)</li>
+          <li>ons voort te planten (geslachtshormonen, cyclus)</li>
+          <li>te overleven in een veranderende omgeving (vecht-of-vlucht, stress)</li>
+          <li>te reageren op ritmes (dag-nachtritme, seizoenen, maandelijkse cyclus)</li>
+        </ul>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔑</span>Het sleutel-slot principe</div>
+        <p>Hormonen worden aangemaakt door <strong>hormoonklieren</strong> en via het bloed vervoerd naar doelorganen. Omdat hormonen niet weten welke cellen ze moeten aansturen, hebben de cellen <strong>receptoren</strong> — een soort slot waar alleen bepaalde hormonen de sleutel van hebben.</p>
+        <p><strong>Als een hormoon past op de receptor → kan de cel aangestuurd worden.</strong></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="3.1 sleutel-slot.png" alt="Sleutel-slot principe: stof X past op receptor X, stof Y past op receptor Y"><figcaption>Figuur 1 — Sleutel-slot principe: elk hormoon past alleen op de juiste receptor</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="3.2 doelwitreceptoren.jpg" alt="Doelwitreceptoren: hormoon wordt via bloed vervoerd naar doelwitcel"><figcaption>Figuur 2 — Hormoon via bloed naar doelwitcel met de juiste receptor</figcaption></figure>
+        </div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('werk','buiten',this)">Wateroplosbare hormonen</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('werk','binnen',this)">Vetoplosbare hormonen</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('werk','afbraak',this)">Afbraak &amp; transport</button>
+        </div>
+        <div id="werk-buiten" class="kdg-tab-inhoud actief">
+          <p><strong>Werken aan de buitenkant van de cel</strong> — ze binden aan receptoren op de celmembraan.</p>
+          <p>Voorbeeld: <strong>insuline</strong> maakt de buitenkant van de cel doorlaatbaar voor glucose, zodat cellen van energie voorzien worden of glucose kunnen opslaan.</p>
+        </div>
+        <div id="werk-binnen" class="kdg-tab-inhoud">
+          <p><strong>Werken binnen in de cel</strong> — vetoplosbare hormonen kunnen door de celmembraan heen en binden aan receptoren in de cel.</p>
+          <p>Voorbeeld: <strong>schildklierhormoon</strong> stimuleert de mitochondriën in de cel om de stofwisseling te versnellen.</p>
+        </div>
+        <div id="werk-afbraak" class="kdg-tab-inhoud">
+          <p>Hormonen zijn meestal niet goed oplosbaar in bloed en binden zich aan <strong>transporteiwitten</strong> (=albumine) — een soort "bootjes" waarmee ze worden vervoerd.</p>
+          <p>Zodra het hormoon loskomt van het transporteiwit = <strong>vrij hormoon</strong>. Zodra niet meer nodig: afgebroken in de <strong>lever</strong>, afvalstoffen verlaten via darm of nieren het lichaam.</p>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🧬</span>Geslachtshormonen als voorbeeld</div>
+        <p>Geslachtshormonen (progesteron, oestrogeen, testosteron) zijn vetoplosbaar en geven opdrachten aan de celkern.</p>
+        <figure class="kdg-img"><img src="3.3 werking-geslachtshormonen.png" alt="Werking van geslachtshormonen op celniveau: hormoon door celmembraan naar celkern"><figcaption>Figuur 3 — Werking van geslachtshormonen op celniveau: (1) hormoon, (2) binding receptor, (3) aanmaak eiwitten, (4) blauwdruk in celkern</figcaption></figure>
+        <table class="kdg-tabel">
+          <tr><th>Hormoon</th><th>Werking</th></tr>
+          <tr><td><strong>Testosteron</strong></td><td>Opdracht om meer spiereiwit aan te maken → spieren groeien</td></tr>
+          <tr><td><strong>Oestrogeen</strong></td><td>Stimuleert celdeling van baarmoederslijmvlies → slijmvlies wordt dikker. Houdt ook botweefsel stevig.</td></tr>
+          <tr><td><strong>Progesteron</strong></td><td>Rijpen van cellen in baarmoederslijmvlies → geschikt voor innesteling eicel</td></tr>
+        </table>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🃏</span>Kernbegrippen — klik om te oefenen</div>
+        <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+        <div class="flip-grid">
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Hormoon</div><div class="flipkaart-achter">Chemische boodschapperstof aangemaakt door een klier, vervoerd via het bloed naar doelorganen.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Receptor</div><div class="flipkaart-achter">Specifiek "slot" op of in een cel waarop alleen bepaalde hormonen ("sleutels") passen.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Homeostase</div><div class="flipkaart-achter">Het evenwicht in het lichaam dat het hormoonstelsel in stand houdt (bv. bloedsuiker, temperatuur).</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Endocrien systeem</div><div class="flipkaart-achter">Systeem dat stoffen inwendig afscheidt — het hormoonstelsel. Trager dan het zenuwstelsel.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Doelorgaan</div><div class="flipkaart-achter">Orgaan of weefsel met de juiste receptoren voor een bepaald hormoon — het "targetorgaan".</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Vrij hormoon</div><div class="flipkaart-achter">Hormoon dat loskomt van zijn transporteiwit en actief kan werken op de doelcel.</div></div></div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">← Overzicht</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m1','m2','1')">Volgende: Homeostase &amp; regelkringen →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 2: HOMEOSTASE & REGELKRINGEN -->
+    <div class="module" id="m2">
+      <div class="module-kop">
+        <div class="module-tag">Module 2</div>
+        <div class="module-titel">Homeostase &amp; regelkringen</div>
+        <div class="module-intro">Het hormoonstelsel bewaart het evenwicht in het lichaam met regelkringen. Die werken via feedback: de uitkomst van een proces stuurt het proces zelf bij.</div>
+        <div class="module-pills"><span class="pill">🔄 Regelkring</span><span class="pill">➖ Negatieve feedback</span><span class="pill">➕ Positieve feedback</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Homeostase en feedbackmechanismen</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/53Fqu_cDi3s?si=ku-BbmiFPNi_5mjz" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔄</span>Wat is een regelkring?</div>
+        <p>Een regelkring is een <strong>controlesysteem</strong> in het lichaam. Vergelijk het met een thermostaat of met rechtdoor fietsen: je stuurt voortdurend bij om niet te ver naar links of rechts te gaan.</p>
+        <div class="regelkring">
+          <div class="regelkring-rij">
+            <span class="regelkring-stap acc1">1. Sensor</span>
+            <span class="regelkring-pijl">→</span>
+            <span class="regelkring-stap">2. Controlecentrum</span>
+            <span class="regelkring-pijl">→</span>
+            <span class="regelkring-stap acc2">3. Effector</span>
+            <span class="regelkring-pijl">→</span>
+            <span class="regelkring-stap">4. Terugkoppeling</span>
+          </div>
+        </div>
+        <table class="kdg-tabel" style="margin-top:14px;">
+          <tr><th>Stap</th><th>Wat</th><th>Voorbeeld</th></tr>
+          <tr><td><strong>Sensor</strong></td><td>Meet een waarde in het bloed</td><td>Meting bloedsuiker, hormoonwaarde, calciumgehalte</td></tr>
+          <tr><td><strong>Controlecentrum</strong></td><td>Vergelijkt met normale waarde</td><td>Hypothalamus of hypofyse</td></tr>
+          <tr><td><strong>Effector</strong></td><td>Klier of orgaan past iets aan</td><td>Schildklier, bijnier, alvleesklier</td></tr>
+          <tr><td><strong>Terugkoppeling</strong></td><td>Verandering gemeld aan controlecentrum</td><td>Hormoonwaarde stijgt/daalt → regeling bijgestuurd</td></tr>
+        </table>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="3.4 regelkring-schema-schildklier.jpg" alt="Schema indirecte en directe feedback: schildklieras vs. bloedsuikerspiegel regelkring"><figcaption>Figuur 4 — Indirecte feedback (schildklieras links) vs. directe feedback (bloedsuikerspiegel rechts)</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">📡</span>Directe vs. indirecte terugkoppeling</div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('feed','direct',this)">Directe terugkoppeling</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('feed','indirect',this)">Indirecte terugkoppeling</button>
+        </div>
+        <div id="feed-direct" class="kdg-tab-inhoud actief">
+          <p>De hypofyse (of een andere klier) reageert <strong>meteen</strong> op wat er in het bloed gemeten wordt — via een korte terugkoppeling zonder tussenstap.</p>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Voorbeeld 1: ADH (anti-diuretisch hormoon)</span><span>+</span></div>
+            <div class="begrip-body"><strong>Negatieve directe terugkoppeling</strong>
+              <p>Osmoreceptoren in de hersenen meten de concentratie van het bloed. Is het bloed te geconcentreerd → meer ADH vrijgegeven → nieren houden water vast → concentratie daalt → ADH daalt.</p>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Voorbeeld 2: Oxytocine (bevalling)</span><span>+</span></div>
+            <div class="begrip-body"><strong>Positieve directe terugkoppeling</strong>
+              <p>Rek van de baarmoederhals → meer oxytocine → sterkere weeën → meer rek → nog meer oxytocine. Stopt pas bij de geboorte.</p>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Voorbeeld 3: PTH (bijschildklier)</span><span>+</span></div>
+            <div class="begrip-body"><strong>Negatieve directe terugkoppeling</strong>
+              <p>De bijschildklier meet zelf het calciumgehalte in het bloed en scheidt PTH af als dat te laag is. Geen tussenkomst van hypothalamus of hypofyse.</p>
+            </div>
+          </div>
+        </div>
+        <div id="feed-indirect" class="kdg-tab-inhoud">
+          <p>De hypofyse geeft eerst een <strong>stimulerend hormoon</strong> af → dat activeert een andere klier → het hormoon van die klier geeft daarna de terugkoppeling.</p>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Voorbeeld 1: TSH → Schildklier (T3/T4)</span><span>+</span></div>
+            <div class="begrip-body"><strong>Hypothalamus-Hypofyse-Schildklier-as</strong>
+              <p>TSH (hypofyse) → stimuleert schildklier → T3/T4 productie. Te veel T3/T4 → remt TSH (hypofyse) en TRH (hypothalamus).</p>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Voorbeeld 2: ACTH → Bijnier (cortisol)</span><span>+</span></div>
+            <div class="begrip-body"><strong>Hypothalamus-Hypofyse-Bijnier-as</strong>
+              <p>ACTH (hypofyse) → stimuleert bijnierschors → cortisol productie. Te veel cortisol → remt ACTH en CRH.</p>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Voorbeeld 3: FSH/LH → Eierstokken/testikels</span><span>+</span></div>
+            <div class="begrip-body"><strong>Hypothalamus-Hypofyse-Gonaden-as</strong>
+              <p>LH/FSH (hypofyse) → stimuleren eierstokken/testikels → oestrogeen, progesteron, testosteron. Deze geslachtshormonen geven terugkoppeling naar hypofyse en hypothalamus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">➖➕</span>Negatieve vs. positieve feedback</div>
+        <table class="kdg-tabel">
+          <tr><th>Type</th><th>Hoe werkt het?</th><th>Hoe vaak?</th><th>Voorbeeld</th></tr>
+          <tr><td><strong>Negatieve feedback</strong></td><td>Te veel hormoon → productie afgeremd. Te weinig → productie gestimuleerd. Streeft naar evenwicht.</td><td>Meest voorkomend</td><td>T3/T4 remmen TSH; cortisol remt ACTH</td></tr>
+          <tr><td><strong>Positieve feedback</strong></td><td>Verandering versterkt zichzelf (sneeuwbaleffect) totdat een eindpunt bereikt is.</td><td>Zeldzaam</td><td>Eisprong: oestrogeenpiek → LH-piek → ovulatie. Oxytocine bij bevalling.</td></tr>
+        </table>
+        <div class="kdg-info" style="margin-top:12px;"><strong>Onthoud:</strong> Negatieve feedback = corrigerend (streeft naar homeostase). Positieve feedback = versterkend (leidt naar een eindpunt zoals bevalling of eisprong).</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">✏️</span>Oefening — Regelkringen ontwerpen</div>
+        <p style="font-size:0.85rem;color:#555;margin-bottom:12px;">Klik op een situatie om de regelkring te bekijken.</p>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>1. Cortisol — te hoog glucoseniveau</span><span>+</span></div>
+          <div class="begrip-body"><strong>Regelkring cortisol (negatieve terugkoppeling)</strong>
+            <p><strong>Situatie:</strong> Te hoog glucoseniveau in het bloed.</p>
+            <figure class="kdg-img"><img src="3.5 regelkring-oefening-1.png" alt="Regelkring glucose: indirect feedback systeem via HVK, ACTH en bijnierschors cortisol"><figcaption>Regelkring 1 — Glucose (indirect feedbacksysteem)</figcaption></figure>
+            <p>Sensor (lever/bloed) meet te hoog glucose → signaal naar hypothalamus → CRH daalt → ACTH daalt → bijnierschors minder cortisol → cortisol verlaagt glucoseaanmaak → glucose daalt naar normaal → terugkoppeling: cortisol normaal.</p>
+            <div class="regelkring">
+              <div class="regelkring-rij">
+                <span class="regelkring-stap acc1">Te hoog glucose</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Hypothalamus: CRH↓</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Hypofyse: ACTH↓</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap acc2">Bijnier: Cortisol↓</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Glucose normaal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>2. Aldosteron — te lage bloeddruk</span><span>+</span></div>
+          <div class="begrip-body"><strong>Regelkring aldosteron (negatieve terugkoppeling)</strong>
+            <p><strong>Situatie:</strong> Te lage bloeddruk.</p>
+            <figure class="kdg-img"><img src="3.5 regelkring-oefening-2.png" alt="Regelkring bloeddruk: indirect feedbacksysteem via HVK, ACTH en bijnierschors aldosteron"><figcaption>Regelkring 2 — Bloeddruk via aldosteron (indirect feedbacksysteem)</figcaption></figure>
+            <p>Sensor meet lage bloeddruk → bijnierschors maakt meer aldosteron → nieren houden meer Na+ (natrium) en water vast → bloedvolume stijgt → bloeddruk stijgt → terugkoppeling: aldosteron daalt.</p>
+            <div class="regelkring">
+              <div class="regelkring-rij">
+                <span class="regelkring-stap acc1">Te lage bloeddruk</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap acc2">Bijnierschors: Aldosteron↑</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Nieren: Na+ &amp; water vasthouden</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Bloeddruk normaal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>3. ADH — te hoog bloedvolume</span><span>+</span></div>
+          <div class="begrip-body"><strong>Regelkring ADH (negatieve terugkoppeling)</strong>
+            <p><strong>Situatie:</strong> Te hoog bloedvolume (te veel vocht in het bloed).</p>
+            <figure class="kdg-img"><img src="3.5 regelkring-oefening-3.png" alt="Regelkring bloedvolume: direct feedbacksysteem via HAK en ADH"><figcaption>Regelkring 3 — Bloedvolume via ADH (direct feedbacksysteem)</figcaption></figure>
+            <p>Sensor meet hoog bloedvolume → hypofyse minder ADH → nieren laten meer water los via urine → bloedvolume daalt → terugkoppeling: ADH normaal.</p>
+            <div class="regelkring">
+              <div class="regelkring-rij">
+                <span class="regelkring-stap acc1">Te hoog bloedvolume</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Hypofyse: ADH↓</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap acc2">Nieren: meer urine</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Bloedvolume normaal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>4. Calcium (PTH) — spierkrampen na inspanning</span><span>+</span></div>
+          <div class="begrip-body"><strong>Regelkring PTH/calcium (negatieve terugkoppeling)</strong>
+            <p><strong>Situatie:</strong> Te laag Ca²⁺ niveau in het bloed (spierkrampen).</p>
+            <figure class="kdg-img"><img src="3.5 regelkring-oefening-4.png" alt="Regelkring calcium: direct feedbacksysteem via bijschildklier en PTH"><figcaption>Regelkring 4 — Calcium via PTH (direct feedbacksysteem)</figcaption></figure>
+            <p>Bijschildklier meet laag calcium → PTH wordt aangemaakt → darmen nemen meer Ca op uit voeding, nieren geven minder Ca af, botten geven Ca af (noodmaatregel) → calcium stijgt → terugkoppeling: PTH daalt.</p>
+            <div class="regelkring">
+              <div class="regelkring-rij">
+                <span class="regelkring-stap acc1">Te laag Ca²⁺</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap acc2">Bijschildklier: PTH↑</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Darmen/nieren/botten: Ca vrijmaken</span>
+                <span class="regelkring-pijl">→</span>
+                <span class="regelkring-stap">Ca²⁺ normaal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m1')">← Functie &amp; werking</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m2','m3','2')">Volgende: Centrale regeling →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 3: CENTRALE REGELING -->
+    <div class="module" id="m3">
+      <div class="module-kop">
+        <div class="module-tag">Module 3</div>
+        <div class="module-titel">Centrale hormonale regeling</div>
+        <div class="module-intro">De hormonale regulatie begint in de hersenen. De hypothalamus en hypofyse zijn de spilfiguren van vrijwel alle hormonale processen en sturen drie dominante systemen aan: stress, stofwisseling en voortplanting.</div>
+        <div class="module-pills"><span class="pill">🧠 Hypothalamus</span><span class="pill">🫀 Hypofyse</span><span class="pill">🔗 Hormoonassen</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🧠</span>Hypothalamus — het coördinatiecentrum</div>
+        <p>De hypothalamus is de <strong>belangrijkste koppeling tussen het zenuwstelsel en het hormoonstelsel</strong>. Hij ontvangt signalen vanuit hersengebieden zoals de amygdala (emotie) en de hippocampus (context) en beslist of hormonale actie vereist is.</p>
+        <p>In stresssituaties kan de hypothalamus <strong>rechtstreeks het ruggenmerg activeren</strong> om via het bijniermerg adrenaline vrij te zetten.</p>
+        <div class="kdg-info"><strong>Functies van de hypothalamus:</strong> bloeddruk, hartslag, honger en dorst, lichaamstemperatuur, seksuele opwinding, slaap-waakritme, vecht-of-vlucht, voedingsgedrag, voortplanting.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🫀</span>Hypofyse — de "dirigent"</div>
+        <p>De hypofyse is een kleine klier <strong>onder de hypothalamus</strong> en bestaat uit een <strong>voorkwab (adenohypofyse)</strong> en een <strong>achterkwab (neurohypofyse)</strong>. Bijna alle hormonale processen staan onder invloed van deze klier.</p>
+        <p>Drie dominante systemen worden aangestuurd: <strong>stress</strong> (bijnieren), <strong>stofwisseling</strong> (schildklier) en <strong>voortplanting</strong> (eierstokken/testikels).</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="3.7 hypothalamus-hypofyse.jpg" alt="Overzichtsschema van alle hormoonassen vanuit hypothalamus en hypofyse naar doelorganen"><figcaption>Figuur 5 — Overzicht hormoonassen: hypothalamus-hypofyse en doelorganen</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="3.10 bijnieras.jpg" alt="Bijnieras schema: hypothalamus CRH → hypofyse ACTH → bijnier aldosteron, cortisol, androgenen"><figcaption>Figuur 6 — Bijnieras: hypothalamus → CRH → hypofyse → ACTH → bijnier</figcaption></figure>
+        </div>
+
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('hypo','vk',this)">Voorkwab (HVK)</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('hypo','ak',this)">Achterkwab (HAK)</button>
+        </div>
+
+        <div id="hypo-vk" class="kdg-tab-inhoud actief">
+          <p style="font-size:0.82rem;color:#aaa;margin-bottom:12px;">De voorkwab maakt hormonen die rechtstreeks of via andere klieren werken.</p>
+
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>GH — Groeihormoon</span><span>+</span></div>
+            <div class="begrip-body"><strong>Direct werkend</strong>
+              <p>Zorgt voor <strong>groei en herstel</strong> van weefsels (spier, bot, slijmvliezen). Cruciaal voor de groeispurt in de puberteit. Wordt vooral tijdens de <strong>slaap</strong> aangemaakt → voldoende slapen is essentieel. Helpt bij herstel na fysieke belasting.</p>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>TSH — Thyroïdstimulerend hormoon → Schildklier</span><span>+</span></div>
+            <div class="begrip-body"><strong>Indirect werkend — Hypothalamus-Hypofyse-Schildklier-as</strong>
+              <p>TSH stimuleert de schildklier tot productie van <strong>T3 en T4</strong>. T4 is inactief en wordt in de lever omgezet naar actief <strong>T3</strong>. T3 stimuleert de stofwisseling door mitochondriën te activeren → versnelt doorbloeding, warmtehuishouding, darmperistaltiek en verbranding.</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+                <figure class="kdg-img" style="margin:0;"><img src="3.8 schildklier-schema.png" alt="Schildklieras: hypothalamus TRH → hypofyse TSH → schildklier T3 T4"><figcaption>Figuur 7 — Schildklieras: hypothalamus → TRH → hypofyse → TSH → schildklier → T3/T4</figcaption></figure>
+                <figure class="kdg-img" style="margin:0;"><img src="3.9 schildklier-anatomie.png" alt="Anatomie schildklier: locatie in hals voor strottenhoofd, vlindervorm"><figcaption>Figuur 8 — Anatomie schildklier (thyroid gland) aan de voorzijde van de hals</figcaption></figure>
+              </div>
+              <figure class="kdg-img"><img src="3.9.1 schildklier-anatomie.png" alt="Microscopische weergave van schildkliercellen: folliculaire cellen, colloïd"><figcaption>Figuur 9 — Microscopische structuur van de schildklier: folliculaire cellen produceren T3/T4</figcaption></figure>
+              <div class="kdg-video" style="margin-top:10px;">
+                <div class="kdg-video-info">
+                  <span class="kdg-video-label">▶ Video</span>
+                  <span class="kdg-video-titel">Schildklier en schildklierhormonen</span>
+                </div>
+                <a class="kdg-video-knop" href="https://youtu.be/LhIcaV_7uRE?si=Wy_uTPBV9oQ8rK_5" target="_blank">▶ Bekijk op YouTube</a>
+              </div>
+              <p style="margin-top:10px;"><strong>Schildklier:</strong> vlindervormige klier aan de voorzijde van de hals. Maakt naast T3/T4 ook <strong>calcitonine</strong> aan (regelt calcium en fosfaat). Heeft <strong>jodium</strong> nodig uit voeding voor aanmaak van T3/T4.</p>
+              <table class="kdg-tabel" style="margin-top:10px;">
+                <tr><th>Toestand</th><th>Naam</th><th>Gevolg</th></tr>
+                <tr><td>Te snel werkende schildklier</td><td><strong>Hyperthyroïdie</strong></td><td>Snelle hartslag, oververhit gevoel, gewichtsverlies</td></tr>
+                <tr><td>Te traag werkende schildklier</td><td><strong>Hypothyroïdie</strong></td><td>Trage hartslag, gewichtstoename, vermoeidheid</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>ACTH — Bijnierstimulans → Bijnierschors</span><span>+</span></div>
+            <div class="begrip-body"><strong>Indirect werkend — Hypothalamus-Hypofyse-Bijnier-as</strong>
+              <p>ACTH (adrenocorticotroop hormoon) stimuleert de bijnierschors tot aanmaak van <strong>steroïdhormonen</strong>. De bijnier bestaat uit:</p>
+              <ul style="margin:8px 0 8px 18px;">
+                <li><strong>Bijniermerg (medulla)</strong>: rechtstreeks contact met hypothalamus → adrenaline bij acuut gevaar</li>
+                <li><strong>Bijnierschors (cortex)</strong>: via ACTH → cortisol, aldosteron, testosteron</li>
+              </ul>
+              <figure class="kdg-img"><img src="3.10 bijnier-anatomie.png" alt="Anatomie bijnieren: locatie boven de nieren, dwarsdoorsnede met bijnierschors en bijniermerg"><figcaption>Figuur 10 — Anatomie bijnieren: bijnierschors (cortex) en bijniermerg (medulla)</figcaption></figure>
+              <table class="kdg-tabel">
+                <tr><th>Hormoon</th><th>Functie</th></tr>
+                <tr><td><strong>Cortisol</strong></td><td>Verhoogt bloedsuiker, ontstekingsremmer, zorgt voor fit ontwaken. Essentieel bij stress (chronisch).</td></tr>
+                <tr><td><strong>Aldosteron</strong></td><td>Water- en zouthormoon: Na+ vasthouden → bloeddrukverhoging</td></tr>
+                <tr><td><strong>Testosteron</strong></td><td>Spiergroei, mannelijkheid, talgaanmaak, libido (ook bij vrouwen in kleine hoeveelheid)</td></tr>
+              </table>
+              <figure class="kdg-img" style="margin-top:12px;"><img src="3.11 bijnierschorshormonen.jpg" alt="Dwarsdoorsnede bijnier met zones: medulla, cortex met glucocorticoïden, mineralocorticoïden, androgenen en catecholamines"><figcaption>Figuur 11 — Bijnierschors: zones en hormonen (glucocorticoïden, mineralocorticoïden, androgenen)</figcaption></figure>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>FSH &amp; LH — Geslachtshormoonassen</span><span>+</span></div>
+            <div class="begrip-body"><strong>Indirect werkend — Hypothalamus-Hypofyse-Gonaden-as</strong>
+              <p><strong>FSH (follikelstimulerende hormoon):</strong> bij vrouwen → rijping Graafse follikel + stimuleert oestrogeenaanmaak. Bij mannen → productie zaadcellen.</p>
+              <p><strong>LH (luteïniserend hormoon):</strong> zet de eisprong in gang → lege follikel wordt corpus luteum → maakt progesteron. Bij mannen → aanmaak testosteron.</p>
+              <figure class="kdg-img"><img src="3.12 gonaden-man-vrouw.png" alt="Primaire en secundaire geslachtskenmerken man en vrouw, gonaden: zaadbal en eierstok"><figcaption>Figuur 12 — Gonaden: zaadbal (testis) bij de man en eierstok (ovarium) bij de vrouw</figcaption></figure>
+              <div class="kdg-video" style="margin-top:10px;">
+                <div class="kdg-video-info">
+                  <span class="kdg-video-label">▶ Video</span>
+                  <span class="kdg-video-titel">De menstruatiecyclus</span>
+                </div>
+                <a class="kdg-video-knop" href="https://youtu.be/nI6XrPtj_bU?si=M8nTkJxuOS6TZRZ1" target="_blank">▶ Bekijk op YouTube</a>
+              </div>
+              <p style="margin-top:12px;"><strong>Menstruatiecyclus (28 dagen):</strong></p>
+              <table class="kdg-tabel">
+                <tr><th>Fase</th><th>Hormonen</th><th>Wat gebeurt er</th></tr>
+                <tr><td>Dag 1–14 (follikelFase)</td><td>FSH↑, Oestrogeen↑</td><td>Graafse follikel rijpt, endometrium wordt dikker</td></tr>
+                <tr><td>Dag 14 (eisprong)</td><td>LH-piek</td><td>Ovulatie — eicel vrijgegeven</td></tr>
+                <tr><td>Dag 15–28 (luteale fase)</td><td>LH licht↑, Progesteron↑</td><td>Corpus luteum maakt progesteron, endometrium trekt vocht aan</td></tr>
+                <tr><td>Geen bevruchting</td><td>Alle hormonen↓</td><td>Endometrium breekt af → menstruatie (dag 0)</td></tr>
+              </table>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+                <figure class="kdg-img" style="margin:0;"><img src="3.13 menstruatiecyclus.jpg" alt="Gedetailleerde hormoonkurven menstruatiecyclus: FSH, LH, oestrogeen, progesteron over 28 dagen"><figcaption>Figuur 13 — Hormoonkurven menstruatiecyclus (28 dagen)</figcaption></figure>
+                <figure class="kdg-img" style="margin:0;"><img src="3.13.1 menstruatiecyclus.png" alt="Schema menstruatiecyclus: folliculaire fase, ovulatie, luteale fase met follikel en corpus luteum"><figcaption>Figuur 14 — Menstruatiecyclus: follikel, ovulatie en corpus luteum</figcaption></figure>
+              </div>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Prolactine — moedermelk</span><span>+</span></div>
+            <div class="begrip-body"><strong>Direct werkend</strong>
+              <p>Prolactine is nodig voor de aanmaak van <strong>moedermelk</strong>. Komt op gang tijdens de zwangerschap (melkproductie nog onderdrukt door progesteron). Onderdrukt FSH en LH → bij frequent borstvoeding wordt nieuwe zwangerschap uitgesteld.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="hypo-ak" class="kdg-tab-inhoud">
+          <p style="font-size:0.82rem;color:#aaa;margin-bottom:12px;">De achterkwab slaat hormonen op die door de hypothalamus zijn aangemaakt en geeft ze vrij.</p>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>Oxytocine — knuffelhormoon</span><span>+</span></div>
+            <div class="begrip-body"><strong>Direct werkend — aangemaakt in hypothalamus</strong>
+              <p>Oxytocine staat bekend als het <strong>knuffelhormoon</strong>. Komt vrij bij knuffelen, massage en seks. Werkt ook als neurotransmitter in de hersenen (rust en geborgenheid).</p>
+              <p><strong>Functies:</strong> samentrekkingen baarmoeder (weeën, bevalling), toeschietreflex (borstvoeding), positieve sociale binding. Bij te hoog gehalte kan het leiden tot angsten en vervelende gevoelens.</p>
+              <figure class="kdg-img"><img src="3.14 oxytocine.jpg" alt="Oxytocine: aanmaak in hypothalamus, afgifte via hypofyseachterkwab, toeschietreflex borstvoeding"><figcaption>Figuur 15 — Oxytocine: aanmaak in hypothalamus, afgifte via achterkwab, toeschietreflex</figcaption></figure>
+            </div>
+          </div>
+          <div class="begrip-kaart" onclick="wisselBegrip(this)">
+            <div class="begrip-kop"><span>ADH — anti-diuretisch hormoon</span><span>+</span></div>
+            <div class="begrip-body"><strong>Direct werkend — reguleert vochtbalans</strong>
+              <p>ADH reguleert de hoeveelheid urine en concentratie. Het zorgt ervoor dat de nieren voldoende water vasthouden. ADH heeft ook een <strong>vaatvernauwende werking</strong> → verhoogt bloeddruk.</p>
+              <p>Samen met aldosteron regelt ADH de hoogte van de <strong>bloeddruk</strong>.</p>
+              <figure class="kdg-img"><img src="3.15 ADH-schema.png" alt="ADH schema: nier houdt water vast, minder urine productie, verhoogd bloedvolume"><figcaption>Figuur 16 — ADH: nier houdt water vast → minder urine → verhoogd bloedvolume en bloeddruk</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m2')">← Homeostase &amp; regelkringen</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m3','m4','3')">Volgende: Perifere klieren →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 4: PERIFERE KLIEREN -->
+    <div class="module" id="m4">
+      <div class="module-kop">
+        <div class="module-tag">Module 4</div>
+        <div class="module-titel">Perifere hormoonklieren</div>
+        <div class="module-intro">Niet alle hormoonklieren worden via de hypofyse gestuurd. Sommige reageren rechtstreeks op veranderingen in het lichaam — autonoom, zonder tussenkomst van de hersenen.</div>
+        <div class="module-pills"><span class="pill">🍬 Pancreas</span><span class="pill">🦴 Bijschildklier</span><span class="pill">⚡ Bijniermerg</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🍬</span>Alvleesklier (pancreas) — bloedsuikerregeling</div>
+        <p>De alvleesklier werkt <strong>autonoom</strong> — niet onder directe controle van de hypofyse. De <strong>eilandjes van Langerhans</strong> meten continu de bloedsuikerspiegel en passen de hormoonproductie aan.</p>
+        <table class="kdg-tabel">
+          <tr><th>Hormoon</th><th>Cel</th><th>Wanneer</th><th>Effect</th><th>Type</th></tr>
+          <tr><td><strong>Insuline</strong></td><td>Bètacellen</td><td>Hoge bloedsuiker</td><td>Verlaagt bloedsuiker: opent cellen voor glucose, stimuleert glycogeenopslag in lever</td><td>Anabool (opbouwend)</td></tr>
+          <tr><td><strong>Glucagon</strong></td><td>Alfacellen</td><td>Lage bloedsuiker</td><td>Verhoogt bloedsuiker: breekt glycogeen af in lever → glucose vrij. Breekt ook vetten af.</td><td>Katabool (afbrekend)</td></tr>
+        </table>
+        <div class="kdg-info" style="margin-top:12px;"><strong>Insuline = sleutel die de deur van de cel opent</strong> voor glucose. Glucose in bloed → lever slaat eerst groot deel op als glycogeen (energiereserve) → rest naar cellen via insuline.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;">
+          <figure class="kdg-img" style="margin:0;"><img src="3.17 insuline-glucagon.png" alt="Schema insuline en glucagon: pancreas, darm, lever, spier en cel met glucosetransport"><figcaption>Figuur 17 — Insuline en glucagon: glucose van pancreas naar lever, spieren en cellen</figcaption></figure>
+          <figure class="kdg-img" style="margin:0;"><img src="3.18 bloedsuikerregeling.jpg" alt="Bloedsuikerregeling: maag, alvleesklier, insuline, bloedvat, lever, spier en cel"><figcaption>Figuur 18 — Bloedsuikerregeling: insuline opent cellen voor glucoseopname</figcaption></figure>
+        </div>
+
+        <div class="kdg-video" style="margin-top:16px;">
+          <div class="kdg-video-info">
+            <span class="kdg-video-label">▶ Video</span>
+            <span class="kdg-video-titel">Stofwisseling en glucose</span>
+          </div>
+          <a class="kdg-video-knop" href="https://youtu.be/DNRpSl7QXko?si=ewrrD4rmSwrPhGss" target="_blank">▶ Bekijk op YouTube</a>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🦴</span>Bijschildklier (parathyreoïd) — calciumhuishouding</div>
+        <p>Vier kleine bijschildkliertjes (nauwelijks groter dan een rijstkorrel) bevinden zich pal naast de schildklier. Ze werken <strong>autonoom</strong> en produceren <strong>PTH (parathyreoïdhormoon)</strong> wanneer het calcium in het bloed te laag is.</p>
+        <p>PTH werkt op drie organen om het calciumgehalte te verhogen:</p>
+        <ul>
+          <li><strong>Darmen:</strong> gestimuleerd tot extra opname van Ca uit voeding</li>
+          <li><strong>Nieren:</strong> gestimuleerd om minder Ca af te geven met de urine</li>
+          <li><strong>Botten:</strong> noodmaatregel — afbraak van bot geeft Ca vrij aan het bloed</li>
+        </ul>
+        <div class="kdg-warn" style="margin-top:12px;"><strong>Opgepast:</strong> Als PTH langdurig actief is door chronisch laag calcium, kan dit leiden tot <strong>botontkalking (osteoporose)</strong>.</div>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="3.19 bijschildklier-anatomie.jpg" alt="Achterzijde schildklier met 4 bijschildkliertjes zichtbaar"><figcaption>Figuur 19 — Achterzijde schildklier (1) met de vier bijschildkliertjes (2)</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">⚡</span>Bijniermerg — acute stress</div>
+        <p>Het bijniermerg staat in <strong>rechtstreeks contact met de hypothalamus</strong> via het sympathisch zenuwstelsel. Het reageert supersnel op noodsituaties en ligt aan de basis van de <strong>vecht-of-vluchtreactie</strong>.</p>
+
+        <div class="kdg-video" style="margin-top:10px;margin-bottom:14px;">
+          <div class="kdg-video-info">
+            <span class="kdg-video-label">▶ Video</span>
+            <span class="kdg-video-titel">Stresshormoon — Adrenaline</span>
+          </div>
+          <a class="kdg-video-knop" href="https://youtu.be/rhKRRP6sVNs?si=CoI7vLJzHEqDPg8i" target="_blank">▶ Bekijk op YouTube</a>
+        </div>
+
+        <table class="kdg-tabel">
+          <tr><th>Hormoon</th><th>Effect op het lichaam</th></tr>
+          <tr><td><strong>Adrenaline</strong> (epinefrine)</td><td>Versnelt ademhaling, verhoogt hartslag, bloedsuiker en bloeddruk, stimuleert bloedstroom naar spieren en hersenen, vermindert bloedstroom naar darmen, verwijd pupillen, verhoogt alertheid, scherpt geheugen aan, verhoogt bloedstolling</td></tr>
+          <tr><td><strong>Noradrenaline</strong></td><td>Vergelijkbaar met adrenaline, maar veroorzaakt in skeletspieren vaatvernauwing (i.p.v. vaatverwijding)</td></tr>
+        </table>
+        <div class="kdg-info2" style="margin-top:12px;"><strong>Acuut vs. chronisch stress:</strong> Bijniermerg = acute stress (adrenaline, seconden). Bijnierschors = chronische stress (cortisol via ACTH, uren tot dagen).</div>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="3.20 bijniermerg-adrenaline.jpg" alt="Schema bijniermerg adrenaline: registratie alarmfase, activatie sympathisch zenuwstelsel, bijniermerg, effecten op lichaam"><figcaption>Figuur 20 — Bijniermerg en adrenaline: vecht-of-vluchtreactie via sympathisch zenuwstelsel</figcaption></figure>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m3')">← Centrale regeling</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m4','m5','4')">Volgende: Aandoeningen →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 5: AANDOENINGEN -->
+    <div class="module" id="m5">
+      <div class="module-kop">
+        <div class="module-tag">Module 5</div>
+        <div class="module-titel">Aandoeningen van het hormoonstelsel</div>
+        <div class="module-intro">Wanneer het hormoonstelsel uit balans raakt, kunnen diverse aandoeningen ontstaan. We bekijken aandoeningen van de schildklier, bijschildklier, bijnierschors en pancreas.</div>
+        <div class="module-pills"><span class="pill">🦋 Schildklier</span><span class="pill">🦴 Bijschildklier</span><span class="pill">⚗️ Bijnierschors</span><span class="pill">💉 Pancreas</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🦋</span>Schildklieraandoeningen</div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('schild','hashi',this)">Hashimoto</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('schild','graves',this)">Ziekte van Graves</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('schild','struma',this)">Struma</button>
+        </div>
+        <div id="schild-hashi" class="kdg-tab-inhoud actief">
+          <p><strong>Auto-immuunziekte</strong> — het eigen afweersysteem richt zich tegen de schildkliercellen → schildklier werkt steeds trager → <strong>hypothyroïdie</strong>.</p>
+          <p><strong>Symptomen:</strong> trage hartslag, gevoeligheid voor koude, geen transpiratie, gewichtstoename, extreme vermoeidheid, pijn en krampen in spieren, trage stoelgang, soms struma, haaruitval, droge huid, afname menstruatiefrequentie, libidoverlies.</p>
+          <div class="kdg-info"><strong>Behandeling:</strong> schildklierhormonen toedienen.</div>
+        </div>
+        <div id="schild-graves" class="kdg-tab-inhoud">
+          <p><strong>Auto-immuunziekte</strong> — afweersysteem maakt schildklierstimulerende antistoffen → schildklier werkt te snel → <strong>hyperthyroïdie</strong>.</p>
+          <p><strong>Symptomen:</strong> snelle hartslag, gejaagd en oververhit gevoel, dorst, gewichtsverlies, psychische klachten (depressie, angst, nervositeit), overmatig zweten, diarree, menstruatiestoornissen, soms uitpuilende ogen (door ontsteking).</p>
+          <div class="kdg-info"><strong>Behandeling:</strong> medicatie (Strumazol), eventueel radioactief jodium of operatie.</div>
+        </div>
+        <div id="schild-struma" class="kdg-tab-inhoud">
+          <p><strong>Vergroting van de schildklier</strong> (goiter of krop), zichtbaar of voelbaar in de hals. Kan optreden bij zowel hyper- als hypothyroïdie.</p>
+          <p><strong>Oorzaken:</strong> interne (ziekte, tumor, zwangerschap) of externe (tekort aan jodium in voeding, bepaalde medicatie).</p>
+          <p><strong>Symptomen:</strong> slikklachten, piepende ademhaling, gespannen gevoel in de hals, heesheid.</p>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🦴</span>Osteoporose (bijschildklier/parathyreoïd)</div>
+        <p><strong>Verminderde botmassa</strong> waarbij botafbraak de botaanmaak overtreft. Tot je dertigste neemt botmassa toe; daarna kan de balans omslaan.</p>
+        <p>PTH speelt een belangrijke rol: bij chronisch laag calcium halen bijschildklieren calcium uit de botten → <strong>botten worden broos en breekbaar</strong>.</p>
+        <p>Vrouwen na de overgang zijn extra kwetsbaar door de verminderde oestrogeenproductie (oestrogeen beschermt botten).</p>
+        <div class="kdg-info"><strong>Preventie:</strong> voldoende calcium (melk, kwark, kaas, yoghurt), eiwitten en vitamine D, regelmatige beweging en buiten komen. Al vanaf de jeugd.</div>
+        <figure class="kdg-img" style="margin-top:14px;"><img src="3.21 osteoporose.jpg" alt="Vergelijking normaal bot vs. osteoporose: normaal dicht botweefsel links, poreus botweefsel rechts"><figcaption>Figuur 21 — Normaal bot vs. osteoporose: botweefsel wordt poreus en breekbaar</figcaption></figure>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">⚗️</span>Bijnierschorsaandoeningen</div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('bijnier','cushing',this)">Syndroom van Cushing</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('bijnier','hyperaldo',this)">Hyperaldosteronisme</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('bijnier','addison',this)">Ziekte van Addison</button>
+        </div>
+        <div id="bijnier-cushing" class="kdg-tab-inhoud actief">
+          <p>Ontstaat wanneer het lichaam te lang <strong>te veel cortisol</strong> aanmaakt (meestal door een tumor in hypofyse of bijnier, of door overmatig gebruik van cortisonen als medicijn).</p>
+          <p><strong>Symptomen:</strong> verhoogde bloedsuiker (kans op diabetes), osteoporose, vermoeidheid, verhoogde bloeddruk, gewichtstoename, verlies spierkracht, psychische stoornissen (depressie). Typisch: maangezicht (vollere wangen), vetophoping in nek en buik, dunne huid met blauwe plekken.</p>
+        </div>
+        <div id="bijnier-hyperaldo" class="kdg-tab-inhoud">
+          <p>Te veel <strong>aldosteron</strong> in het bloed → te veel natrium en water vasthouden → <strong>hoge bloeddruk</strong>.</p>
+          <p><strong>Primaire vorm:</strong> oorzaak in de bijnier zelf (bv. goedaardige tumor — ziekte van Conn). <strong>Secundaire vorm:</strong> oorzaak buiten de bijnier (bv. vernauwing nierslagader).</p>
+          <p><strong>Symptomen:</strong> moeheid, hoofdpijn, spierzwakte en spierkrampen, dorst, veel plassen (vooral 's nachts).</p>
+        </div>
+        <div id="bijnier-addison" class="kdg-tab-inhoud">
+          <p><strong>Auto-immuunziekte</strong> — eigen afweer valt de bijnierschors aan → onvoldoende cortisol, aldosteron en androgenen.</p>
+          <p><strong>Gevolgen:</strong> onvermogen om met stress om te gaan, meer kans op infecties en psychische stress.</p>
+          <p><strong>Symptomen:</strong> bruine verkleuring van gezicht, handlijnen en tandvlees, trek in zout voedsel, moeheid, weinig energie, minder eetlust, afvallen, misselijkheid, lage bloeddruk, pijnlijke spieren, somberheid.</p>
+          <div class="kdg-info"><strong>Behandeling:</strong> aanvullen van het hormonentekort.</div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">💉</span>Diabetes mellitus (pancreas)</div>
+        <p>Diabetes is een <strong>chronische aandoening</strong> gekenmerkt door hyperglycemie (te veel suiker in het bloed), veroorzaakt door verminderde insulineproductie of insulineresistentie. Normaal: bloedsuiker tussen 70–140 mg/dl.</p>
+        <figure class="kdg-img"><img src="3.22 diabetes-type1-type2.jpg" alt="Vergelijking gezond, diabetes type 1 en diabetes type 2: insuline, insulinereceptor en GLUT4 glucosetransporter"><figcaption>Figuur 22 — Gezond vs. diabetes type 1 (geen insuline) vs. diabetes type 2 (insulineresistentie)</figcaption></figure>
+
+        <div class="kdg-video" style="margin:14px 0;">
+          <div class="kdg-video-info">
+            <span class="kdg-video-label">▶ Video</span>
+            <span class="kdg-video-titel">Suikerziekte</span>
+          </div>
+          <a class="kdg-video-knop" href="https://youtu.be/Qwg1kVMYlPY?si=EvSBFMvGLXcznIpQ" target="_blank">▶ Bekijk op YouTube</a>
+        </div>
+
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('diab','type1',this)">Type 1</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('diab','type2',this)">Type 2</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('diab','hyper',this)">Hyperglycemie</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('diab','hypo',this)">Hypoglycemie</button>
+        </div>
+        <div id="diab-type1" class="kdg-tab-inhoud actief">
+          <p><strong>Insuline-afhankelijke diabetes</strong> — begint vaak voor het 30ste jaar. De eigen afweercellen vernietigen de insulineproducerende bètacellen van de alvleesklier → <strong>vrijwel geen insuline productie</strong>.</p>
+          <p><strong>Behandeling:</strong> dagelijkse glycemiemeting + dagelijkse insuline-injecties (bloedsuikerverlagend hormoon).</p>
+          <p>Symptomen: veel urineren, veel drinken, moe, vermageren, zure appeltjesgeur (acetongeur).</p>
+        </div>
+        <div id="diab-type2" class="kdg-tab-inhoud">
+          <p><strong>Niet-insuline-afhankelijke of ouderdomsdiabetes</strong> — vroeger alleen bij mensen boven de 40, nu ook bij jongeren met overgewicht. Oorzaken: erfelijkheid, leeftijd, gebrek aan beweging, overgewicht.</p>
+          <p>Twee mechanismen: (1) verminderde insulineproductie door bètacellen, (2) <strong>insulineresistentie</strong> — cellen reageren niet meer goed op insuline.</p>
+          <p><strong>Behandeling:</strong> aanpassen levensstijl (voeding, beweging) + eventueel orale antidiabetica. Soms insuline nodig.</p>
+          <p>Symptomen treden langzaam op: slecht genezende wonden, verminderd gezichtsvermogen, terugkomende infecties, vermoeidheid.</p>
+        </div>
+        <div id="diab-hyper" class="kdg-tab-inhoud">
+          <p><strong>Hyperglycemie &gt; 180 mg/dl</strong> — te hoge bloedsuiker.</p>
+          <p><strong>Oorzaken:</strong> te weinig insuline, te veel eten, minder inspanning, infecties, koorts, stress.</p>
+          <p><strong>Symptomen:</strong> veel urineren, veel drinken, droge plakkerige tong, vermoeidheid, misselijkheid, zure appeltjesgeur.</p>
+          <figure class="kdg-img"><img src="3.23 hyperglycemie.png" alt="Illustratie hyperglycemie symptomen: slaperigheid, moeheid, dorst, veel plassen, droge tong"><figcaption>Figuur 23 — Symptomen hyperglycemie (HYPER)</figcaption></figure>
+          <div class="kdg-warn"><strong>Actie:</strong> glycemie controleren, suikervrij vocht geven (dehydratatie voorkomen), arts verwittigen, snelwerkende insuline toedienen op voorschrift.</div>
+        </div>
+        <div id="diab-hypo" class="kdg-tab-inhoud">
+          <p><strong>Hypoglycemie &lt; 60–70 mg/dl</strong> — te lage bloedsuiker.</p>
+          <p><strong>Oorzaken:</strong> overdosis insuline, te weinig eten, te veel inspanning, alcohol, stress.</p>
+          <p><strong>Symptomen:</strong> zweten, beven, hartkloppingen, angst, honger, bleekheid. Erger: wazig zien, duizeligheid, verwardheid, gedragsverandering (lijkt dronken).</p>
+          <figure class="kdg-img"><img src="3.24 Hypoglycemie.png" alt="Illustratie hypoglycemie symptomen: wisselend humeur, moeheid, honger, hoofdpijn, bleekheid, beven, wazig zien, duizeligheid, zweten"><figcaption>Figuur 24 — Symptomen hypoglycemie (HYPO)</figcaption></figure>
+          <div class="kdg-warn"><strong>Actie bewust:</strong> snel resorbeerbare koolhydraten (druivensuiker, klontjes suiker). Na herstel: traagwerkende koolhydraten (boterham). <strong>Bewusteloze patiënt:</strong> niets oraal toedienen, arts verwittigen.</div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m4')">← Perifere klieren</button>
+        <button class="kdg-knop kdg-knop-acc2" onclick="voltooiEnVolgende('m5','m6','5')">Naar de zelftoets →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 6: ZELFTOETS -->
+    
+    <!-- ======================== FLASHCARDS MODULE ======================== -->
+    <div class="module" id="m7">
+      <div class="module-kop">
+        <div class="module-tag">Sleutelbegrippen</div>
+        <div class="module-titel">Begrippen herhalen</div>
+        <div class="module-intro">Gebruik deze flashcards om de belangrijkste begrippen te herhalen. Klik op een kaart om de definitie te zien. Draai alle kaarten om om zeker te zijn dat je de stof beheerst.</div>
+        <div class="module-pills"><span class="pill">🃏 Begrippen</span><span class="pill">🔄 Interactief</span><span class="pill">✅ Herhaling</span></div>
+      </div>
+
+          <div class="kdg-kaart kdg-kaart-groen">
+            <div class="kaart-titel"><span class="kaart-icoon">🃏</span>Sleutelbegrippen hormoonstelsel — draai de kaart om</div>
+            <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+            <div class="flip-grid">
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Hormoon</div><div class="flipkaart-achter">Chemische boodschapperstof aangemaakt door een klier, vervoerd via het bloed naar doelorganen.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Receptor</div><div class="flipkaart-achter">Specifiek "slot" op of in een cel waarop alleen bepaalde hormonen ("sleutels") passen.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Homeostase</div><div class="flipkaart-achter">Het evenwicht in het lichaam dat het hormoonstelsel in stand houdt (bv. bloedsuiker, temperatuur).</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Endocrien systeem</div><div class="flipkaart-achter">Systeem dat stoffen inwendig afscheidt — het hormoonstelsel. Trager dan het zenuwstelsel.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Doelorgaan</div><div class="flipkaart-achter">Orgaan of weefsel met de juiste receptoren voor een bepaald hormoon — het "targetorgaan".</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Negatieve feedback</div><div class="flipkaart-achter">Zelfregulatie: te hoog hormoongehalte remt de eigen productie. Te laag gehalte stimuleert ze. Streeft naar evenwicht.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Hypothalamus</div><div class="flipkaart-achter">Hersendeel dat het regelcentrum is van het hormoonstelsel. Stuurt de hypofyse aan via releasing hormones.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Insuline</div><div class="flipkaart-achter">Hormoon van de bètacellen (alvleesklier). Verlaagt de bloedsuiker door cellen doorlaatbaar te maken voor glucose.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Glucagon</div><div class="flipkaart-achter">Hormoon van de alfacellen (alvleesklier). Verhoogt de bloedsuiker door glycogeen af te breken in de lever.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Cortisol</div><div class="flipkaart-achter">Stresshormoon aangemaakt door de bijnierschors. Verhoogt bloedsuiker, onderdrukt immuunsysteem. Chronisch hoog = schadelijk.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">T3 / T4</div><div class="flipkaart-achter">Schildklierhormonen die de stofwisseling regelen. T4 is inactief en wordt in de lever omgezet naar actief T3.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">TSH</div><div class="flipkaart-achter">Thyroïdstimulerend hormoon van de hypofyse. Stimuleert de schildklier tot aanmaak van T3 en T4.</div></div></div>
+            </div>
+          </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">← Overzicht</button>
+      </div>
+    </div>
+
+    <div class="module" id="m6">
+      <div class="module-kop">
+        <div class="module-tag">Zelftoets</div>
+        <div class="module-titel">Test je kennis</div>
+        <div class="module-intro">Beantwoord de vragen om te controleren of je de stof van alle modules begrijpt. Na elke vraag zie je direct of je antwoord correct is.</div>
+        <div class="module-pills"><span class="pill">❓ 10 vragen</span><span class="pill">✅ Directe feedback</span><span class="pill">⭐ Eindscore</span></div>
+      </div>
+      <div class="kdg-quiz-intro">
+        <div class="quiz-intro-icoon">🎯</div>
+        <div class="quiz-intro-tekst">
+          <h3>Klaar voor de toets?</h3>
+          <p>Beantwoord alle 10 vragen. Na elke vraag zie je meteen of je antwoord correct is en lees je een korte uitleg.</p>
+        </div>
+      </div>
+      <div id="quiz-container"></div>
+      <div class="quiz-resultaat" id="quizResultaat">
+        <div class="resultaat-score" id="resultaatScore"></div>
+        <div class="resultaat-sterren" id="resultaatSterren"></div>
+        <div class="resultaat-bericht" id="resultaatBericht"></div>
+        <br>
+        <button class="kdg-knop kdg-knop-acc1" onclick="herlaadQuiz()">Opnieuw proberen</button>
+      </div>
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m5')">← Aandoeningen</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">⌂ Overzicht</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const bezocht = {};
+const quizAntwoorden = {};
+
+function toonModule(id) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('actief'));
+  document.querySelectorAll('.kdg-nav-item').forEach(n => n.classList.remove('actief'));
+  document.getElementById(id).classList.add('actief');
+  const map = { welkom:0, m1:1, m2:2, m3:3, m4:4, m5:5, m6:6 , m7:7};
+  if (map[id] !== undefined) document.querySelectorAll('.kdg-nav-item')[map[id]].classList.add('actief');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const num = id.replace('m','');
+  if (!isNaN(num) && num) markeerBezocht(num);
+}
+
+function markeerBezocht(num) {
+  if (!bezocht[num]) {
+    bezocht[num] = true;
+    const el = document.getElementById('status-' + num);
+    if (el && !el.textContent.includes('Voltooid')) el.textContent = 'Bekeken';
+  }
+}
+
+function markeerVoltooid(num) {
+  const bal = document.getElementById('bal-' + num);
+  const nav = document.getElementById('nav-' + num);
+  const st  = document.getElementById('status-' + num);
+  if (bal) { bal.textContent = '✓'; bal.style.background = 'var(--acc2)'; bal.style.color = 'var(--kdg-wit)'; }
+  if (nav) nav.classList.add('gedaan');
+  if (st) st.textContent = 'Voltooid';
+  updateVoortgang();
+}
+
+function voltooiEnVolgende(huidig, volgend, num) {
+  markeerVoltooid(num);
+  toonModule(volgend);
+}
+
+function updateVoortgang() {
+  const n = document.querySelectorAll('.kdg-nav-item.gedaan').length;
+  document.getElementById('progressFill').style.width = (n / 6 * 100) + '%';
+  document.getElementById('progressLabel').textContent = n + ' / 6 voltooid';
+}
+
+function wisselBegrip(el) {
+  const body = el.querySelector('.begrip-body');
+  const kop = el.querySelector('.begrip-kop span:last-child');
+  const open = el.dataset.open === 'true';
+  el.dataset.open = open ? 'false' : 'true';
+  body.style.display = open ? 'none' : 'block';
+  kop.textContent = open ? '+' : '−';
+  el.style.borderColor = open ? 'var(--kdg-lichtgrijs)' : 'var(--acc1)';
+}
+
+function wisselTab(groep, tab, knop) {
+  document.querySelectorAll('[id^="' + groep + '-"]').forEach(el => el.classList.remove('actief'));
+  knop.closest('.kdg-kaart, .kdg-tab-inhoud, div').querySelectorAll('.kdg-tab-knop').forEach(b => b.classList.remove('actief'));
+  document.getElementById(groep + '-' + tab).classList.add('actief');
+  knop.classList.add('actief');
+}
+
+// QUIZ
+const vragen = [
+  {
+    v: "Wat is het belangrijkste verschil tussen het zenuwstelsel en het hormoonstelsel?",
+    opties: ["Het zenuwstelsel werkt via chemische stoffen, het hormoonstelsel via elektrische signalen","Het zenuwstelsel werkt supersnel via elektrische signalen, het hormoonstelsel trager via hormonen in het bloed","Alleen het hormoonstelsel regelt homeostase","Het zenuwstelsel en hormoonstelsel hebben geen verbinding met elkaar"],
+    juist: 1,
+    uitleg: "Het zenuwstelsel gebruikt elektrische signalen en neurotransmitters en werkt supersnel. Het hormoonstelsel (endocrien systeem) werkt trager via hormonen die via het bloed worden vervoerd. Beide systemen werken nauw samen."
+  },
+  {
+    v: "Wat verstaan we onder het 'sleutel-slot principe' bij hormonen?",
+    opties: ["Hormonen sluiten cellen af zodat andere stoffen er niet in kunnen","Alleen hormonen met de juiste receptormatch kunnen een cel aansturen","Alle cellen in het lichaam reageren op hetzelfde hormoon","Hormonen moeten altijd via de celkern werken"],
+    juist: 1,
+    uitleg: "Receptoren zijn specifieke 'sloten' op of in cellen. Alleen als een hormoon (de 'sleutel') past op de receptor van een cel, kan die cel aangestuurd worden. Zo worden specifieke doelorganen bereikt."
+  },
+  {
+    v: "Wat is negatieve feedback in een regelkring?",
+    opties: ["Wanneer een hormoon zichzelf versterkt totdat een eindpunt bereikt is","Wanneer een te hoog hormoongehalte de eigen productie afremt, en een te laag gehalte de productie stimuleert","Wanneer de hypofyse altijd meer hormonen aanmaakt als reactie op een stijging","Wanneer feedback uitsluitend via het bijniermerg verloopt"],
+    juist: 1,
+    uitleg: "Negatieve feedback stuurt bij richting evenwicht (homeostase): te veel hormoon → productie daalt; te weinig → productie stijgt. Dit is het meest voorkomende feedbacksysteem in het hormoonstelsel."
+  },
+  {
+    v: "Welke twee structuren in de hersenen vormen het regelcentrum van de meeste hormonale processen?",
+    opties: ["Amygdala en hippocampus","Hypothalamus en hypofyse","Hersenstam en cerebellum","Pijnappelklier en thalamus"],
+    juist: 1,
+    uitleg: "De hypothalamus is het coördinatiecentrum dat signalen ontvangt en beslist of hormonale actie nodig is. De hypofyse stuurt vervolgens drie dominante systemen aan: stress (bijnieren), stofwisseling (schildklier) en voortplanting (gonaden)."
+  },
+  {
+    v: "Wat doet TSH en welke klier stimuleert het?",
+    opties: ["TSH stimuleert de bijnierschors tot aanmaak van cortisol","TSH stimuleert de schildklier tot aanmaak van T3 en T4","TSH stimuleert de eierstokken tot aanmaak van oestrogeen","TSH stimuleert de alvleesklier tot aanmaak van insuline"],
+    juist: 1,
+    uitleg: "TSH (thyroïdstimulerend hormoon) wordt aangemaakt door de hypofyse en stimuleert de schildklier tot productie van T3 en T4. T4 is inactief en wordt in de lever omgezet naar actief T3, dat de stofwisseling versnelt."
+  },
+  {
+    v: "Wat is het verschil tussen insuline en glucagon?",
+    opties: ["Insuline verhoogt de bloedsuiker, glucagon verlaagt ze","Insuline verlaagt de bloedsuiker door cellen te openen voor glucose; glucagon verhoogt de bloedsuiker door glycogeen af te breken","Beide hormonen worden aangemaakt door de schildklier","Insuline werkt alleen in de lever, glucagon alleen in de spieren"],
+    juist: 1,
+    uitleg: "Insuline (bètacellen) verlaagt de bloedsuiker door cellen doorlaatbaar te maken voor glucose en opslag als glycogeen te stimuleren. Glucagon (alfacellen) verhoogt de bloedsuiker door glycogeen af te breken in de lever."
+  },
+  {
+    v: "Wat is het kenmerkende verschil tussen diabetes type 1 en type 2?",
+    opties: ["Type 1 treft alleen ouderen, type 2 alleen kinderen","Bij type 1 worden insulineproducerende cellen vernietigd door het eigen afweersysteem; bij type 2 is er insulineresistentie of verminderde productie","Type 1 wordt behandeld met dieet, type 2 altijd met insuline","Er is geen verschil — beide hebben dezelfde oorzaak"],
+    juist: 1,
+    uitleg: "Type 1 is een auto-immuunziekte: bètacellen worden vernietigd → vrijwel geen insuline → dagelijkse insuline-injecties nodig. Type 2 is gelinkt aan levensstijl en erfelijkheid → insulineresistentie of verminderde productie → eerst aanpak via levensstijl."
+  },
+  {
+    v: "Welke rol speelt PTH (parathyreoïdhormoon) bij een te laag calciumgehalte in het bloed?",
+    opties: ["PTH verlaagt het calciumgehalte door calcium op te slaan in de botten","PTH stimuleert de darmen, nieren en botten om calcium vrij te maken en het gehalte te verhogen","PTH wordt aangemaakt door de schildklier en heeft geen invloed op calcium","PTH remt de alvleesklier zodat minder insuline wordt aangemaakt"],
+    juist: 1,
+    uitleg: "Bij een te laag calciumgehalte maakt de bijschildklier PTH aan. PTH stimuleert (1) de darmen tot extra Ca-opname, (2) de nieren om minder Ca af te geven, en (3) als noodmaatregel de botten om Ca vrij te geven — wat bij langdurig gebruik leidt tot osteoporose."
+  },
+  {
+    v: "Hashimoto en de ziekte van Graves zijn allebei aandoeningen van de schildklier. Wat is het verschil?",
+    opties: ["Hashimoto = hyperthyroïdie, Graves = hypothyroïdie","Hashimoto = hypothyroïdie (schildklier werkt te traag); Graves = hyperthyroïdie (schildklier werkt te snel)","Beide leiden tot hyperthyroïdie, maar via verschillende mechanismen","Hashimoto is geen auto-immuunziekte, Graves wel"],
+    juist: 1,
+    uitleg: "Hashimoto: eigen afweer vernietigt schildkliercellen → schildklier werkt trager → hypothyroïdie (gewichtstoename, vermoeidheid, koude-intolerantie). Graves: antistoffen stimuleren schildklier → werkt te snel → hyperthyroïdie (gewichtsverlies, snelle hartslag, nervositeit)."
+  },
+  {
+    v: "Bij acute stress (vecht-of-vlucht) wordt adrenaline vrijgegeven. Via welke weg gaat dat?",
+    opties: ["Hypothalamus → hypofyse → ACTH → bijnierschors → adrenaline","Hypothalamus → sympathisch zenuwstelsel → bijniermerg → adrenaline","Hypofyse → TSH → schildklier → adrenaline","Amygdala → FSH → bijniermerg → adrenaline"],
+    juist: 1,
+    uitleg: "Bij acuut gevaar activeert de hypothalamus rechtstreeks het sympathisch zenuwstelsel → bijniermerg → adrenaline vrijgegeven in seconden. Dit is sneller dan de hormonale weg via de hypofyse. Chronische stress verloopt wel via ACTH → bijnierschors → cortisol."
+  }
+];
+
+function bouwQuiz() {
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = '';
+  vragen.forEach((v, i) => {
+    const d = document.createElement('div');
+    d.className = 'vraag-kaart';
+    d.id = 'vk-' + i;
+    d.innerHTML = `<div class="vraag-num">Vraag ${i+1} van ${vragen.length}</div>
+      <div class="vraag-tekst">${v.v}</div>
+      <ul class="opties">${v.opties.map((o,j)=>`<li><button class="optie-knop" onclick="kiesAntwoord(${i},${j})">${o}</button></li>`).join('')}</ul>
+      <div class="feedback" id="fb-${i}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function kiesAntwoord(vIdx, aIdx) {
+  if (quizAntwoorden[vIdx] !== undefined) return;
+  quizAntwoorden[vIdx] = aIdx;
+  const v = vragen[vIdx];
+  const kaart = document.getElementById('vk-' + vIdx);
+  kaart.classList.add('beantwoord');
+  kaart.querySelectorAll('.optie-knop').forEach((b, i) => {
+    b.disabled = true;
+    if (i === v.juist) b.classList.add('juist');
+    if (i === aIdx && i !== v.juist) b.classList.add('fout');
+  });
+  const fb = document.getElementById('fb-' + vIdx);
+  const ok = aIdx === v.juist;
+  fb.className = 'feedback toon ' + (ok ? 'juist' : 'fout');
+  fb.innerHTML = (ok ? '✓ Juist. ' : '✗ Niet juist. ') + v.uitleg;
+  if (Object.keys(quizAntwoorden).length === vragen.length) toonResultaat();
+}
+
+function toonResultaat() {
+  let goed = 0;
+  vragen.forEach((v,i) => { if (quizAntwoorden[i] === v.juist) goed++; });
+  const pct = Math.round(goed / vragen.length * 100);
+  document.getElementById('resultaatScore').textContent = goed + ' / ' + vragen.length;
+  document.getElementById('resultaatSterren').textContent = pct >= 80 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
+  document.getElementById('resultaatBericht').textContent = pct >= 80 ? 'Uitstekend. Je beheerst de stof goed.' : pct >= 60 ? 'Goed gedaan. Herhaal de modules waar je fouten maakte.' : 'Blijf oefenen. Doorloop de lesstof opnieuw.';
+  document.getElementById('quizResultaat').classList.add('toon');
+  markeerVoltooid('6');
+}
+
+function herlaadQuiz() {
+  Object.keys(quizAntwoorden).forEach(k => delete quizAntwoorden[k]);
+  document.getElementById('quizResultaat').classList.remove('toon');
+  bouwQuiz();
+}
+
+bouwQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomedisch Kader — Deel 5: Zintuigen | KdG</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --kdg-zwart:       #000000;
+  --kdg-wit:         #ffffff;
+  --kdg-donkergrijs: #282828;
+  --kdg-midgrijs:    #555555;
+  --kdg-lichtgrijs:  #e6e6e6;
+  --kdg-achtergrond: #f5f5f5;
+  --acc1:            #6991c8;
+  --acc1-licht:      #eef3fb;
+  --acc1-donker:     #4d6fa0;
+  --acc2:            #a0b4dc;
+  --acc2-licht:      #f0f4fb;
+  --acc2-donker:     #7590bb;
+  --font-titel: 'Nunito', 'Century Gothic', sans-serif;
+  --font-body:  'Open Sans', 'Arial', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--kdg-achtergrond); color: var(--kdg-zwart); font-size: 16px; line-height: 1.65; }
+.kdg-header { background: var(--kdg-zwart); color: var(--kdg-wit); position: sticky; top: 0; z-index: 200; }
+.kdg-header-inner { max-width: 1140px; margin: 0 auto; padding: 13px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.kdg-logo-mark { background: var(--acc1); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 700; font-size: 1rem; padding: 5px 11px; }
+.kdg-logo-area { display: flex; align-items: center; gap: 14px; }
+.kdg-header-title { font-family: var(--font-titel); font-weight: 300; font-size: 0.95rem; }
+.kdg-header-sub { font-size: 0.72rem; color: #aaa; margin-top: 1px; }
+.kdg-progress-wrap { display: flex; align-items: center; gap: 12px; }
+.kdg-progress-bar { width: 200px; height: 3px; background: #333; }
+.kdg-progress-fill { height: 100%; background: var(--acc1); width: 0%; transition: width 0.4s; }
+.kdg-progress-label { font-size: 0.72rem; color: #aaa; white-space: nowrap; }
+.kdg-layout { max-width: 1140px; margin: 0 auto; padding: 28px 32px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+.kdg-sidebar { position: sticky; top: 68px; background: var(--kdg-wit); border-top: 3px solid var(--acc1); }
+.kdg-sidebar-kop { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 10px 16px; font-family: var(--font-titel); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.kdg-nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 16px; cursor: pointer; border-bottom: 1px solid var(--kdg-lichtgrijs); font-size: 0.85rem; color: var(--kdg-midgrijs); text-decoration: none; transition: background 0.15s; }
+.kdg-nav-item:hover { background: var(--acc1-licht); color: var(--kdg-zwart); }
+.kdg-nav-item.actief { background: var(--acc1-licht); color: var(--kdg-zwart); font-weight: 600; border-left: 3px solid var(--acc1); padding-left: 13px; }
+.nav-bal { width: 24px; height: 24px; border-radius: 50%; background: var(--kdg-lichtgrijs); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; font-family: var(--font-titel); color: var(--kdg-midgrijs); transition: background 0.2s; }
+.kdg-nav-item.gedaan .nav-bal { background: var(--acc2); color: var(--kdg-wit); }
+.nav-naam { flex: 1; }
+.nav-sub { font-size: 0.72rem; color: #999; margin-top: 1px; }
+.kdg-content { min-width: 0; }
+.module { display: none; animation: fadeIn 0.25s ease; }
+.module.actief { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.module-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 28px 32px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.module-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--acc1); font-weight: 600; margin-bottom: 8px; }
+.module-titel { font-family: var(--font-titel); font-size: 1.9rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+.module-intro { font-size: 0.9rem; color: #ccc; max-width: 580px; font-weight: 300; line-height: 1.65; }
+.module-pills { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.pill { border: 1px solid #444; color: #ccc; padding: 3px 10px; font-size: 0.72rem; }
+.kdg-kaart { background: var(--kdg-wit); border-top: 3px solid var(--acc1); padding: 22px 26px; margin-bottom: 16px; }
+.kdg-kaart-acc2 { border-top-color: var(--acc2); }
+.kdg-kaart-zwart { border-top-color: var(--kdg-zwart); }
+.kaart-titel { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; color: var(--kdg-zwart); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.kaart-icoon { width: 30px; height: 30px; background: var(--acc1); color: var(--kdg-wit); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.kaart-icoon.acc2 { background: var(--acc2); }
+.kdg-kaart p { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 10px; line-height: 1.65; }
+.kdg-kaart p:last-child { margin-bottom: 0; }
+.kdg-kaart strong { color: var(--kdg-zwart); font-weight: 600; }
+.kdg-kaart ul, .kdg-kaart ol { margin: 10px 0 10px 20px; }
+.kdg-kaart li { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 6px; line-height: 1.6; }
+.kdg-info { background: var(--acc1-licht); border-left: 4px solid var(--acc1); padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-info strong { color: var(--kdg-zwart); }
+.kdg-info2 { background: var(--acc2-licht); border-left: 4px solid var(--acc2); padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-info2 strong { color: var(--kdg-zwart); }
+.kdg-warn { background: #fff8e0; border-left: 4px solid #e8c200; padding: 12px 16px; margin: 14px 0; font-size: 0.875rem; color: var(--kdg-donkergrijs); }
+.kdg-tabel { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
+.kdg-tabel th { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 9px 14px; text-align: left; font-weight: 600; font-size: 0.8rem; }
+.kdg-tabel td { padding: 8px 14px; border-bottom: 1px solid var(--kdg-lichtgrijs); color: var(--kdg-donkergrijs); vertical-align: top; }
+.kdg-tabel tr:hover td { background: var(--acc1-licht); }
+.kdg-img { background: var(--kdg-lichtgrijs); padding: 16px; margin: 16px 0; text-align: center; }
+.kdg-img img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.kdg-img figcaption { font-size: 0.78rem; color: var(--kdg-midgrijs); margin-top: 8px; font-style: italic; }
+.kdg-video { margin: 20px 0; background: var(--kdg-zwart); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.kdg-video-info { display: flex; align-items: center; gap: 12px; flex: 1; }
+.kdg-video-label { background: var(--acc1); color: var(--kdg-wit); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; white-space: nowrap; flex-shrink: 0; }
+.kdg-video-titel { font-family: var(--font-titel); font-size: 0.92rem; font-weight: 600; color: var(--kdg-wit); }
+.kdg-video-knop { display: inline-flex; align-items: center; gap: 8px; background: var(--acc1); color: var(--kdg-wit); padding: 10px 20px; font-size: 0.85rem; font-weight: 700; font-family: var(--font-body); text-decoration: none; white-space: nowrap; transition: background 0.15s; }
+.kdg-video-knop:hover { background: var(--acc1-donker); }
+.kdg-tabs { display: flex; border-bottom: 2px solid var(--kdg-lichtgrijs); flex-wrap: wrap; }
+.kdg-tab-knop { padding: 9px 18px; border: none; background: transparent; font-size: 0.83rem; cursor: pointer; font-family: var(--font-body); color: var(--kdg-midgrijs); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+.kdg-tab-knop:hover { color: var(--kdg-zwart); }
+.kdg-tab-knop.actief { color: var(--kdg-zwart); border-bottom-color: var(--acc1); font-weight: 600; }
+.kdg-tab-inhoud { display: none; padding: 16px 0 0; }
+.kdg-tab-inhoud.actief { display: block; }
+.begrip-kaart { border: 1px solid var(--kdg-lichtgrijs); cursor: pointer; transition: border-color 0.15s; margin-bottom: 8px; }
+.begrip-kaart:hover { border-color: var(--acc1); }
+.begrip-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 10px 14px; font-size: 0.88rem; font-weight: 600; font-family: var(--font-titel); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.begrip-kop span:last-child { flex-shrink: 0; font-size: 1.1rem; }
+.begrip-body { display: none; padding: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); line-height: 1.65; background: var(--kdg-wit); }
+.begrip-body p { margin-bottom: 8px; font-size: 0.86rem; }
+.flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin-top: 10px; }
+.flipkaart { height: 110px; perspective: 600px; cursor: pointer; }
+.flipkaart-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
+.flipkaart.gekeerd .flipkaart-inner { transform: rotateY(180deg); }
+.flipkaart-voor, .flipkaart-achter { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; }
+.flipkaart-voor { background: var(--kdg-zwart); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 600; font-size: 0.82rem; }
+.flipkaart-achter { background: var(--acc1-licht); color: var(--kdg-donkergrijs); border: 2px solid var(--acc1); transform: rotateY(180deg); font-size: 0.75rem; line-height: 1.5; }
+.flip-hint { font-size: 0.72rem; color: #999; text-align: center; margin-top: 6px; }
+.kdg-knop { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: var(--font-body); border: none; transition: background 0.15s; }
+.kdg-knop-acc1 { background: var(--acc1); color: var(--kdg-wit); }
+.kdg-knop-acc1:hover { background: var(--acc1-donker); }
+.kdg-knop-acc2 { background: var(--acc2); color: var(--kdg-wit); }
+.kdg-knop-acc2:hover { background: var(--acc2-donker); }
+.kdg-knop-omlijnd { background: transparent; color: var(--kdg-zwart); border: 1px solid var(--kdg-zwart); }
+.kdg-knop-omlijnd:hover { background: var(--kdg-lichtgrijs); }
+.module-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--kdg-lichtgrijs); }
+.welkom-hero { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 40px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.welkom-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--acc1); font-weight: 600; margin-bottom: 10px; }
+.welkom-titel { font-family: var(--font-titel); font-size: 2.4rem; font-weight: 700; line-height: 1.1; margin-bottom: 12px; }
+.welkom-tekst { color: #ccc; font-size: 0.9rem; max-width: 500px; font-weight: 300; line-height: 1.7; }
+.module-overzicht { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 12px; }
+.module-tegel { background: var(--kdg-wit); padding: 20px; cursor: pointer; transition: all 0.15s; border-top: 3px solid var(--kdg-lichtgrijs); }
+.module-tegel:hover { border-top-color: var(--acc1); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.tegel-nummer { font-family: var(--font-titel); font-size: 2rem; font-weight: 700; color: var(--acc1); line-height: 1; }
+.tegel-naam { font-weight: 700; font-size: 0.88rem; color: var(--kdg-zwart); font-family: var(--font-titel); margin-top: 6px; }
+.tegel-sub { font-size: 0.77rem; color: var(--kdg-midgrijs); margin-top: 3px; }
+.tegel-status { font-size: 0.7rem; color: #aaa; margin-top: 8px; }
+.sectie-header { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 14px 24px; margin: 24px 0 16px; display: flex; align-items: center; gap: 12px; font-family: var(--font-titel); font-size: 1.1rem; font-weight: 700; }
+.sectie-header-icoon { font-size: 1.4rem; }
+.vraag-kaart { background: var(--kdg-wit); border-top: 3px solid var(--kdg-lichtgrijs); padding: 20px 24px; margin-bottom: 14px; }
+.vraag-kaart.beantwoord { border-top-color: var(--acc1); }
+.vraag-num { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--acc1-donker); font-weight: 600; margin-bottom: 6px; }
+.vraag-tekst { font-size: 0.92rem; font-weight: 600; color: var(--kdg-zwart); margin-bottom: 14px; line-height: 1.5; font-family: var(--font-titel); }
+.opties { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.optie-knop { width: 100%; text-align: left; padding: 10px 14px; border: 1px solid var(--kdg-lichtgrijs); background: #fafafa; cursor: pointer; font-size: 0.85rem; color: var(--kdg-donkergrijs); transition: all 0.15s; font-family: var(--font-body); line-height: 1.4; }
+.optie-knop:hover:not(:disabled) { border-color: var(--acc1); background: var(--acc1-licht); color: var(--kdg-zwart); }
+.optie-knop.juist { background: #d4f4e8; border-color: #37be87; color: var(--kdg-zwart); font-weight: 600; }
+.optie-knop.fout { background: #fde8e8; border-color: #cc3333; color: #cc3333; }
+.optie-knop:disabled { cursor: default; }
+.feedback { display: none; margin-top: 10px; padding: 9px 13px; font-size: 0.83rem; }
+.feedback.toon { display: block; }
+.feedback.juist { background: #d4f4e8; color: var(--kdg-zwart); border-left: 3px solid #37be87; }
+.feedback.fout { background: #fde8e8; color: #990000; border-left: 3px solid #cc3333; }
+.quiz-resultaat { display: none; background: var(--kdg-zwart); color: var(--kdg-wit); padding: 32px; text-align: center; margin-top: 20px; }
+.quiz-resultaat.toon { display: block; }
+.resultaat-score { font-family: var(--font-titel); font-size: 3.5rem; font-weight: 700; color: var(--acc1); }
+.resultaat-sterren { font-size: 1.4rem; margin: 8px 0; }
+.resultaat-bericht { color: #ccc; font-size: 0.9rem; }
+.kdg-quiz-intro { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 20px 24px; margin-bottom: 20px; display: flex; align-items: center; gap: 16px; }
+.quiz-intro-icoon { font-size: 2rem; }
+.quiz-intro-tekst h3 { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; color: var(--acc1); }
+.quiz-intro-tekst p { font-size: 0.85rem; color: #ccc; font-weight: 300; }
+@media (max-width: 768px) {
+  .kdg-layout { grid-template-columns: 1fr; padding: 14px; }
+  .kdg-sidebar { position: static; }
+  .welkom-titel { font-size: 1.8rem; }
+  .module-titel { font-size: 1.5rem; }
+  .kdg-header-inner { padding: 12px 16px; }
+  .kdg-progress-wrap { display: none; }
+}
+
+/* LEERDOEL BANNERS */
+.leerdoel-banner, .leerdoel-banner2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  border-left: 5px solid var(--acc1);
+  background: var(--acc1-licht, #e0f2f4);
+}
+.leerdoel-banner2 {
+  border-left-color: var(--acc2, #37be87);
+  background: var(--acc2-licht, #d4f4e8);
+  margin-top: -8px;
+}
+.leerdoel-icoon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.leerdoel-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--acc1-donker, #3d8a94);
+  margin-bottom: 4px;
+  font-family: var(--font-titel);
+}
+.leerdoel-banner2 .leerdoel-label {
+  color: var(--acc2-donker, #289969);
+}
+.leerdoel-inhoud {
+  font-size: 0.9rem;
+  color: var(--kdg-donkergrijs, #282828);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+</style>
+</head>
+<body>
+
+<header class="kdg-header">
+  <div class="kdg-header-inner">
+    <div class="kdg-logo-area">
+      <div class="kdg-logo-mark">KdG</div>
+      <div>
+        <div class="kdg-header-title">Biomedisch Kader</div>
+        <div class="kdg-header-sub">Deel 5 — Zintuigen: Het Oog &amp; Het Oor · 1ste jaar Orthopedagogie</div>
+      </div>
+    </div>
+    <div class="kdg-progress-wrap">
+      <div class="kdg-progress-bar"><div class="kdg-progress-fill" id="progressFill"></div></div>
+      <div class="kdg-progress-label" id="progressLabel">0 / 6 voltooid</div>
+    </div>
+  </div>
+</header>
+
+<div class="kdg-layout">
+  <nav class="kdg-sidebar">
+    <div class="kdg-sidebar-kop">Inhoud</div>
+    <a class="kdg-nav-item actief" onclick="toonModule('welkom')" href="#">
+      <span class="nav-bal">⌂</span>
+      <div class="nav-naam"><div>Overzicht</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-1" onclick="toonModule('m1')" href="#">
+      <span class="nav-bal" id="bal-1">1</span>
+      <div class="nav-naam"><div>Bouw van het oog</div><div class="nav-sub">Sclera, iris, retina, lens</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-2" onclick="toonModule('m2')" href="#">
+      <span class="nav-bal" id="bal-2">2</span>
+      <div class="nav-naam"><div>Werking van het oog</div><div class="nav-sub">Pupilreflex, accommodatie, chiasma</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-3" onclick="toonModule('m3')" href="#">
+      <span class="nav-bal" id="bal-3">3</span>
+      <div class="nav-naam"><div>Oogaandoeningen</div><div class="nav-sub">Myopie, glaucoom, cataract…</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-4" onclick="toonModule('m4')" href="#">
+      <span class="nav-bal" id="bal-4">4</span>
+      <div class="nav-naam"><div>Bouw &amp; werking oor</div><div class="nav-sub">Buiten-, midden-, binnenoor</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-5" onclick="toonModule('m5')" href="#">
+      <span class="nav-bal" id="bal-5">5</span>
+      <div class="nav-naam"><div>Gehoorafwijkingen</div><div class="nav-sub">Geleiding, perceptie, Ménière</div></div>
+    </a>
+    
+    <a class="kdg-nav-item" id="nav-7" onclick="toonModule('m7')" href="#">
+      <span class="nav-bal" id="bal-06">6</span>
+      <div class="nav-naam"><div>Sleutelbegrippen</div><div class="nav-sub">Begrippen herhalen</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-6" onclick="toonModule('m6')" href="#">
+      <span class="nav-bal" id="bal-6">✓</span>
+      <div class="nav-naam"><div>Zelftoets</div><div class="nav-sub">Test je kennis</div></div>
+    </a>
+  </nav>
+
+  <main class="kdg-content">
+
+    <!-- WELKOM -->
+    <div class="module actief" id="welkom">
+      <div class="welkom-hero">
+        <div class="welkom-tag">Karel de Grote Hogeschool · Orthopedagogie · 1ste jaar</div>
+        <div class="welkom-titel">Deel 5: Zintuigen</div>
+        <div class="welkom-tekst">Zintuigen zijn gespecialiseerde organen met zintuigcellen die prikkels uit de omgeving opvangen en omzetten in elektrische impulsen. In dit deel bespreken we twee sleutelzintuigen: het oog (licht) en het oor (geluid en evenwicht).</div>
+      </div>
+      <div class="leerdoel-banner">
+        <div class="leerdoel-icoon">🎯</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel</div>
+          <div class="leerdoel-inhoud">Je benoemt hoe de zintuigen werken en legt uit hoe stoornissen in waarneming het dagelijks functioneren van cliënten beïnvloeden.</div>
+        </div>
+      </div>
+      <div class="leerdoel-banner2">
+        <div class="leerdoel-icoon">🏥</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel — Aandoeningen</div>
+          <div class="leerdoel-inhoud">Je past basis medische kennis toe op orthopedagogische situaties en herkent signalen die wijzen op lichamelijke oorzaken van gedrag of klachten.</div>
+        </div>
+      </div>
+
+      <div class="module-overzicht">
+        <div class="module-tegel" onclick="toonModule('m1')">
+          <div class="tegel-nummer">01</div>
+          <div class="tegel-naam">Bouw van het oog</div>
+          <div class="tegel-sub">Drie lagen, lens, retina, kegeltjes &amp; staafjes</div>
+          <div class="tegel-status" id="status-1">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m2')">
+          <div class="tegel-nummer">02</div>
+          <div class="tegel-naam">Werking van het oog</div>
+          <div class="tegel-sub">Pupilreflex, accommodatie, chiasma opticum</div>
+          <div class="tegel-status" id="status-2">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m3')">
+          <div class="tegel-nummer">03</div>
+          <div class="tegel-naam">Oogaandoeningen</div>
+          <div class="tegel-sub">Bijziendheid, glaucoom, cataract &amp; meer</div>
+          <div class="tegel-status" id="status-3">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m4')">
+          <div class="tegel-nummer">04</div>
+          <div class="tegel-naam">Bouw &amp; werking oor</div>
+          <div class="tegel-sub">Drie delen, geluidsgolven, orgaan van Corti</div>
+          <div class="tegel-status" id="status-4">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m5')">
+          <div class="tegel-nummer">05</div>
+          <div class="tegel-naam">Gehoorafwijkingen</div>
+          <div class="tegel-sub">Geleidingsdoofheid, perceptiedoofheid, Ménière</div>
+          <div class="tegel-status" id="status-5">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m7')">
+          <div class="tegel-nummer">06</div>
+          <div class="tegel-naam">Sleutelbegrippen</div>
+          <div class="tegel-sub">Begrippen herhalen</div>
+          <div class="tegel-status" id="status-06">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m6')">
+          <div class="tegel-nummer">✓</div>
+          <div class="tegel-naam">Zelftoets</div>
+          <div class="tegel-sub">10 vragen over oog en oor</div>
+          <div class="tegel-status" id="status-6">Nog niet gemaakt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 1: BOUW VAN HET OOG -->
+    <div class="module" id="m1">
+      <div class="module-kop">
+        <div class="module-tag">Module 1 — Het Oog</div>
+        <div class="module-titel">Bouw van het oog</div>
+        <div class="module-intro">De oogbol bestaat uit drie lagen die de inwendige structuren omhullen: de sclera (buitenste), het vaatvlies (middelste) en de retina (binnenste lichtgevoelige laag).</div>
+        <div class="module-pills"><span class="pill">👁️ Drie lagen</span><span class="pill">🔬 Retina</span><span class="pill">💡 Kegeltjes &amp; staafjes</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Hoe werkt het oog?</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/kLRIMTR5kQQ?si=iJY8hL6NkBetWC5S" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🧱</span>De drie lagen van de oogbol</div>
+        <table class="kdg-tabel">
+          <tr><th>Laag</th><th>Naam</th><th>Functie</th></tr>
+          <tr><td><strong>Buitenste laag</strong></td><td>Harde oogrok (sclera)</td><td>Stevige bindweefsellaag, wit. Aan de voorkant: het doorzichtige hoornvlies (cornea). Aanhechtingsplaats voor 6 oogspieren.</td></tr>
+          <tr><td><strong>Middelste laag</strong></td><td>Vaatvlies</td><td>Goed doorbloed — voorziet oog van zuurstof en voedingsstoffen. Gaat aan de voorkant over in iris en straalvormig lichaam.</td></tr>
+          <tr><td><strong>Binnenste laag</strong></td><td>Netvlies (retina)</td><td>Lichtgevoelige laag met fotoreceptoren (kegeltjes en staafjes). Zet beelden om in elektrische signalen.</td></tr>
+        </table>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🌈</span>Het vaatvlies: iris, pupil &amp; lens</div>
+        <p>Het vaatvlies bevat aan de voorkant de meeste bekende structuren van het oog:</p>
+        <table class="kdg-tabel">
+          <tr><th>Structuur</th><th>Beschrijving</th></tr>
+          <tr><td><strong>Iris (regenboogvlies)</strong></td><td>Gepigmenteerde ring die de oogkleur bepaalt. Bevat kring- en lengtespieren die de pupilgrootte regelen.</td></tr>
+          <tr><td><strong>Pupil</strong></td><td>De opening in de iris waardoor licht binnenkomt. Grootte wordt reflexmatig aangepast aan lichtintensiteit.</td></tr>
+          <tr><td><strong>Straalvormig lichaam</strong></td><td>Verdikking vlak voor de iris. Hierin zitten de lensbandjes die de ooglens vasthouden.</td></tr>
+          <tr><td><strong>Ooglens</strong></td><td>Heldere, elastische lens direct achter de pupil. Kan boller/platter worden (accommodatie). Niet doorbloed.</td></tr>
+          <tr><td><strong>Voorste oogkamer</strong></td><td>Ruimte tussen cornea en iris, gevuld met kamerwater (oogvocht).</td></tr>
+          <tr><td><strong>Achterste oogkamer</strong></td><td>Ruimte achter de iris waar de lens is opgehangen. Produceert kamerwater dat elke 1,5 uur ververst.</td></tr>
+          <tr><td><strong>Glasachtig lichaam</strong></td><td>Heldere, geleiachtige substantie die de oogbol achter de lens opvult. Geeft stevigheid aan de oogbol.</td></tr>
+        </table>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">💡</span>Het netvlies (retina) — kegeltjes &amp; staafjes</div>
+        <p>Het netvlies is de lichtgevoelige binnenlaag van het oog. Het bestaat uit <strong>fotoreceptoren</strong> die licht omzetten in elektrische signalen.</p>
+        <table class="kdg-tabel">
+          <tr><th></th><th>Kegeltjes</th><th>Staafjes</th></tr>
+          <tr><td><strong>Aantal</strong></td><td>~5 miljoen</td><td>~120 miljoen</td></tr>
+          <tr><td><strong>Waarnemen</strong></td><td>Kleur en contrast — details</td><td>Licht en donker — bij weinig licht</td></tr>
+          <tr><td><strong>Types</strong></td><td>3 types: gevoelig voor rood, blauw of geelgroen licht</td><td>1 type: gevoelig voor lichtintensiteit</td></tr>
+          <tr><td><strong>Concentratie</strong></td><td>Vooral in de <strong>gele vlek (macula)</strong> — scherpste zicht</td><td>Verspreid over het netvlies</td></tr>
+        </table>
+        <div class="kdg-info">
+          <strong>Gele vlek (Macula):</strong> De plek met de hoogste concentratie kegeltjes. Als je naar iets kijkt, draai je je ogen zodat het beeld op de gele vlek valt → scherpste beeld.<br>
+          <strong>Blinde vlek:</strong> De plek waar de oogzenuw het oog verlaat. Geen fotoreceptoren → nooit een beeld.
+        </div>
+        <p>Het netvlies bestaat uit <strong>4 lagen</strong> (van buiten naar binnen): pigmentcellen → fotoreceptoren (kegeltjes/staafjes) → zenuwcellen → zenuwvezels die samenkomen in de blinde vlek en de oogzenuw vormen.</p>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🗺️</span>De oogzenuw &amp; chiasma</div>
+        <p>De <strong>oogzenuw (nervus opticus)</strong> verlaat het oog via de blinde vlek en loopt naar de hersenen. Na ~1 cm kruisen de twee oogzenuwen elkaar in het <strong>chiasma opticum</strong> (chiasma = kruis).</p>
+        <p>In het chiasma kruisen de zenuwuitlopers van het neuszijdegedeelte van het netvlies. Het resultaat: signalen van het rechter gezichtsveld gaan naar de linkerhersenhelft en vice versa. Je vormt met 2 ogen één 3D-beeld.</p>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🃏</span>Kernbegrippen — klik om te oefenen</div>
+        <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+        <div class="flip-grid">
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Cornea</div><div class="flipkaart-achter">Het doorzichtige hoornvlies aan de voorkant van de sclera. Sterker bol dan de rest van de oogrok.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Iris</div><div class="flipkaart-achter">Gepigmenteerde ring — bepaalt de oogkleur. Bevat spieren die de pupilgrootte regelen.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Retina</div><div class="flipkaart-achter">Het netvlies — lichtgevoelige binnenlaag met kegeltjes en staafjes die licht omzetten in elektrische signalen.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Macula</div><div class="flipkaart-achter">De gele vlek — hoogste concentratie kegeltjes → scherpste zicht. Punt waar je bewust naar kijkt.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Blinde vlek</div><div class="flipkaart-achter">Plek waar de oogzenuw het oog verlaat. Geen fotoreceptoren → geen beeldvorming op die plek.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Kamerwater</div><div class="flipkaart-achter">Heldere vloeistof in de oogkamers. Aangemaakt in achterste oogkamer, afgevoerd via voorste oogkamer. Ververst elke 1,5 uur.</div></div></div>
+        </div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">← Overzicht</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m1','m2','1')">Volgende: Werking van het oog →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 2: WERKING VAN HET OOG -->
+    <div class="module" id="m2">
+      <div class="module-kop">
+        <div class="module-tag">Module 2 — Het Oog</div>
+        <div class="module-titel">Werking van het oog</div>
+        <div class="module-intro">Het oog werkt als een fototoestel: licht valt binnen via de cornea en lens, wordt gefocust op de retina, en elektrische signalen gaan via de oogzenuwen naar de hersenen waar je bewust ziet.</div>
+        <div class="module-pills"><span class="pill">🔦 Pupilreflex</span><span class="pill">🔍 Accommodatie</span><span class="pill">✖️ Chiasma opticum</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔦</span>Pupilreflex</div>
+        <p>De pupilreflex past de pupilgrootte automatisch aan de hoeveelheid invallend licht aan. Dit is een voorbeeld van <strong>negatieve terugkoppeling</strong> (zie Hormoonstelsel).</p>
+        <table class="kdg-tabel">
+          <tr><th>Situatie</th><th>Spieren</th><th>Effect</th></tr>
+          <tr><td><strong>Veel licht</strong></td><td>Kringspieren samentrekken</td><td>Pupil nauwer → minder licht op retina (bescherming)</td></tr>
+          <tr><td><strong>Weinig licht</strong></td><td>Lengtespieren samentrekken, kringspieren ontspannen</td><td>Pupil groter → meer licht op retina</td></tr>
+        </table>
+        <div class="kdg-info"><strong>Route van de reflex:</strong> Netvlies meet lichtsterkte → sensorische zenuwcellen → hersenstam → schakelcellen → motorische zenuwcellen → kring- of lengtespieren in iris.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔍</span>Beeldvorming &amp; accommodatie</div>
+        <p>Het oog heeft <strong>twee lenzen</strong>: de cornea en de ooglens. De ooglens kan van vorm veranderen om zowel dichtbij als veraf scherp te zien. Dit heet <strong>accommodatie</strong>.</p>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('acc','ver',this)">Kijken in de verte</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('acc','dicht',this)">Kijken dichtbij</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('acc','hoe',this)">Hoe werkt het?</button>
+        </div>
+        <div id="acc-ver" class="kdg-tab-inhoud actief">
+          <p><strong>Rusttoestand</strong> — kringspieren volledig ontspannen → lensbandjes opgespannen → lens uitgerekt en <strong>platter</strong> → lichtstralen weinig afgebogen → scherp beeld van veraf op netvlies.</p>
+          <div class="kdg-info2">Veraf kijken = ogen in rust. Weinig inspanning vereist.</div>
+        </div>
+        <div id="acc-dicht" class="kdg-tab-inhoud">
+          <p>Onscherp beeld op netvlies → reflex: <strong>kringspieren trekken samen</strong> → diameter straalvormig lichaam kleiner → lensbandjes minder strak → lens neemt bolle vorm aan → lichtstralen sterk afgebogen → scherp beeld dichtbij.</p>
+          <div class="kdg-info2">Dichtbij kijken = actieve inspanning van de ogen. Vermoeiend bij langdurig gebruik (bv. scherm).</div>
+        </div>
+        <div id="acc-hoe" class="kdg-tab-inhoud">
+          <p>De lens is van nature elastisch en neemt uit zichzelf een maximale <strong>bolle</strong> vorm aan. De kringspier (accommodatiespier) in het straalvormig lichaam werkt samen met de lensbandjes:</p>
+          <ul>
+            <li>Kringspier ontspannen → lensbandjes gespannen → lens plat</li>
+            <li>Kringspier gespannen → lensbandjes slap → lens bol</li>
+          </ul>
+          <p>Het <strong>brandpunt</strong> is het punt waar lichtstralen na de lens samenkomen. Voor scherp zien moet het brandpunt precies op de <strong>gele vlek</strong> vallen.</p>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">✖️</span>Chiasma opticum — beeldvorming in de hersenen</div>
+        <p>Na de oogbol lopen de impulsen via de oogzenuw naar het <strong>chiasma opticum</strong> (kruising van de oogzenuwen). Hier kruisen de vezels van het neuszijde-gedeelte van elk netvlies naar de tegenovergestelde hersenhelft.</p>
+        <p>Het resultaat van deze kruising:</p>
+        <ul>
+          <li>Alles wat je <strong>links</strong> ziet → verwerkt in de <strong>rechter</strong> occipitaalkwab</li>
+          <li>Alles wat je <strong>rechts</strong> ziet → verwerkt in de <strong>linker</strong> occipitaalkwab</li>
+          <li>Je vormt van 2 afzonderlijke netvliesbeelden één <strong>driedimensionaal</strong> beeld</li>
+        </ul>
+        <div class="kdg-info">De hersenen zetten de sterk verkleinde, tweedimensionale netvliesbeelden om: ze worden vergroot, rechtop gezet en tot een 3D-beeld samengevoegd. Beeldvorming vindt pas plaats in de occipitaalkwab (achterhoofdskwab).</div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m1')">← Bouw van het oog</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m2','m3','2')">Volgende: Oogaandoeningen →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 3: OOGAANDOENINGEN -->
+    <div class="module" id="m3">
+      <div class="module-kop">
+        <div class="module-tag">Module 3 — Het Oog</div>
+        <div class="module-titel">Oogaandoeningen</div>
+        <div class="module-intro">Wanneer de structuren van het oog niet correct functioneren, ontstaan aandoeningen die de visus (het zichtvermogen) beïnvloeden. We bespreken zowel refractiestoornissen als ernstige oogziekten.</div>
+        <div class="module-pills"><span class="pill">👓 Refractie</span><span class="pill">🎨 Kleurperceptie</span><span class="pill">⚠️ Oogziekten</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">👓</span>Refractiestoornissen — brandpunt op de verkeerde plek</div>
+        <p style="font-size:0.82rem;color:#777;margin-bottom:12px;">Klik op een aandoening voor uitleg, oorzaak en correctie.</p>
+
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Bijziendheid — Myopie</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Het brandpunt valt <em>voor</em> het netvlies — verafgelegen beelden zijn onscherp, dichtbij is scherp.</p>
+            <p><strong>Oorzaak:</strong> De oogbol is te lang, of de cornea/lens heeft een te sterke bolling.</p>
+            <p><strong>Correctie:</strong> Hol (divergerende) lenzen of contactlenzen. De lens buigt de lichtstralen vooraf uiteen zodat het brandpunt verder naar achter schuift.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Verziendheid — Hypermetropie</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Het brandpunt valt <em>achter</em> het netvlies — dichtbijgelegen beelden zijn onscherp, veraf is (beter) scherp.</p>
+            <p><strong>Oorzaak:</strong> De oogbol is te kort, of de breking van de cornea/lens is onvoldoende.</p>
+            <p><strong>Correctie:</strong> Bol (convergerende) lenzen die lichtstralen al voor de cornea laten samenkomen.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Astigmatisme</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Onregelmatige bolling van de cornea → lichtstralen worden in verschillende richtingen anders gebroken → wazig en vervormd beeld op alle afstanden.</p>
+            <p><strong>Oorzaak:</strong> Onregelmatig gevormde cornea (of lens).</p>
+            <p><strong>Correctie:</strong> Cilindrische lenzen of torigche contactlenzen die de ongelijke breking compenseren.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Ouderdomsverziendheid — Presbyopie</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Verlies van de elasticiteit van de ooglens door het ouder worden → lens kan niet meer voldoende bol worden → dichtbij zien wordt moeilijker (leesbril nodig).</p>
+            <p><strong>Leeftijd:</strong> Begint typisch rond het 40ste–45ste levensjaar.</p>
+            <p><strong>Correctie:</strong> Leeslenzen (bol) of multifocale brillen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🎨</span>Kleur- en binoculaire aandoeningen</div>
+
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Kleurenblindheid — Daltonisme</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Oorzaak:</strong> Een of meerdere types kegeltjes ontbreken of functioneren niet correct. X-gebonden recessief aandoening → komt veel vaker voor bij mannen.</p>
+            <p><strong>Meest voorkomend:</strong> Rood-groen kleurenblindheid (verwardheid van rood en groen).</p>
+            <p><strong>Test:</strong> Ishihara-kleurenplaten — gekleurde stippenpatronen waarbij cijfers of vormen alleen zichtbaar zijn voor mensen met normaal kleurenzicht.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Scheelzien — Strabisme</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> De ogen staan niet parallel — één oog wijkt af naar binnen, buiten, boven of onder. De hersenen ontvangen twee verschillende beelden die ze niet kunnen samenvoegen.</p>
+            <p><strong>Behandeling:</strong> Occlusie (afdekken goed oog), bril, prismalenzen, soms operatie van de oogspieren.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Lui oog — Amblyopie</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Verminderd zicht in één oog dat geen structurele oorzaak heeft — de hersenen onderdrukken het beeld van het zwakkere oog. Vaak als gevolg van strabisme of sterke bijziendheid/verziendheid op jonge leeftijd.</p>
+            <p><strong>Behandeling:</strong> Zo vroeg mogelijk (voor 7e jaar): afdekken van het goede oog zodat het luie oog gedwongen wordt te werken.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Lichtschuwheid — Fotofobie</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Overgevoeligheid voor licht — normaal licht wordt als te fel of pijnlijk ervaren.</p>
+            <p><strong>Oorzaken:</strong> Oogontsteking, migraine, hersenvliesontsteking, albinisme (tekort aan pigment in iris zodat te veel licht binnenkomt).</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Nachtblindheid</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Slechte aanpassing van het zicht aan duisternis — de staafjes functioneren niet goed.</p>
+            <p><strong>Oorzaken:</strong> Vitamine A-tekort (vitamine A is nodig voor de aanmaak van het lichtgevoelige pigment in staafjes), erfelijke aandoeningen (bv. retinitis pigmentosa).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">⚠️</span>Ernstige oogziekten</div>
+
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Glaucoom (groene staar)</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Verhoogde oogdruk doordat het kamerwater niet goed kan worden afgevoerd → druk beschadigt de oogzenuw → progressief verlies van het gezichtsveld (tunnelvisie).</p>
+            <p><strong>Twee vormen:</strong></p>
+            <ul>
+              <li><strong>Chronisch (open-kamerhoek):</strong> Sluipend, pijnloos — meest voorkomend. De kamerhoek is open maar de afvloed verloopt te traag.</li>
+              <li><strong>Acuut (gesloten-kamerhoek):</strong> Plotse aanval met ernstige oogpijn, wazig zien, roodheid, misselijkheid. Medische noodtoestand.</li>
+            </ul>
+            <p><strong>Behandeling:</strong> Oogdrukverlagende druppels, laser of operatie. <em>Schade aan de oogzenuw is onomkeerbaar.</em></p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Cataract (grijze staar)</span><span>+</span></div>
+          <div class="begrip-body">
+            <p><strong>Probleem:</strong> Vertroebeling van de ooglens → minder licht bereikt het netvlies → wazig en vervaagd zicht, verhoogde lichtgevoeligheid, verminderd kleurenzicht.</p>
+            <p><strong>Oorzaken:</strong> Veroudering (meest voorkomend), UV-blootstelling, diabetes, medicijnen (corticosteroïden), erfelijkheid.</p>
+            <p><strong>Behandeling:</strong> Operatieve verwijdering van de troebele lens en plaatsing van een kunstlens. Zeer succesvol.</p>
+          </div>
+        </div>
+        <div class="kdg-info2" style="margin-top:14px;"><strong>Zelfstudie (braille.be):</strong> Raadpleeg de website van Braille Liga voor verdere studie van ablatio retina, maculadegeneratie en retinitis pigmentosa.</div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m2')">← Werking van het oog</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m3','m4','3')">Volgende: Bouw &amp; werking oor →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 4: BOUW & WERKING OOR -->
+    <div class="module" id="m4">
+      <div class="module-kop">
+        <div class="module-tag">Module 4 — Het Oor</div>
+        <div class="module-titel">Bouw &amp; werking van het oor</div>
+        <div class="module-intro">Het oor vangt geluidsgolven op en zet ze om in elektrische signalen. Geluidstrillingen doorlopen drie anatomische delen — van de oorschelp tot diep in het binnenoor — vooraleer de hersenen het als geluid herkennen.</div>
+        <div class="module-pills"><span class="pill">👂 Drie delen</span><span class="pill">〰️ Geluidsgolven</span><span class="pill">🐚 Cochlea</span></div>
+      </div>
+
+      <div class="kdg-video">
+        <div class="kdg-video-info">
+          <span class="kdg-video-label">▶ Video</span>
+          <span class="kdg-video-titel">Het oor</span>
+        </div>
+        <a class="kdg-video-knop" href="https://youtu.be/opI_kW8lEhc?si=rJ8lfml7y1OVpRJe" target="_blank">▶ Bekijk op YouTube</a>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🏗️</span>Bouw van het oor — drie delen</div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('oor','buiten',this)">Uitwendig oor</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('oor','midden',this)">Middenoor</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('oor','binnen',this)">Binnenoor</button>
+        </div>
+        <div id="oor-buiten" class="kdg-tab-inhoud actief">
+          <p><strong>Bestaat uit:</strong> Oorschelp + gehoorgang</p>
+          <ul>
+            <li><strong>Oorschelp:</strong> Kraakbeen bedekt met huid. Onze oorschelpen zijn niet beweegbaar → kleine rol bij richting horen.</li>
+            <li><strong>Gehoorgang:</strong> ~2,5 cm lang, S-vorm, loopt iets omhoog. Buitenste deel: kraakbeen met haartjes en klieren die oorsmeer afscheiden (filtert stof). Binnenste deel: hard bot.</li>
+          </ul>
+        </div>
+        <div id="oor-midden" class="kdg-tab-inhoud">
+          <p><strong>Begint bij het trommelvlies. Bevat:</strong></p>
+          <ul>
+            <li><strong>Trommelvlies:</strong> Dunne vlies — gaat trillen bij geluid.</li>
+            <li><strong>Gehoorbeentjes (3 kleinste bootten v/h lichaam):</strong>
+              <ul>
+                <li><strong>Hamer</strong> → vast aan trommelvlies</li>
+                <li><strong>Aambeeld</strong> → tussen hamer en stijgbeugel</li>
+                <li><strong>Stijgbeugel</strong> → zit vast aan het ovale venster</li>
+              </ul>
+            </li>
+            <li><strong>Ovale venster:</strong> Ingang van het binnenoor.</li>
+            <li><strong>Buis van Eustachius:</strong> Verbindt middenoor met neus-keelholte → zorgt dat luchtdruk voor en achter trommelvlies gelijk blijft.</li>
+          </ul>
+          <div class="kdg-info">Functie middenoor: geluidstrillingen van het trommelvlies zonder te veel energieverlies doorgeven aan de vloeistof in het slakkenhuis.</div>
+        </div>
+        <div id="oor-binnen" class="kdg-tab-inhoud">
+          <p>Met vloeistof gevuld, gelegen in het <strong>rotsbeen</strong>. Drie onderdelen:</p>
+          <ul>
+            <li><strong>Vestibulum + halfcirkelvormige kanalen:</strong> Evenwichtsorgaan — registreert draaiingen en versnellingen van het hoofd.</li>
+            <li><strong>Cochlea (slakkenhuis):</strong> Opgerolde buis (~3,5 cm). Verantwoordelijk voor geluidsperceptie. Bevat drie kanalen met vloeistof (endolymfe/perilymfe) en het orgaan van Corti.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">〰️</span>Geluid &amp; geluidsgolven</div>
+        <p>Geluid zijn trillingen van luchtmoleculen. Twee eigenschappen bepalen hoe geluid klinkt:</p>
+        <table class="kdg-tabel">
+          <tr><th>Eigenschap</th><th>Bepaald door</th><th>Eenheid</th><th>Effect</th></tr>
+          <tr><td><strong>Volume (intensiteit)</strong></td><td>Amplitude van de golf (hoog/laag)</td><td>Decibel (dB)</td><td>Hoge golf = luid; lage golf = zacht</td></tr>
+          <tr><td><strong>Toonhoogte</strong></td><td>Frequentie van de golf (kort/lang)</td><td>Hertz (Hz)</td><td>Korte golf = hoge toon; lange golf = lage toon</td></tr>
+        </table>
+        <div class="kdg-info2"><strong>In het heelal is het muisstil</strong> — zonder lucht geen trillingen, dus geen geluid.</div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🐚</span>Van geluidsgolf naar elektrische prikkel</div>
+
+        <div class="kdg-video" style="margin-bottom:14px;">
+          <div class="kdg-video-info">
+            <span class="kdg-video-label">▶ Video</span>
+            <span class="kdg-video-titel">Hoe werkt het oor?</span>
+          </div>
+          <a class="kdg-video-knop" href="https://youtu.be/ae_bmjXH1OU?si=0mQW4Mpbinrjkr-v" target="_blank">▶ Bekijk op YouTube</a>
+        </div>
+
+        <p>Geluidstrillingen doorlopen de volgende route:</p>
+        <table class="kdg-tabel">
+          <tr><th>Stap</th><th>Structuur</th><th>Wat gebeurt er</th></tr>
+          <tr><td>1</td><td>Oorschelp → gehoorgang</td><td>Geluidsgolven worden opgevangen en naar trommelvlies geleid</td></tr>
+          <tr><td>2</td><td>Trommelvlies</td><td>Gaat trillen bij geluid</td></tr>
+          <tr><td>3</td><td>Hamer → aambeeld → stijgbeugel</td><td>Trillingen versterkt en doorgegeven aan ovale venster</td></tr>
+          <tr><td>4</td><td>Ovale venster → cochlea</td><td>Trilling zet vloeistof in cochlea in beweging</td></tr>
+          <tr><td>5</td><td>Basilair membraan + orgaan van Corti</td><td>Vloeistofgolf brengt haarcellen in beweging → elektrische potentiaal ontstaat</td></tr>
+          <tr><td>6</td><td>Gehoorzenuw</td><td>Elektrische signalen naar hersenen (temporaalkwab)</td></tr>
+          <tr><td>7</td><td>Hersenen</td><td>Signalen worden als "horen" geïnterpreteerd</td></tr>
+        </table>
+        <div class="kdg-info"><strong>"Horen doe je met je oren. Verstaan doe je met je brein!"</strong> — De hersenen zetten klanken om in woorden en bepalen de richting en toonhoogte van het geluid.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🎵</span>Orgaan van Corti &amp; het audiogram</div>
+        <p>Het <strong>orgaan van Corti</strong> ligt in het slakkenhuis op het basilair membraan. Het bevat <strong>haarcellen (fonoreceptoren)</strong> die trillen als de vloeistof in het slakkenhuis in beweging wordt gebracht. Ze zetten mechanische energie om in elektrische zenuwprikkels.</p>
+        <p>Het slakkenhuis heeft drie kanalen: <strong>scala media</strong> (endolymfe), <strong>scala vestibuli</strong> (perilymfe) en <strong>scala tympani</strong> (perilymfe).</p>
+        <div class="kdg-info2"><strong>Audiogram:</strong> Grafiek die het gehoor weergeeft. Horizontale as: frequentie (Hz) — toonhoogte. Verticale as: volume (dB). De gehoordrempel is het gebied waar normaal gehoor geluiden waarneemt. Rechteroor: ° — linkeroor: ×.</div>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m3')">← Oogaandoeningen</button>
+        <button class="kdg-knop kdg-knop-acc1" onclick="voltooiEnVolgende('m4','m5','4')">Volgende: Gehoorafwijkingen →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 5: GEHOORAFWIJKINGEN -->
+    <div class="module" id="m5">
+      <div class="module-kop">
+        <div class="module-tag">Module 5 — Het Oor</div>
+        <div class="module-titel">Gehoorafwijkingen</div>
+        <div class="module-intro">Gehoorverlies kan op twee niveaus optreden: in het geleidingsdeel (buiten- en middenoor) of in het perceptieve deel (binnenoor en gehoorzenuw). Vroegtijdige opsporing is cruciaal voor de taal- en spraakontwikkeling.</div>
+        <div class="module-pills"><span class="pill">📢 Geleidingsdoofheid</span><span class="pill">🧠 Perceptiedoofheid</span><span class="pill">🔀 Gemengd</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">📢</span>Geleidingsdoofheid</div>
+        <p>Luchtgeleiding slecht, beengeleiding goed. Het geluid wordt verhinderd op weg van buiten- naar binnenoor. In de meeste gevallen behandelbaar.</p>
+        <p><strong>Mogelijke oorzaken:</strong> vreemd voorwerp in gehoorgang, oorsmeerplug, ontsteking, probleem met gehoorbeentjes of trommelvlies.</p>
+
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Middenoorontsteking — Otitis media</span><span>+</span></div>
+          <div class="begrip-body">
+            <p>Infectie van het middenoor — de ruimte direct achter het trommelvlies. Ruim 70% van de kinderen onder 2 jaar heeft er soms last van.</p>
+            <p>De buis van Eustachius kan het vocht niet afvoeren (slijmvlies gezwollen) → vocht gevangen achter trommelvlies → soms met virussen of bacteriën. Kan ook bij volwassenen voorkomen, maar minder frequent.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Otosclerose</span><span>+</span></div>
+          <div class="begrip-body">
+            <p>Abnormale groei van sponsachtig botweefsel in het middenoor (meestal ter hoogte van de stijgbeugel bij het ovale venster). De gehoorbeentjes kunnen niet meer vrij bewegen → geluidstrillingen worden slecht doorgegeven.</p>
+            <p><strong>Behandeling:</strong> Chirurgie (vervangen van de stijgbeugel door een prothese).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon">🧠</span>Perceptiedoofheid</div>
+        <p>Meest voorkomende vorm. Beschadiging van het <strong>binnenoor</strong> (slakkenhuis) of de <strong>gehoorzenuw</strong>. Audiogram toont gelijk gehoorverlies bij lucht- én beengeleiding. In de meeste gevallen <strong>onomkeerbaar</strong>.</p>
+        <p><strong>Oorzaken:</strong> Aangeboren (erfelijk, virusinfecties, vroeggeboorte, zuurstofgebrek) of verworven (lawaai, ototoxische medicijnen, infectie, hoofdletsel).</p>
+
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Ouderdomsslechthorendheid — Presbyacusis</span><span>+</span></div>
+          <div class="begrip-body">
+            <p>Progressieve verslechtering van het gehoor door meerdere oorzaken samen: blootstelling aan lawaai gedurende het leven, ototoxische medicijnen, risicofactoren (roken, hoge bloeddruk, diabetes) en leeftijdsgebonden afname van de haarcellen op het orgaan van Corti.</p>
+            <p>Hogere frequenties gaan het eerst achteruit. Erfelijke aanleg speelt ook een rol.</p>
+          </div>
+        </div>
+        <div class="begrip-kaart" onclick="wisselBegrip(this)">
+          <div class="begrip-kop"><span>Ziekte van Ménière</span><span>+</span></div>
+          <div class="begrip-body">
+            <p>Niet goed werkend binnenoor door ophoping van vloeistof (endolymfe) in het slakkenhuis → overdruk op het vlies. Het vlies kan scheuren → vloeistoffen vermengen → Ménière-aanval.</p>
+            <p><strong>Symptomen (aanvalsgewijs):</strong> Slechthorendheid, ernstige duizeligheid, misselijkheid en tinnitus (oorsuizen). Aanvallen kunnen weken tot jaren uit elkaar liggen.</p>
+            <p><strong>Voorkomen:</strong> Kan één of twee oren treffen. In 10% van de gevallen gaat ook het tweede oor mee doen.</p>
+            <p><strong>Oorzaak:</strong> Nog niet volledig bekend.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-acc2">
+        <div class="kaart-titel"><span class="kaart-icoon acc2">🔀</span>Gemengde doofheid</div>
+        <p>Combinatie van geleidingsdoofheid én perceptief gehoorverlies. De mate van gehoorverlies is vaak groot.</p>
+        <div class="kdg-warn"><strong>Vroegtijdige opsporing is essentieel</strong> — gehoorverlies op jonge leeftijd heeft grote gevolgen voor de taal- en spraakontwikkeling. Hoe vroeger de problemen worden opgespoord en behandeld, hoe beter de prognose.</div>
+        <table class="kdg-tabel" style="margin-top:12px;">
+          <tr><th>Type</th><th>Locatie probleem</th><th>Audiogram</th><th>Behandelbaarheid</th></tr>
+          <tr><td><strong>Geleidingsdoofheid</strong></td><td>Buiten- of middenoor</td><td>Luchtgeleiding slecht, beengeleiding goed</td><td>Meestal behandelbaar</td></tr>
+          <tr><td><strong>Perceptiedoofheid</strong></td><td>Binnenoor of gehoorzenuw</td><td>Beide even slecht</td><td>Vaak onomkeerbaar</td></tr>
+          <tr><td><strong>Gemengd</strong></td><td>Beiden</td><td>Beide gestoord, luchtgeleiding slechter</td><td>Gedeeltelijk behandelbaar</td></tr>
+        </table>
+      </div>
+
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m4')">← Bouw &amp; werking oor</button>
+        <button class="kdg-knop kdg-knop-acc2" onclick="voltooiEnVolgende('m5','m6','5')">Naar de zelftoets →</button>
+      </div>
+    </div>
+
+    <!-- MODULE 6: ZELFTOETS -->
+    
+    <!-- ======================== FLASHCARDS MODULE ======================== -->
+    <div class="module" id="m7">
+      <div class="module-kop">
+        <div class="module-tag">Sleutelbegrippen</div>
+        <div class="module-titel">Begrippen herhalen</div>
+        <div class="module-intro">Gebruik deze flashcards om de belangrijkste begrippen te herhalen. Klik op een kaart om de definitie te zien. Draai alle kaarten om om zeker te zijn dat je de stof beheerst.</div>
+        <div class="module-pills"><span class="pill">🃏 Begrippen</span><span class="pill">🔄 Interactief</span><span class="pill">✅ Herhaling</span></div>
+      </div>
+
+          <div class="kdg-kaart kdg-kaart-groen">
+            <div class="kaart-titel"><span class="kaart-icoon">🃏</span>Sleutelbegrippen zintuigen — draai de kaart om</div>
+            <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+            <div class="flip-grid">
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Cornea</div><div class="flipkaart-achter">Het doorzichtige hoornvlies aan de voorkant van de sclera. Sterker bol dan de rest van de oogrok.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Iris</div><div class="flipkaart-achter">Gepigmenteerde ring — bepaalt de oogkleur. Bevat spieren die de pupilgrootte regelen.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Retina</div><div class="flipkaart-achter">Het netvlies — lichtgevoelige binnenlaag met kegeltjes en staafjes die licht omzetten in elektrische signalen.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Macula</div><div class="flipkaart-achter">De gele vlek — hoogste concentratie kegeltjes → scherpste zicht. Punt waar je bewust naar kijkt.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Accommodatie</div><div class="flipkaart-achter">Het aanpassen van de lensbolling: bij dichtbij kijken → kringspieren samentrekken → lens boller → sterker afbuigen.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Glaucoom</div><div class="flipkaart-achter">Verhoogde oogdruk door slechte afvoer van kamerwater → beschadiging van de oogzenuw → onomkeerbaar gezichtsveldverlies.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Cochlea</div><div class="flipkaart-achter">Het slakkenhuis in het binnenoor. Bevat het orgaan van Corti dat trillingen omzet in elektrische signalen.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Gehoorbeentjes</div><div class="flipkaart-achter">Hamer, aambeeld en stijgbeugel — drie botjes in het middenoor die trillingen van het trommelvlies versterken naar het binnenoor.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Geleidingsdoofheid</div><div class="flipkaart-achter">Probleem in buiten- of middenoor. Luchtgeleiding slecht, beengeleiding normaal. Vaak behandelbaar.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Perceptiedoofheid</div><div class="flipkaart-achter">Beschadiging van binnenoor of gehoorzenuw. Beide geleidingsvormen aangetast. Vaak onomkeerbaar.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Tinnitus</div><div class="flipkaart-achter">Oorsuizen — het waarnemen van geluid zonder externe bron. Typisch symptoom bij Ménière.</div></div></div>
+              <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Chiasma opticum</div><div class="flipkaart-achter">Kruising van de twee oogzenuwen waarbij vezels van de neuszijde naar de tegenovergestelde hersenhelft gaan.</div></div></div>
+            </div>
+          </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">← Overzicht</button>
+      </div>
+    </div>
+
+    <div class="module" id="m6">
+      <div class="module-kop">
+        <div class="module-tag">Zelftoets</div>
+        <div class="module-titel">Test je kennis</div>
+        <div class="module-intro">Beantwoord de vragen over het oog én het oor. Na elke vraag zie je direct of je antwoord correct is.</div>
+        <div class="module-pills"><span class="pill">👁️ 5 vragen oog</span><span class="pill">👂 5 vragen oor</span><span class="pill">⭐ Eindscore</span></div>
+      </div>
+      <div class="kdg-quiz-intro">
+        <div class="quiz-intro-icoon">🎯</div>
+        <div class="quiz-intro-tekst">
+          <h3>Klaar voor de toets?</h3>
+          <p>10 vragen — 5 over het oog, 5 over het oor. Na elke vraag zie je meteen feedback.</p>
+        </div>
+      </div>
+      <div id="quiz-container"></div>
+      <div class="quiz-resultaat" id="quizResultaat">
+        <div class="resultaat-score" id="resultaatScore"></div>
+        <div class="resultaat-sterren" id="resultaatSterren"></div>
+        <div class="resultaat-bericht" id="resultaatBericht"></div>
+        <br>
+        <button class="kdg-knop kdg-knop-acc1" onclick="herlaadQuiz()">Opnieuw proberen</button>
+      </div>
+      <div class="module-nav">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('m5')">← Gehoorafwijkingen</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">⌂ Overzicht</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const bezocht = {};
+const quizAntwoorden = {};
+
+function toonModule(id) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('actief'));
+  document.querySelectorAll('.kdg-nav-item').forEach(n => n.classList.remove('actief'));
+  document.getElementById(id).classList.add('actief');
+  const map = { welkom:0, m1:1, m2:2, m3:3, m4:4, m5:5, m6:6 , m7:7};
+  if (map[id] !== undefined) document.querySelectorAll('.kdg-nav-item')[map[id]].classList.add('actief');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const num = id.replace('m','');
+  if (!isNaN(num) && num) markeerBezocht(num);
+}
+function markeerBezocht(num) {
+  if (!bezocht[num]) {
+    bezocht[num] = true;
+    const el = document.getElementById('status-' + num);
+    if (el && !el.textContent.includes('Voltooid')) el.textContent = 'Bekeken';
+  }
+}
+function markeerVoltooid(num) {
+  const bal = document.getElementById('bal-' + num);
+  const nav = document.getElementById('nav-' + num);
+  const st  = document.getElementById('status-' + num);
+  if (bal) { bal.textContent = '✓'; bal.style.background = 'var(--acc2)'; bal.style.color = 'var(--kdg-wit)'; }
+  if (nav) nav.classList.add('gedaan');
+  if (st) st.textContent = 'Voltooid';
+  updateVoortgang();
+}
+function voltooiEnVolgende(huidig, volgend, num) {
+  markeerVoltooid(num);
+  toonModule(volgend);
+}
+function updateVoortgang() {
+  const n = document.querySelectorAll('.kdg-nav-item.gedaan').length;
+  document.getElementById('progressFill').style.width = (n / 6 * 100) + '%';
+  document.getElementById('progressLabel').textContent = n + ' / 6 voltooid';
+}
+function wisselBegrip(el) {
+  const body = el.querySelector('.begrip-body');
+  const kop = el.querySelector('.begrip-kop span:last-child');
+  const open = el.dataset.open === 'true';
+  el.dataset.open = open ? 'false' : 'true';
+  body.style.display = open ? 'none' : 'block';
+  kop.textContent = open ? '+' : '−';
+  el.style.borderColor = open ? 'var(--kdg-lichtgrijs)' : 'var(--acc1)';
+}
+function wisselTab(groep, tab, knop) {
+  document.querySelectorAll('[id^="' + groep + '-"]').forEach(el => el.classList.remove('actief'));
+  knop.closest('.kdg-kaart').querySelectorAll('.kdg-tab-knop').forEach(b => b.classList.remove('actief'));
+  document.getElementById(groep + '-' + tab).classList.add('actief');
+  knop.classList.add('actief');
+}
+
+const vragen = [
+  {
+    v: "Welke laag van de oogbol bevat de fotoreceptoren (kegeltjes en staafjes)?",
+    opties: ["De sclera (harde oogrok)","Het vaatvlies","De retina (netvlies)","Het glasachtig lichaam"],
+    juist: 2,
+    uitleg: "De retina (het netvlies) is de binnenste lichtgevoelige laag van de oogbol. Ze bevat kegeltjes (kleur, details) en staafjes (licht/donker, bij weinig licht)."
+  },
+  {
+    v: "Wat is het verschil tussen kegeltjes en staafjes?",
+    opties: ["Kegeltjes nemen licht/donker waar, staafjes nemen kleur waar","Kegeltjes nemen kleur en contrast waar; staafjes nemen licht en donker waar","Kegeltjes bevinden zich alleen in de blinde vlek; staafjes in de macula","Er is geen functioneel verschil, alleen een verschil in vorm"],
+    juist: 1,
+    uitleg: "Kegeltjes: kleur en contrast, voor scherpe details. Geconcentreerd in de macula (gele vlek). Staafjes: licht/donker, voor zien bij weinig licht. ~120 miljoen staafjes en ~5 miljoen kegeltjes."
+  },
+  {
+    v: "Wat gebeurt er bij accommodatie wanneer je van veraf naar dichtbij kijkt?",
+    opties: ["De pupil wordt groter om meer licht binnen te laten","De kringspieren ontspannen zodat de lens platter wordt","De kringspieren trekken samen, de lensbandjes worden slapper en de lens wordt boller","De iris vergroot om de lenssterkte te verhogen"],
+    juist: 2,
+    uitleg: "Bij dichtbij kijken: kringspieren samentrekken → diameter straalvormig lichaam kleiner → lensbandjes worden slapper → lens neemt zijn maximale bolle vorm aan → lichtstralen worden sterk afgebogen → scherp beeld dichtbij."
+  },
+  {
+    v: "Wat is glaucoom en waarom is het gevaarlijk?",
+    opties: ["Vertroebeling van de lens die het zicht geleidelijk vermindert","Verhoogde oogdruk die de oogzenuw beschadigt — schade is onomkeerbaar","Ontsteking van de retina die kegeltjes en staafjes vernietigt","Een refractieafwijking waarbij het brandpunt voor het netvlies valt"],
+    juist: 1,
+    uitleg: "Bij glaucoom kan kamerwater niet goed worden afgevoerd → verhoogde oogdruk → schade aan de oogzenuw → progressief verlies van het gezichtsveld. De schade is onomkeerbaar, vandaar het belang van vroege opsporing en behandeling."
+  },
+  {
+    v: "Wat is het chiasma opticum en wat is zijn functie?",
+    opties: ["Een spier die de ooglens van vorm doet veranderen","De kruising van de twee oogzenuwen waarbij bepaalde vezels naar de tegenovergestelde hersenhelft gaan","De verbinding tussen de retina en het vaatvlies","Een vloeistof die de oogbol opvult en stevigheid geeft"],
+    juist: 1,
+    uitleg: "Het chiasma opticum is de kruising van de oogzenuwen. Vezels van het neuszijde-gedeelte kruisen naar de tegenovergestelde hersenhelft. Resultaat: je vormt van 2 netvliesbeelden één 3D-beeld, en elk visueel halffveld wordt door de tegenovergestelde hersenhelft verwerkt."
+  },
+  {
+    v: "Welke drie gehoorbeentjes bevinden zich in het middenoor?",
+    opties: ["Cochlea, vestibulum en semicirculaire kanalen","Hamer, aambeeld en stijgbeugel","Trommelvlies, ovale venster en ronde venster","Basilair membraan, scala media en orgaan van Corti"],
+    juist: 1,
+    uitleg: "De drie gehoorbeentjes zijn hamer (vast aan trommelvlies), aambeeld (verbindingsschakel) en stijgbeugel (raakt het ovale venster). Ze versterken en geleiden trillingen van het trommelvlies naar het binnenoor."
+  },
+  {
+    v: "Waar worden geluidsgolven definitief omgezet in elektrische signalen?",
+    opties: ["In het trommelvlies","In de gehoorgang","In het orgaan van Corti in de cochlea","In de buis van Eustachius"],
+    juist: 2,
+    uitleg: "Het orgaan van Corti ligt in de cochlea (slakkenhuis) op het basilair membraan. Haarcellen (fonoreceptoren) trillen als de vloeistof in de cochlea beweegt en zetten mechanische energie om in elektrische zenuwprikkels die via de gehoorzenuw naar de hersenen gaan."
+  },
+  {
+    v: "Wat is het verschil tussen geleidingsdoofheid en perceptiedoofheid?",
+    opties: ["Bij geleidingsdoofheid is het binnenoor beschadigd; bij perceptiedoofheid het middenoor","Geleidingsdoofheid situeert zich in het buiten-/middenoor en is vaak behandelbaar; perceptiedoofheid in het binnenoor/gehoorzenuw en is vaak onomkeerbaar","Er is geen verschil, het zijn twee namen voor hetzelfde","Geleidingsdoofheid is aangeboren; perceptiedoofheid is altijd verworven"],
+    juist: 1,
+    uitleg: "Geleidingsdoofheid: probleem in buiten- of middenoor (luchtgeleiding slecht, beengeleiding goed) → meestal behandelbaar. Perceptiedoofheid: beschadiging van binnenoor of gehoorzenuw (beide geleidingsvormen even slecht) → in de meeste gevallen onomkeerbaar."
+  },
+  {
+    v: "Wat zijn de typische symptomen van de ziekte van Ménière?",
+    opties: ["Wazig zien, verhoogde oogdruk en hoofdpijn","Slechthorendheid, ernstige duizeligheid, misselijkheid en tinnitus (oorsuizen), aanvalsgewijs","Pijn bij het eten, loopneus en koorts","Progressief gehoorverlies alleen voor hoge tonen, zonder duizeligheid"],
+    juist: 1,
+    uitleg: "Ménière wordt veroorzaakt door ophoping van vloeistof in het slakkenhuis. De vier kardinale symptomen zijn: fluctuerend gehoorverlies, hevige draaiduizeligheid, oorsuizen (tinnitus) en een vol gevoel in het oor. Verloopt aanvalsgewijs."
+  },
+  {
+    v: "Waarom is vroegtijdige opsporing van gehoorverlies bij jonge kinderen zo belangrijk?",
+    opties: ["Omdat gehoorverlies bij kinderen altijd te genezen is met een operatie","Omdat gehoorverlies geen gevolgen heeft als het pas na het 5e jaar wordt ontdekt","Omdat gehoorverlies grote gevolgen heeft voor de taal- en spraakontwikkeling — hoe vroeger behandeld, hoe beter de prognose","Omdat het gehoor na het 3e jaar niet meer kan verbeteren"],
+    juist: 2,
+    uitleg: "Gehoorverlies op jonge leeftijd heeft grote gevolgen voor de taal- en spraakontwikkeling, omdat kinderen taal leren via gehoor. Vroegtijdige opsporing (bv. neonatale gehoorscreening) en behandeling (hoortoestellen, cochleaire implantaten, logopedie) beperken de gevolgen."
+  }
+];
+
+function bouwQuiz() {
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = '';
+  vragen.forEach((v, i) => {
+    const d = document.createElement('div');
+    d.className = 'vraag-kaart';
+    d.id = 'vk-' + i;
+    d.innerHTML = `<div class="vraag-num">Vraag ${i+1} van ${vragen.length} ${i < 5 ? '— Het Oog 👁️' : '— Het Oor 👂'}</div>
+      <div class="vraag-tekst">${v.v}</div>
+      <ul class="opties">${v.opties.map((o,j)=>`<li><button class="optie-knop" onclick="kiesAntwoord(${i},${j})">${o}</button></li>`).join('')}</ul>
+      <div class="feedback" id="fb-${i}"></div>`;
+    c.appendChild(d);
+  });
+}
+function kiesAntwoord(vIdx, aIdx) {
+  if (quizAntwoorden[vIdx] !== undefined) return;
+  quizAntwoorden[vIdx] = aIdx;
+  const v = vragen[vIdx];
+  const kaart = document.getElementById('vk-' + vIdx);
+  kaart.classList.add('beantwoord');
+  kaart.querySelectorAll('.optie-knop').forEach((b, i) => {
+    b.disabled = true;
+    if (i === v.juist) b.classList.add('juist');
+    if (i === aIdx && i !== v.juist) b.classList.add('fout');
+  });
+  const fb = document.getElementById('fb-' + vIdx);
+  const ok = aIdx === v.juist;
+  fb.className = 'feedback toon ' + (ok ? 'juist' : 'fout');
+  fb.innerHTML = (ok ? '✓ Juist. ' : '✗ Niet juist. ') + v.uitleg;
+  if (Object.keys(quizAntwoorden).length === vragen.length) toonResultaat();
+}
+function toonResultaat() {
+  let goed = 0;
+  vragen.forEach((v,i) => { if (quizAntwoorden[i] === v.juist) goed++; });
+  const pct = Math.round(goed / vragen.length * 100);
+  document.getElementById('resultaatScore').textContent = goed + ' / ' + vragen.length;
+  document.getElementById('resultaatSterren').textContent = pct >= 80 ? '⭐⭐⭐' : pct >= 60 ? '⭐⭐' : '⭐';
+  document.getElementById('resultaatBericht').textContent = pct >= 80 ? 'Uitstekend. Je beheerst de stof goed.' : pct >= 60 ? 'Goed gedaan. Herhaal de modules waar je fouten maakte.' : 'Blijf oefenen. Doorloop de lesstof opnieuw.';
+  document.getElementById('quizResultaat').classList.add('toon');
+  markeerVoltooid('6');
+}
+function herlaadQuiz() {
+  Object.keys(quizAntwoorden).forEach(k => delete quizAntwoorden[k]);
+  document.getElementById('quizResultaat').classList.remove('toon');
+  bouwQuiz();
+}
+bouwQuiz();
+</script>
+</body>
+</html>

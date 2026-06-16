@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomedisch Kader — Deel 6: Medicatie | KdG</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   KdG HUISSTIJL 2025 — Combinatie C: Rood + Oranje
+   Basis: zwart + wit | Accent 1: #ff645a | Accent 2: #ff873c
+   Lettertypes: Nunito (titels) | Open Sans (body)
+   ============================================================ */
+:root {
+  --kdg-zwart:       #000000;
+  --kdg-wit:         #ffffff;
+  --kdg-donkergrijs: #282828;
+  --kdg-midgrijs:    #555555;
+  --kdg-lichtgrijs:  #e6e6e6;
+  --kdg-achtergrond: #f5f5f5;
+  --acc1:            #ff645a;
+  --acc1-licht:      #ffe8e7;
+  --acc1-donker:     #cc3f35;
+  --acc2:            #ff873c;
+  --acc2-licht:      #fff0e6;
+  --acc2-donker:     #cc5e1a;
+  --font-titel: 'Nunito', 'Century Gothic', sans-serif;
+  --font-body:  'Open Sans', 'Arial', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); background: var(--kdg-achtergrond); color: var(--kdg-zwart); font-size: 16px; line-height: 1.65; }
+
+/* HEADER */
+.kdg-header { background: var(--kdg-zwart); color: var(--kdg-wit); position: sticky; top: 0; z-index: 200; }
+.kdg-header-inner { max-width: 1140px; margin: 0 auto; padding: 13px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.kdg-logo-area { display: flex; align-items: center; gap: 14px; }
+.kdg-logo-mark { background: var(--acc1); color: var(--kdg-zwart); font-family: var(--font-titel); font-weight: 700; font-size: 1rem; padding: 5px 11px; }
+.kdg-header-title { font-family: var(--font-titel); font-weight: 300; font-size: 0.95rem; }
+.kdg-header-sub { font-size: 0.72rem; color: #aaa; margin-top: 1px; }
+.kdg-progress-wrap { display: flex; align-items: center; gap: 12px; }
+.kdg-progress-bar { width: 200px; height: 3px; background: #333; }
+.kdg-progress-fill { height: 100%; background: var(--acc1); width: 0%; transition: width 0.4s; }
+.kdg-progress-label { font-size: 0.72rem; color: #aaa; white-space: nowrap; }
+
+/* LAYOUT */
+.kdg-layout { max-width: 1140px; margin: 0 auto; padding: 28px 32px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+
+/* SIDEBAR */
+.kdg-sidebar { position: sticky; top: 68px; background: var(--kdg-wit); border-top: 3px solid var(--acc1); }
+.kdg-sidebar-kop { background: var(--kdg-donkergrijs); color: var(--kdg-wit); padding: 10px 16px; font-family: var(--font-titel); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.kdg-nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 16px; cursor: pointer; border-bottom: 1px solid var(--kdg-lichtgrijs); font-size: 0.85rem; color: var(--kdg-midgrijs); text-decoration: none; transition: background 0.15s; }
+.kdg-nav-item:hover { background: var(--acc1-licht); color: var(--kdg-zwart); }
+.kdg-nav-item.actief { background: var(--acc1-licht); color: var(--kdg-zwart); font-weight: 600; border-left: 3px solid var(--acc1); padding-left: 13px; }
+.kdg-nav-item.gedaan .nav-bal { background: var(--acc2); color: var(--kdg-wit); }
+.nav-bal { width: 24px; height: 24px; border-radius: 50%; background: var(--kdg-lichtgrijs); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; font-family: var(--font-titel); color: var(--kdg-midgrijs); transition: background 0.2s; }
+.nav-naam { flex: 1; }
+.nav-sub { font-size: 0.72rem; color: #999; margin-top: 1px; }
+
+/* MODULES */
+.kdg-content { min-width: 0; }
+.module { display: none; }
+.module.actief { display: block; }
+
+/* WELKOM */
+.welkom-hero { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 40px; margin-bottom: 20px; border-left: 6px solid var(--acc1); }
+.welkom-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--acc1); font-weight: 600; margin-bottom: 10px; }
+.welkom-titel { font-family: var(--font-titel); font-size: 2.4rem; font-weight: 700; line-height: 1.1; margin-bottom: 12px; }
+.welkom-tekst { color: #ccc; font-size: 0.9rem; max-width: 500px; font-weight: 300; line-height: 1.7; }
+
+/* LEERDOEL BANNERS */
+.leerdoel-banner, .leerdoel-banner2 {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 22px; margin-bottom: 20px;
+  border-left: 5px solid var(--acc1);
+  background: var(--acc1-licht);
+}
+.leerdoel-banner2 { border-left-color: var(--acc2); background: var(--acc2-licht); margin-top: -8px; }
+.leerdoel-icoon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.leerdoel-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--acc1-donker); margin-bottom: 4px; font-family: var(--font-titel); }
+.leerdoel-banner2 .leerdoel-label { color: var(--acc2-donker); }
+.leerdoel-inhoud { font-size: 0.9rem; color: var(--kdg-donkergrijs); line-height: 1.6; font-style: italic; }
+
+/* OVERZICHT TEGELS */
+.module-overzicht { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 0; }
+.module-tegel { background: var(--kdg-wit); border-top: 3px solid var(--kdg-lichtgrijs); padding: 18px 16px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+.module-tegel:hover { border-top-color: var(--acc1); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.tegel-nummer { font-family: var(--font-titel); font-size: 1.6rem; font-weight: 700; color: var(--kdg-lichtgrijs); margin-bottom: 8px; }
+.tegel-naam { font-family: var(--font-titel); font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+.tegel-sub { font-size: 0.72rem; color: var(--kdg-midgrijs); margin-bottom: 10px; }
+.tegel-status { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: #bbb; }
+
+/* MODULE KOP */
+.module-kop { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 28px 32px; margin-bottom: 24px; border-left: 6px solid var(--acc1); }
+.module-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--acc1); font-weight: 600; margin-bottom: 8px; }
+.module-titel { font-family: var(--font-titel); font-size: 1.9rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+.module-intro { color: #ccc; font-size: 0.9rem; max-width: 600px; font-weight: 300; line-height: 1.7; }
+.module-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.pill { background: rgba(255,255,255,0.12); color: #ddd; font-size: 0.72rem; padding: 4px 10px; font-family: var(--font-titel); }
+
+/* KAARTEN */
+.kdg-kaart { background: var(--kdg-wit); border-top: 3px solid var(--acc1); padding: 22px 26px; margin-bottom: 16px; }
+.kdg-kaart-oranje { border-top-color: var(--acc2); }
+.kdg-kaart-zwart { border-top-color: var(--kdg-zwart); }
+.kdg-kaart-groen { border-top-color: #37be87; }
+.kaart-titel { font-family: var(--font-titel); font-size: 1.05rem; font-weight: 700; color: var(--kdg-zwart); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.kaart-icoon { width: 30px; height: 30px; background: var(--acc1); color: var(--kdg-wit); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.kaart-icoon.oranje { background: var(--acc2); }
+.kaart-icoon.zwart { background: var(--kdg-zwart); }
+.kaart-icoon.groen { background: #37be87; }
+.kdg-kaart p { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 10px; line-height: 1.65; }
+.kdg-kaart p:last-child { margin-bottom: 0; }
+.kdg-kaart strong { color: var(--kdg-zwart); font-weight: 600; }
+.kdg-kaart ul { margin: 10px 0 10px 20px; }
+.kdg-kaart li { font-size: 0.9rem; color: var(--kdg-donkergrijs); margin-bottom: 6px; line-height: 1.6; }
+
+/* INFO / WAARSCHUWING */
+.kdg-info { background: var(--acc1-licht); border-left: 3px solid var(--acc1); padding: 12px 16px; margin-top: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); }
+.kdg-info-oranje { background: var(--acc2-licht); border-left-color: var(--acc2); padding: 12px 16px; margin-top: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); }
+.kdg-info-zwart { background: #f0f0f0; border-left: 3px solid var(--kdg-zwart); padding: 12px 16px; margin-top: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); }
+
+/* TABS */
+.kdg-tabs { display: flex; flex-wrap: wrap; gap: 0; border-bottom: 2px solid var(--kdg-lichtgrijs); margin-bottom: 0; }
+.kdg-tab-knop { background: none; border: none; padding: 10px 16px; font-family: var(--font-body); font-size: 0.84rem; cursor: pointer; color: var(--kdg-midgrijs); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.15s; }
+.kdg-tab-knop:hover { color: var(--kdg-zwart); }
+.kdg-tab-knop.actief { color: var(--kdg-zwart); border-bottom-color: var(--acc1); font-weight: 600; }
+.kdg-tab-inhoud { display: none; padding: 16px 0 0; }
+.kdg-tab-inhoud.actief { display: block; }
+
+/* BEGRIPPEN (klikbare accordeon) */
+.begrip-kaart { background: var(--kdg-wit); margin-bottom: 8px; cursor: pointer; border: 1px solid var(--kdg-lichtgrijs); }
+.begrip-kop { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+.begrip-kop span:first-child { font-size: 0.88rem; font-weight: 600; color: var(--kdg-zwart); }
+.begrip-kop span:last-child { flex-shrink: 0; font-size: 1.1rem; }
+.begrip-body { display: none; padding: 14px; font-size: 0.86rem; color: var(--kdg-donkergrijs); line-height: 1.65; background: var(--kdg-wit); }
+.begrip-body strong { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--acc1-donker); display: block; margin-bottom: 4px; }
+.begrip-body p { margin-bottom: 8px; font-size: 0.86rem; }
+
+/* FLIPKAARTEN */
+.flip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 10px; }
+.flipkaart { height: 120px; perspective: 600px; cursor: pointer; }
+.flipkaart-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.45s; }
+.flipkaart.gekeerd .flipkaart-inner { transform: rotateY(180deg); }
+.flipkaart-voor, .flipkaart-achter { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; font-size: 0.85rem; }
+.flipkaart-voor { background: var(--kdg-zwart); color: var(--kdg-wit); font-family: var(--font-titel); font-weight: 600; }
+.flipkaart-achter { background: var(--acc1-licht); color: var(--kdg-donkergrijs); border: 2px solid var(--acc1); transform: rotateY(180deg); font-size: 0.78rem; line-height: 1.5; }
+.flip-hint { font-size: 0.72rem; color: #999; text-align: center; margin-top: 6px; }
+
+/* TABEL */
+.kdg-tabel { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-top: 12px; }
+.kdg-tabel th { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 10px 14px; text-align: left; font-family: var(--font-titel); font-weight: 600; font-size: 0.8rem; }
+.kdg-tabel td { padding: 9px 14px; border-bottom: 1px solid var(--kdg-lichtgrijs); vertical-align: top; }
+.kdg-tabel tr:nth-child(even) td { background: #fafafa; }
+.kdg-tabel tr:hover td { background: var(--acc1-licht); }
+
+/* KNOPPEN */
+.kdg-knop { display: inline-block; padding: 10px 20px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: background 0.15s; }
+.kdg-knop-primair { background: var(--acc1); color: var(--kdg-wit); }
+.kdg-knop-primair:hover { background: var(--acc1-donker); }
+.kdg-knop-omlijnd { background: transparent; border: 2px solid var(--kdg-lichtgrijs); color: var(--kdg-midgrijs); }
+.kdg-knop-omlijnd:hover { border-color: var(--acc1); color: var(--kdg-zwart); }
+
+/* QUIZ */
+.kdg-quiz-intro { background: var(--kdg-wit); padding: 22px 26px; margin-bottom: 20px; border-left: 4px solid var(--acc2); display: flex; gap: 16px; align-items: flex-start; }
+.quiz-intro-icoon { font-size: 2rem; flex-shrink: 0; }
+.kdg-quiz-intro h3 { font-family: var(--font-titel); font-size: 1rem; margin-bottom: 6px; }
+.kdg-quiz-intro p { font-size: 0.86rem; color: var(--kdg-midgrijs); }
+#quiz-container .vraag-kaart { background: var(--kdg-wit); border-top: 3px solid var(--kdg-lichtgrijs); padding: 20px 24px; margin-bottom: 14px; }
+#quiz-container .vraag-kaart.beantwoord { border-top-color: var(--acc1); }
+.vraag-num { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--acc1-donker); font-weight: 600; margin-bottom: 6px; }
+.vraag-tekst { font-size: 0.92rem; font-weight: 600; color: var(--kdg-zwart); margin-bottom: 14px; line-height: 1.5; font-family: var(--font-titel); }
+.optie-knop { display: block; width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 7px; background: #fafafa; border: 1px solid var(--kdg-lichtgrijs); font-family: var(--font-body); font-size: 0.86rem; cursor: pointer; transition: background 0.12s; }
+.optie-knop:hover { background: var(--acc1-licht); border-color: var(--acc1); }
+.optie-knop.juist { background: #d4f4e8; border-color: #37be87; color: #289969; font-weight: 600; }
+.optie-knop.fout { background: #ffe8e7; border-color: var(--acc1); color: var(--acc1-donker); }
+.optie-knop:disabled { cursor: default; }
+.quiz-feedback { margin-top: 10px; padding: 10px 14px; font-size: 0.84rem; line-height: 1.55; }
+.quiz-feedback.juist { background: #d4f4e8; color: #289969; }
+.quiz-feedback.fout { background: var(--acc1-licht); color: var(--acc1-donker); }
+.quiz-score { background: var(--kdg-zwart); color: var(--kdg-wit); padding: 24px 28px; margin-top: 20px; text-align: center; }
+.score-getal { font-family: var(--font-titel); font-size: 3rem; font-weight: 700; color: var(--acc2); }
+.score-label { font-size: 0.9rem; color: #ccc; margin-top: 4px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .kdg-layout { grid-template-columns: 1fr; padding: 16px; }
+  .kdg-sidebar { position: static; }
+  .welkom-titel, .module-titel { font-size: 1.5rem; }
+  .kdg-progress-wrap { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="kdg-header">
+  <div class="kdg-header-inner">
+    <div class="kdg-logo-area">
+      <div class="kdg-logo-mark">KdG</div>
+      <div>
+        <div class="kdg-header-title">Bio-medisch Kader — Deel 6</div>
+        <div class="kdg-header-sub">Bachelor Orthopedagogie · 1ste jaar · 2025–2026</div>
+      </div>
+    </div>
+    <div class="kdg-progress-wrap">
+      <div class="kdg-progress-bar"><div class="kdg-progress-fill" id="voortgang-balk"></div></div>
+      <div class="kdg-progress-label" id="voortgang-tekst">0 / 6 modules</div>
+    </div>
+  </div>
+</header>
+
+<div class="kdg-layout">
+  <!-- SIDEBAR NAV -->
+  <nav class="kdg-sidebar">
+    <div class="kdg-sidebar-kop">Inhoud</div>
+    <a class="kdg-nav-item actief" onclick="toonModule('welkom')" href="#">
+      <span class="nav-bal">⌂</span>
+      <div class="nav-naam"><div>Overzicht</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-1" onclick="toonModule('m1')" href="#">
+      <span class="nav-bal" id="bal-1">1</span>
+      <div class="nav-naam"><div>Definitie &amp; indeling</div><div class="nav-sub">Wat is medicatie?</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-2" onclick="toonModule('m2')" href="#">
+      <span class="nav-bal" id="bal-2">2</span>
+      <div class="nav-naam"><div>Farmacokinetiek</div><div class="nav-sub">Wat doet het lichaam?</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-3" onclick="toonModule('m3')" href="#">
+      <span class="nav-bal" id="bal-3">3</span>
+      <div class="nav-naam"><div>Farmacodynamiek</div><div class="nav-sub">Wat doet de stof?</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-4" onclick="toonModule('m4')" href="#">
+      <span class="nav-bal" id="bal-4">4</span>
+      <div class="nav-naam"><div>Toedieningswijzen</div><div class="nav-sub">Enteraal &amp; parenteraal</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-5" onclick="toonModule('m5')" href="#">
+      <span class="nav-bal" id="bal-5">5</span>
+      <div class="nav-naam"><div>Nevenwerkingen</div><div class="nav-sub">Bijwerkingen &amp; gevaren</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-6" onclick="toonModule('m6')" href="#">
+      <span class="nav-bal" id="bal-6">6</span>
+      <div class="nav-naam"><div>Sleutelbegrippen</div><div class="nav-sub">Begrippen herhalen</div></div>
+    </a>
+    <a class="kdg-nav-item" id="nav-7" onclick="toonModule('m7')" href="#">
+      <span class="nav-bal" id="bal-7">✓</span>
+      <div class="nav-naam"><div>Zelftoets</div><div class="nav-sub">Test je kennis</div></div>
+    </a>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="kdg-content">
+
+    <!-- ======================== WELKOM ======================== -->
+    <div class="module actief" id="welkom">
+      <div class="welkom-hero">
+        <div class="welkom-tag">Karel de Grote Hogeschool · Orthopedagogie · 1ste jaar</div>
+        <div class="welkom-titel">Deel 6: Medicatie</div>
+        <div class="welkom-tekst">Als hulpverlener kom je dagelijks in contact met medicatie. In dit leerpad leer je wat geneesmiddelen zijn, hoe het lichaam ermee omgaat, hoe ze werken en welke risico's en bijwerkingen een rol spelen.</div>
+      </div>
+
+      <div class="leerdoel-banner">
+        <div class="leerdoel-icoon">🎯</div>
+        <div class="leerdoel-tekst">
+          <div class="leerdoel-label">Leerdoel</div>
+          <div class="leerdoel-inhoud">Je legt uit hoe medicatie werkt in het lichaam en beschrijft mogelijke effecten en bijwerkingen vanuit een begeleidende rol.</div>
+        </div>
+      </div>
+
+      <div class="module-overzicht">
+        <div class="module-tegel" onclick="toonModule('m1')">
+          <div class="tegel-nummer">01</div>
+          <div class="tegel-naam">Definitie &amp; indeling</div>
+          <div class="tegel-sub">Wat is medicatie?</div>
+          <div class="tegel-status" id="status-1">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m2')">
+          <div class="tegel-nummer">02</div>
+          <div class="tegel-naam">Farmacokinetiek</div>
+          <div class="tegel-sub">Wat doet het lichaam?</div>
+          <div class="tegel-status" id="status-2">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m3')">
+          <div class="tegel-nummer">03</div>
+          <div class="tegel-naam">Farmacodynamiek</div>
+          <div class="tegel-sub">Wat doet de stof?</div>
+          <div class="tegel-status" id="status-3">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m4')">
+          <div class="tegel-nummer">04</div>
+          <div class="tegel-naam">Toedieningswijzen</div>
+          <div class="tegel-sub">Enteraal &amp; parenteraal</div>
+          <div class="tegel-status" id="status-4">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m5')">
+          <div class="tegel-nummer">05</div>
+          <div class="tegel-naam">Nevenwerkingen</div>
+          <div class="tegel-sub">Bijwerkingen &amp; gevaren</div>
+          <div class="tegel-status" id="status-5">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m6')">
+          <div class="tegel-nummer">06</div>
+          <div class="tegel-naam">Sleutelbegrippen</div>
+          <div class="tegel-sub">Begrippen herhalen</div>
+          <div class="tegel-status" id="status-6">Nog niet bekeken</div>
+        </div>
+        <div class="module-tegel" onclick="toonModule('m7')">
+          <div class="tegel-nummer">✓</div>
+          <div class="tegel-naam">Zelftoets</div>
+          <div class="tegel-sub">10 vragen over alle modules</div>
+          <div class="tegel-status" id="status-7">Nog niet gemaakt</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 1: DEFINITIE & INDELING ======================== -->
+    <div class="module" id="m1">
+      <div class="module-kop">
+        <div class="module-tag">Module 1</div>
+        <div class="module-titel">Definitie &amp; indeling van medicatie</div>
+        <div class="module-intro">Wat is een geneesmiddel? Hoe worden geneesmiddelen benoemd en ingedeeld? En welke rol speelt farmacovigilantie in de zorg?</div>
+        <div class="module-pills"><span class="pill">💊 Definitie</span><span class="pill">🏷 Benaming</span><span class="pill">📋 Indeling</span><span class="pill">👁 Farmacovigilantie</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">💊</span>Wat is een geneesmiddel?</div>
+        <p>Een geneesmiddel is elke enkelvoudige of samengestelde substantie die een <strong>therapeutische of profylactische eigenschap</strong> heeft met betrekking tot ziekten bij de mens. Het kan worden toegediend om fysiologische functies te herstellen, te verbeteren of te wijzigen — of om een medische diagnose te stellen.</p>
+        <div class="kdg-info"><strong>Wetgeving:</strong> KB 25 maart 1964 "wet op de geneesmiddelen", gewijzigd 28 december 2006.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon zwart">🏷</span>Benaming van geneesmiddelen</div>
+        <p>Geneesmiddelen hebben drie soorten namen die in de zorg door elkaar worden gebruikt:</p>
+        <table class="kdg-tabel" style="margin-top:12px;">
+          <tr><th>Type naam</th><th>Uitleg</th><th>Voorbeeld</th></tr>
+          <tr><td><strong>Specialiteitsnaam (merknaam)</strong></td><td>Naam gegeven door de fabrikant met patent</td><td>Dafalgan®, Brufen®, Augmentin®</td></tr>
+          <tr><td><strong>Generische naam</strong></td><td>Kwalitatief gelijkwaardig, goedkoper alternatief — verwijst naar actief bestanddeel + producent</td><td>Paracetamol EG® (= Dafalgan®)</td></tr>
+          <tr><td><strong>Stofnaam</strong></td><td>Het actief bestanddeel zelf</td><td>paracetamol, ibuprofen</td></tr>
+        </table>
+        <div class="kdg-info-zwart"><strong>Tip:</strong> Medicatie hoef je niet van buiten te kennen. Raadpleeg altijd <a href="https://www.bcfi.be" target="_blank">www.bcfi.be</a> of <a href="https://www.e-compendium.be" target="_blank">www.e-compendium.be</a></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">📋</span>Indeling van medicatie</div>
+        <p>Op basis van het doel of de werkzaamheid worden geneesmiddelen ingedeeld in zes groepen:</p>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('ind','causaal',this)">Causaal</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('ind','symptomatisch',this)">Symptomatisch</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('ind','substitutie',this)">Substitutie</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('ind','profylactisch',this)">Profylactisch</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('ind','diagnostisch',this)">Diagnostisch</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('ind','placebo',this)">Placebo</button>
+        </div>
+        <div id="ind-causaal" class="kdg-tab-inhoud actief"><p><strong>Causale medicatie</strong> bestrijdt de oorzaak van de ziekte.</p><p>Antibiotica gaan de ziektekiem bestrijden. Cytostatica remmen de tumorgroei.</p><div class="kdg-info"><strong>Voorbeeld:</strong> Augmentin® (amoxicilline + clavulaanzuur) — antibioticum</div></div>
+        <div id="ind-symptomatisch" class="kdg-tab-inhoud"><p><strong>Symptomatische medicatie</strong> bestrijdt niet de ziekte zelf maar de gevolgen — de symptomen.</p><p>Anti-emetica bij braken, koortswerend middel bij koorts.</p><div class="kdg-info"><strong>Voorbeeld:</strong> Dafalgan® (paracetamol) — koortswerend en pijnstillend</div></div>
+        <div id="ind-substitutie" class="kdg-tab-inhoud"><p><strong>Substitutiemedicatie</strong> vervangt stoffen die het organisme zelf niet of onvoldoende aanmaakt, zoals hormonen of vitamines.</p><div class="kdg-info"><strong>Voorbeeld:</strong> D-cure® (colecalciferol) — vitamine D3</div></div>
+        <div id="ind-profylactisch" class="kdg-tab-inhoud"><p><strong>Profylactische medicatie</strong> voorkomt dat een ziekte zich (zo sterk) kan manifesteren bij een bekend risico.</p><p>Profylactische antibiotica voor darmoperatie, vaccinatie voor tropische gebieden.</p><div class="kdg-info"><strong>Voorbeeld:</strong> Vaccin tegen gele koorts</div></div>
+        <div id="ind-diagnostisch" class="kdg-tab-inhoud"><p><strong>Diagnostische medicatie</strong> helpt bij het vaststellen van een ziekte. Denk aan contrastmiddelen voor beeldvorming of de tuberculine-inspuiting.</p><div class="kdg-info"><strong>Voorbeeld:</strong> Visipaque® (jodixanol) — intraveneus contrastmiddel</div></div>
+        <div id="ind-placebo" class="kdg-tab-inhoud"><p><strong>Placebomedicatie</strong> heeft geen echte geneeskrachtige werking maar werkt via het gesuggereerde effect. De patiënt is ervan overtuigd dat het middel werkzaam is.</p><p>In de praktijk: capsules gevuld met een niet-schadelijke stof, gemaakt door de apotheker.</p></div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-oranje">
+        <div class="kaart-titel"><span class="kaart-icoon oranje">👁</span>Farmacovigilantie</div>
+        <p>Na wetenschappelijk onderzoek en markttoelating blijft een geneesmiddel onder toezicht — dit noemt men <strong>geneesmiddelenbewaking of farmacovigilantie</strong>.</p>
+        <p>Bij een vermoeden dat een cliënt een reactie vertoont na inname van een geneesmiddel, moet dit gemeld worden aan:</p>
+        <ul>
+          <li>De producent</li>
+          <li>Het <strong>FAGG</strong> — Federaal Agentschap voor Geneesmiddelen en Gezondheidsproducten (<a href="https://www.fagg-afmps.be" target="_blank">www.fagg-afmps.be</a>)</li>
+        </ul>
+        <div class="kdg-info-oranje">Hoewel er geen wettelijke meldingsplicht is voor gezondheidsmedewerkers, wordt dit vanuit ethische principes wél verwacht.</div>
+      </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-primair" onclick="toonModule('m2')">Volgende module →</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')" style="margin-left:10px;">← Overzicht</button>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 2: FARMACOKINETIEK ======================== -->
+    <div class="module" id="m2">
+      <div class="module-kop">
+        <div class="module-tag">Module 2</div>
+        <div class="module-titel">Farmacokinetiek</div>
+        <div class="module-intro">Farmacokinetiek beschrijft wat het lichaam met een geneesmiddel doet: absorptie, distributie, metabolisme en excretie — het ADME-model.</div>
+        <div class="module-pills"><span class="pill">🔺 Absorptie</span><span class="pill">🔄 Distributie</span><span class="pill">⚗ Metabolisme</span><span class="pill">💧 Excretie</span><span class="pill">📊 Begrippen</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🗂</span>Het compartimentenmodel</div>
+        <p>Het lichaam wordt in de farmacokinetiek schematisch voorgesteld als een verzameling <strong>compartimenten</strong>: het centrale compartiment (bloedbaan), het doelorgaan, de depotorganen en de metabole organen.</p>
+        <p>Een geneesmiddel doorloopt steeds dezelfde weg: <strong>absorptie → distributie → metabolisme → excretie</strong> (ADME).</p>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon zwart">🔺</span>Absorptie (resorptie)</div>
+        <p>Absorptie is de opname van het geneesmiddel in de bloedbaan. De manier van toediening bepaalt de snelheid en volledigheid:</p>
+        <ul>
+          <li>Via slijmvliezen van het spijsverteringsstelsel (orale inname)</li>
+          <li>Via injectie (rechtstreeks in bloedbaan)</li>
+          <li>Via de huid (pleisters, crèmes)</li>
+        </ul>
+        <div class="kdg-info-zwart"><strong>First-pass effect:</strong> Bij orale inname passeert het geneesmiddel eerst de lever via het poortsysteem. De lever breekt een deel af vóór het de grote circulatie bereikt → lagere biologische beschikbaarheid. Sublinguaal en rectaal ontwijken dit first-pass effect.</div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">📊</span>Farmacologische begrippen</div>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('pk','biologisch',this)">Biologische beschikbaarheid</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('pk','halfwaardetijd',this)">Halfwaardetijd</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('pk','therapeutisch',this)">Therapeutisch venster</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('pk','toxisch',this)">Toxische dosis</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('pk','cumulatie',this)">Cumulatie</button>
+        </div>
+        <div id="pk-biologisch" class="kdg-tab-inhoud actief">
+          <p>De <strong>biologische beschikbaarheid</strong> is het gedeelte van de dosis dat onveranderd in de circulatie terechtkomt. Bij intraveneuze toediening is dit 100%. Bij orale inname is dit lager door het first-pass effect.</p>
+          <p><em>Voorbeeld: Biologische beschikbaarheid van 70% wil zeggen dat bij 100mg inname slechts 70mg effectief in de bloedbaan beschikbaar is.</em></p>
+        </div>
+        <div id="pk-halfwaardetijd" class="kdg-tab-inhoud">
+          <p>De <strong>halfwaardetijd</strong> is de tijdsduur die het lichaam nodig heeft om de plasmaconcentratie te halveren. Ze is specifiek voor elk geneesmiddel.</p>
+          <p>Klinisch belang: bepaalt wanneer een nieuwe dosis nodig is. Slaapmedicatie midden in de nacht innemen is zinloos als de halfwaardetijd kort is.</p>
+        </div>
+        <div id="pk-therapeutisch" class="kdg-tab-inhoud">
+          <p>Het <strong>therapeutisch venster</strong> is de zone tussen de minimale en maximale bloedspiegel waarbij het geneesmiddel effectief is zonder toxische effecten.</p>
+          <p>De breedte van dit venster verschilt sterk per geneesmiddel. Een smal therapeutisch venster vereist strikte opvolging (bv. digoxine, lithium).</p>
+        </div>
+        <div id="pk-toxisch" class="kdg-tab-inhoud">
+          <p><strong>Subtherapeutische dosis:</strong> het geneesmiddel is aanwezig in de bloedbaan maar in te lage concentratie om effectief te zijn.</p>
+          <p><strong>Toxische dosis:</strong> de concentratie overschrijdt het therapeutisch venster → nadelige effecten op de gezondheid. Kan optreden bij overdosering of slecht metabolisme.</p>
+        </div>
+        <div id="pk-cumulatie" class="kdg-tab-inhoud">
+          <p><strong>Cumulatie (opstapeling)</strong> treedt op als de absorptie sneller gaat dan de excretie. De concentratie stijgt geleidelijk totdat de toxische zone bereikt wordt.</p>
+          <p>Als hulpverlener moet je bedacht zijn op late bijwerkingen — die kunnen pas na weken optreden (bv. digoxine/Lanoxin®).</p>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-oranje">
+        <div class="kaart-titel"><span class="kaart-icoon oranje">⚗</span>Metabolisme &amp; excretie</div>
+        <p><strong>Metabolisme</strong> vindt voornamelijk plaats in de lever (via het enzymensysteem cytochroom P450). De lever neutraliseert, ontgift en breekt geneesmiddelen af tot metabolieten — wateroplosbaar voor uitscheiding via de nieren, vetoplosbaar via de galwegen.</p>
+        <p><strong>Pro-drug:</strong> een geneesmiddel dat pas na metabolisatie door de lever actief wordt (bv. Tramadol®).</p>
+        <p><strong>Excretie (eliminatie)</strong> verwijdert het geneesmiddel uit het lichaam — voornamelijk via urine, ook via stoelgang, huid en ademhaling.</p>
+        <div class="kdg-info-oranje"><strong>Let op bij nierproblemen:</strong> verminderde nierfunctie vertraagt excretie → geneesmiddelen stapelen op → dosisaanpassing noodzakelijk.</div>
+      </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-primair" onclick="toonModule('m3')">Volgende module →</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')" style="margin-left:10px;">← Overzicht</button>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 3: FARMACODYNAMIEK ======================== -->
+    <div class="module" id="m3">
+      <div class="module-kop">
+        <div class="module-tag">Module 3</div>
+        <div class="module-titel">Farmacodynamiek</div>
+        <div class="module-intro">Farmacodynamiek beschrijft wat een geneesmiddel met het lichaam doet — hoe het aangrijpt op eiwitten en cellen om een therapeutisch effect te bereiken.</div>
+        <div class="module-pills"><span class="pill">🔬 Aangrijpingspunten</span><span class="pill">🔑 Agonist/Antagonist</span><span class="pill">📡 Receptoren</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔬</span>Hoe grijpen geneesmiddelen aan?</div>
+        <p>Geneesmiddelen binden zich aan <strong>eiwitten in of op cellen</strong>. Ons lichaam heeft meer dan 20.000 eiwitten, maar slechts ongeveer 1% is bruikbaar als aangrijpingspunt voor geneesmiddelen.</p>
+        <p>Wanneer een geneesmiddel invloed heeft op een eiwit, heeft dit automatisch invloed op een fysiologisch proces — in positieve (genezing) of negatieve (bijwerking) zin.</p>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon zwart">📡</span>De 4 soorten aangrijpingspunten</div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>Receptoreiwitten (receptoren)</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Werkingsmechanisme</strong><p>Receptoren werken als ontvanger of antenne op het celmembraan of in de cel. Ze werken via het <strong>sleutel-slot systeem</strong>: alleen de juiste sleutel (ligand/medicijn) past in het slot (receptor).</p><p><strong>Agonist:</strong> bootst het natuurlijk effect na en activeert de cel. <strong>Antagonist:</strong> blokkeert de receptor zonder effect — andere stoffen kunnen niet meer binden.</p><p><em>Voorbeeld: insuline bindt aan insulinereceptor → cellen nemen meer glucose op.</em></p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>Ionkanaaleiwitten</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Werkingsmechanisme</strong><p>Speciale eiwitten (kanalen) die water, ionen en opgeloste stoffen door de vettige membraanlaag laten passeren. Ze zijn spanningsafhankelijk — openen en sluiten op basis van de elektrische lading.</p><p><em>Voorbeeld: lokale anesthetica blokkeren natriumkanalen → geen pijnimpulsen meer.</em></p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>Transporteiwitten</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Werkingsmechanisme</strong><p>Vervoeren stoffen doorheen de celmembraan. Geneesmiddelen kunnen dit transport blokkeren of versterken.</p><p><em>Voorbeeld: antidepressiva (SSRI's) blokkeren de heropname van serotonine → meer serotonine beschikbaar in de synaps.</em></p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>Enzymen</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Werkingsmechanisme</strong><p>Enzymen katalyseren biochemische reacties in de cel. Geneesmiddelen kunnen enzymen remmen of stimuleren.</p><p><em>Voorbeeld: ACE-remmers blokkeren het angiotensine-converterend enzym → bloeddruk daalt.</em></p></div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🔑</span>Agonist vs. Antagonist</div>
+        <table class="kdg-tabel">
+          <tr><th>Type</th><th>Werking</th><th>Voorbeeld</th></tr>
+          <tr><td><strong>Agonist</strong></td><td>Bindt aan receptor én activeert hem — bootst het lichaamseigen effect na</td><td>Morfine (bindt aan opiaat-receptoren → pijnstilling)</td></tr>
+          <tr><td><strong>Antagonist</strong></td><td>Bindt aan receptor maar activeert hem NIET — blokkeert andere stoffen</td><td>Naloxon (blokkeert opiaat-receptoren → antidoot bij overdosis)</td></tr>
+        </table>
+      </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-primair" onclick="toonModule('m4')">Volgende module →</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')" style="margin-left:10px;">← Overzicht</button>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 4: TOEDIENINGSWIJZEN ======================== -->
+    <div class="module" id="m4">
+      <div class="module-kop">
+        <div class="module-tag">Module 4</div>
+        <div class="module-titel">Toedieningswijzen</div>
+        <div class="module-intro">De manier waarop een geneesmiddel wordt toegediend bepaalt de snelheid en volledigheid van de opname. We onderscheiden lokale vs. systemische werking en enterale vs. parenterale toediening.</div>
+        <div class="module-pills"><span class="pill">🔵 Lokaal / Systemisch</span><span class="pill">💊 Enteraal</span><span class="pill">💉 Parenteraal</span><span class="pill">👄 Galenische vormen</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">🎯</span>Lokaal of systemisch</div>
+        <p><strong>Lokale werking:</strong> het geneesmiddel werkt op de plaats waar het wordt aangebracht — zonder in de circulatie te komen.</p>
+        <p><strong>Systemische werking:</strong> het geneesmiddel komt via de bloedbaan in de circulatie en verspreidt zich door het hele organisme.</p>
+        <div class="kdg-info"><strong>Let op uitzonderingen:</strong> een pleisters kan zowel lokaal (bv. Rapydan® — anestheticum) als systemisch werken (bv. Durogesic®/fentanyl — pijnstilling). Ook een zetpil kan lokaal (Glycerine Suppo® — laxativum) of systemisch (Voltaren zetpil® — ontstekingsremmer) werken.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon zwart">💊</span>Enterale toediening — via het maagdarmkanaal</div>
+        <p>Enterale geneesmiddelen worden opgenomen via mond, rectum of sonde (bv. PEG-sonde). Ze zijn altijd onderhevig aan het first-pass effect.</p>
+        <div class="kdg-tabs">
+          <button class="kdg-tab-knop actief" onclick="wisselTab('td','oraal',this)">Oraal</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('td','sublinguaal',this)">Sublinguaal</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('td','orodispersibel',this)">Orodispersibel</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('td','rectaal',this)">Rectaal</button>
+          <button class="kdg-tab-knop" onclick="wisselTab('td','special',this)">Speciale vormen</button>
+        </div>
+        <div id="td-oraal" class="kdg-tab-inhoud actief">
+          <p>Orale medicatie wordt geslikt en opgenomen via het maagdarmkanaal. Galenische vormen: vaste vormen (tabletten, capsules, zakjes), bruistabletten, vloeibare vormen (oplossing, suspensie, druppels).</p>
+        </div>
+        <div id="td-sublinguaal" class="kdg-tab-inhoud">
+          <p><strong>Sublinguaal</strong> = onder de tong. Oplost in de mond en wordt opgenomen via het mondslijmvlies rechtstreeks in de bloedbaan. <strong>Geen first-pass effect</strong> → werkt zeer snel.</p>
+          <p><em>Voorbeeld: Temesta Expidet® (lorazepam) — sedativum pre-operatief</em></p>
+        </div>
+        <div id="td-orodispersibel" class="kdg-tab-inhoud">
+          <p><strong>Orodispersibel</strong> = lost op in de mond, maar wordt opgenomen via het maagdarmkanaal (niet via het mondslijmvlies). Wél first-pass effect. Voordeel: ook voor mensen die moeilijk tabletten slikken.</p>
+          <p><em>Voorbeeld: Dafalgan Odis® (paracetamol)</em></p>
+        </div>
+        <div id="td-rectaal" class="kdg-tab-inhoud">
+          <p><strong>Rectale toediening</strong> (zetpillen/suppositoriums) — opname via rectaal slijmvlies, recht in de bloedbaan (geen first-pass). Nuttig bij braken of spijsverteringsproblemen.</p>
+          <p><em>Voorbeeld: Voltaren zetpil® (diclofenac) — ontstekingsremmer systemisch</em></p>
+        </div>
+        <div id="td-special" class="kdg-tab-inhoud">
+          <p><strong>Enteric coated:</strong> beschermend laagje zodat het geneesmiddel niet oplost in het maagzuur maar pas in de dundarm. Mag niet geplet worden.<br><em>Voorbeeld: Asaflow® (acetylsalicylzuur)</em></p>
+          <p><strong>Controlled release / Retard:</strong> vertraagde vrijgave — werkt over langere periode. Herkenbaar aan CR, LA, Retard, PL in de naam.<br><em>Voorbeeld: Xanax Retard® (alprazolam)</em></p>
+        </div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">💉</span>Parenterale toediening — buiten het maagdarmkanaal</div>
+        <p>Parenterale toediening omvat alle toedieningswijzen die <strong>niet via het maagdarmkanaal</strong> verlopen. Het geneesmiddel wordt rechtstreeks in het lichaam ingebracht.</p>
+        <table class="kdg-tabel">
+          <tr><th>Wijze</th><th>Afkorting</th><th>Omschrijving</th></tr>
+          <tr><td>Intraveneus</td><td>IV</td><td>Rechtstreeks in bloedvat — snelste werking, biologische beschikbaarheid 100%</td></tr>
+          <tr><td>Intramusculair</td><td>IM</td><td>In spierweefsel — trager dan IV, maar sneller dan oraal</td></tr>
+          <tr><td>Subcutaan</td><td>SC</td><td>Onder de huid — traagste parenterale opname. Bv. insuline</td></tr>
+          <tr><td>Transdermaal</td><td>TD</td><td>Via de huid (pleisters) — continue afgifte over langere periode</td></tr>
+          <tr><td>Inhalatie</td><td>—</td><td>Via de luchtwegen — snel effect in longen. Bv. astma-inhalatoren</td></tr>
+        </table>
+        <div class="kdg-info-oranje"><strong>Voordeel parenteraal:</strong> geen first-pass effect, snellere werking, nuttig bij bewusteloze patiënten of ernstige braakreacties.</div>
+      </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-primair" onclick="toonModule('m5')">Volgende module →</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')" style="margin-left:10px;">← Overzicht</button>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 5: NEVENWERKINGEN ======================== -->
+    <div class="module" id="m5">
+      <div class="module-kop">
+        <div class="module-tag">Module 5</div>
+        <div class="module-titel">Nevenwerkingen &amp; gevaren</div>
+        <div class="module-intro">ALLE geneesmiddelen kunnen bijwerkingen hebben. Als hulpverlener is observatie van de cliënt cruciaal. In dit module leer je de verschillende soorten gevaren kennen.</div>
+        <div class="module-pills"><span class="pill">⚠ Allergie</span><span class="pill">🧬 Idiosyncrasie</span><span class="pill">😣 Intolerantie</span><span class="pill">🔗 Afhankelijkheid</span><span class="pill">☠ Intoxicatie</span></div>
+      </div>
+
+      <div class="kdg-kaart">
+        <div class="kaart-titel"><span class="kaart-icoon">⚠</span>Factoren die nevenwerkingen bepalen</div>
+        <ul>
+          <li>Ieder lichaam is anders — variaties in eiwitten kunnen leiden tot andere reacties</li>
+          <li>Een te sterke werking door leeftijd, genetisch verschil of ziekte</li>
+          <li><strong>Hypoproteïnemie</strong> (te weinig albumine in het bloed): minder gebonden fractie → hogere vrije fractie → risico op toxiciteit</li>
+          <li>Binding van medicatie aan verkeerde receptoren (bv. hartmedicatie die ook longeffecten veroorzaakt)</li>
+          <li>Toxische geneesmiddelen zoals chemotherapie</li>
+        </ul>
+        <div class="kdg-info"><strong>Basisregel:</strong> ALLE geneesmiddelen kunnen bijwerkingen hebben. Sommige zijn aanvaardbaar, andere niet. Observeer de cliënt altijd nauwkeurig.</div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-zwart">
+        <div class="kaart-titel"><span class="kaart-icoon zwart">🔍</span>Soorten gevaren</div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>⚠ Allergie</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Mechanisme</strong><p>Reactie van antistoffen op antigenen — histamine komt vrij. Niet dosisafhankelijk: een zeer kleine hoeveelheid kan een zware reactie uitlokken bij gevoelige personen.</p><p>Kan zich uiten als urticaria (jeukende huidbultjes), contacteczeem of — in ernstige gevallen — een <strong>anafylactische shock</strong> met circulatoire collaps en glottisoedeem. Levensbedreigend.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>🧬 Idiosyncrasie</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Mechanisme</strong><p>Abnormale reactie op een geneesmiddel door een <strong>genetische factor</strong> (niet door antistoffen). Het enzym om het geneesmiddel af te breken wordt niet geproduceerd → uitgesproken effect.</p><p><em>Voorbeeld: na toediening van een spierontspanner kan bij sommige mensen verlamming van de ademhalingsspieren optreden — levensbedreigend.</em></p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>😣 Intolerantie</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Mechanisme</strong><p>Het geneesmiddel wordt gedeeltelijk of niet verdragen. Geen histamine, geen genetische factor. Uit zich als misselijkheid, braken, diarree, obstipatie, loomheid, slapeloosheid.</p><p>Bij bepaalde geneesmiddelen zijn deze klachten tijdelijk (opstartfase) en verdwijnen bij langdurig gebruik.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>🔗 Toxicomanie / Afhankelijkheid</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Mechanisme</strong><p>Ziekelijke drang naar een toxische stof met chronische intoxicatie en ondermijning van de persoonlijkheid.</p><p><strong>Somatische afhankelijkheid:</strong> het lichaam heeft de stof nodig om fysiek goed te voelen — gaat gepaard met <em>gewenning</em> (steeds hogere dosis nodig voor hetzelfde effect).</p><p><strong>Psychische afhankelijkheid:</strong> onweerstaanbare drang om de stof te gebruiken.</p><p><strong>Sociale afhankelijkheid:</strong> impact op de omgeving — andere personen worden ingezet om de stof te verkrijgen.</p><p>Plots stoppen kan leiden tot abstinentieverschijnselen. Geleidelijk afbouwen of vervangproduct (bv. Mephenon®/methadon) kan noodzakelijk zijn.</p></div>
+        </div>
+        <div class="begrip-kaart" onclick="this.querySelector('.begrip-body').style.display = this.querySelector('.begrip-body').style.display === 'block' ? 'none' : 'block'">
+          <div class="begrip-kop"><span>☠ Intoxicatie (vergiftiging)</span><span>＋</span></div>
+          <div class="begrip-body"><strong>Mechanisme</strong><p>Vergiftiging door aard en hoeveelheid van het product — treedt vaak op bij cumulatie of onvolledige uitscheiding.</p><p><em>Voorbeeld: Lanoxin®/digoxine — bijwerkingen door cumulatie worden pas na weken merkbaar.</em></p><p>Een intoxicatie kan ook bewust uitgelokt worden in het kader van een suïcidepoging.</p></div>
+        </div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-oranje">
+        <div class="kaart-titel"><span class="kaart-icoon oranje">🤝</span>Therapietrouw &amp; de rol van de hulpverlener</div>
+        <p>Als hulpverlener sta je dicht bij de cliënt. Je rol is cliënten motiveren om medicatie <strong>correct en consequent</strong> in te nemen (therapietrouw).</p>
+        <ul>
+          <li>Begrijp de medicatie die de cliënt gebruikt — raadpleeg <a href="https://www.bcfi.be" target="_blank">www.bcfi.be</a></li>
+          <li>Observeer actief op bijwerkingen en veranderingen in gedrag of fysieke toestand</li>
+          <li>Meld vermoedens van bijwerkingen aan de behandelende arts</li>
+          <li>Stimuleer en ondersteun — een gemotiveerde cliënt is therapietrouwer</li>
+        </ul>
+        <div class="kdg-info-oranje"><strong>Signaalfunctie:</strong> als hulpverlener ben jij de ogen en oren van het zorgteam. Gedragsverandering, sufheid, misselijkheid of huidreacties na medicatiewijziging zijn altijd relevant om te vermelden.</div>
+      </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-primair" onclick="toonModule('m6')">Volgende module →</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')" style="margin-left:10px;">← Overzicht</button>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 6: FLASHCARDS ======================== -->
+    <div class="module" id="m6">
+      <div class="module-kop">
+        <div class="module-tag">Sleutelbegrippen</div>
+        <div class="module-titel">Begrippen herhalen</div>
+        <div class="module-intro">Gebruik deze flashcards om de belangrijkste begrippen te herhalen. Klik op een kaart om de definitie te zien.</div>
+        <div class="module-pills"><span class="pill">🃏 Begrippen</span><span class="pill">🔄 Interactief</span><span class="pill">✅ Herhaling</span></div>
+      </div>
+
+      <div class="kdg-kaart kdg-kaart-groen">
+        <div class="kaart-titel"><span class="kaart-icoon groen">🃏</span>Sleutelbegrippen medicatie — draai de kaart om</div>
+        <p class="flip-hint">Klik op een kaart om de definitie te zien</p>
+        <div class="flip-grid">
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Farmacokinetiek</div><div class="flipkaart-achter">Wat het lichaam met het geneesmiddel doet: absorptie, distributie, metabolisme en excretie (ADME).</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Farmacodynamiek</div><div class="flipkaart-achter">Wat het geneesmiddel met het lichaam doet — hoe het aangrijpt op receptoren, kanalen, transporteiwitten of enzymen.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">First-pass effect</div><div class="flipkaart-achter">Afbraak van oraal ingenomen medicatie door de lever vóór het de grote circulatie bereikt → lagere biologische beschikbaarheid.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Biologische beschikbaarheid</div><div class="flipkaart-achter">Het percentage van de dosis dat onveranderd in de circulatie beschikbaar is. Intraveneus = 100%. Oraal = minder door first-pass.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Halfwaardetijd</div><div class="flipkaart-achter">Tijdsduur die het lichaam nodig heeft om de plasmaconcentratie van een geneesmiddel te halveren.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Therapeutisch venster</div><div class="flipkaart-achter">Zone tussen minimale en maximale bloedspiegel waarbij het geneesmiddel effectief is zonder toxische effecten.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Cumulatie</div><div class="flipkaart-achter">Opstapeling van een geneesmiddel doordat absorptie sneller verloopt dan excretie → risico op toxische effecten.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Agonist</div><div class="flipkaart-achter">Een stof die aan een receptor bindt én hem activeert — bootst het lichaamseigen effect na.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Antagonist</div><div class="flipkaart-achter">Een stof die aan een receptor bindt maar hem NIET activeert — blokkeert andere stoffen.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Enteraal</div><div class="flipkaart-achter">Toedieningswijze via het maagdarmkanaal: oraal, sublinguaal, rectaal, via sonde. Onderhevig aan first-pass effect.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Parenteraal</div><div class="flipkaart-achter">Toedieningswijze buiten het maagdarmkanaal: IV, IM, SC, transdermaal. Geen first-pass effect.</div></div></div>
+          <div class="flipkaart" onclick="this.classList.toggle('gekeerd')"><div class="flipkaart-inner"><div class="flipkaart-voor">Anafylactische shock</div><div class="flipkaart-achter">Zéér ernstige allergische reactie waarbij meerdere organen betrokken zijn — circulatoire collaps mogelijk. Levensbedreigend.</div></div></div>
+        </div>
+      </div>
+      <div style="margin-top:24px;">
+        <button class="kdg-knop kdg-knop-primair" onclick="toonModule('m7')">Naar de zelftoets →</button>
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')" style="margin-left:10px;">← Overzicht</button>
+      </div>
+    </div>
+
+    <!-- ======================== MODULE 7: ZELFTOETS ======================== -->
+    <div class="module" id="m7">
+      <div class="module-kop">
+        <div class="module-tag">Zelftoets</div>
+        <div class="module-titel">Test je kennis</div>
+        <div class="module-intro">Beantwoord de vragen om te controleren of je de stof van alle modules begrijpt. Na elke vraag zie je direct of je antwoord correct is.</div>
+        <div class="module-pills"><span class="pill">❓ 10 vragen</span><span class="pill">✅ Directe feedback</span><span class="pill">⭐ Eindscore</span></div>
+      </div>
+      <div class="kdg-quiz-intro">
+        <div class="quiz-intro-icoon">🎯</div>
+        <div class="quiz-intro-tekst">
+          <h3>Klaar voor de toets?</h3>
+          <p>Beantwoord alle 10 vragen. Na elke vraag zie je meteen of je antwoord correct is en lees je een korte uitleg.</p>
+        </div>
+      </div>
+      <div id="quiz-container"></div>
+      <div style="margin-top:20px;">
+        <button class="kdg-knop kdg-knop-omlijnd" onclick="toonModule('welkom')">⌂ Overzicht</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ============================================================
+// NAVIGATIE
+// ============================================================
+const bezocht = new Set();
+const map = { welkom:0, m1:1, m2:2, m3:3, m4:4, m5:5, m6:6, m7:7 };
+
+function toonModule(id) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('actief'));
+  document.querySelectorAll('.kdg-nav-item').forEach(n => n.classList.remove('actief'));
+  const mod = document.getElementById(id);
+  if (mod) mod.classList.add('actief');
+  const nav = document.getElementById('nav-' + map[id]);
+  if (nav) { nav.classList.add('actief'); nav.classList.add('gedaan'); }
+  bezocht.add(id);
+  updateVoortgang();
+  window.scrollTo(0, 0);
+  if (id === 'm7' && document.getElementById('quiz-container').children.length === 0) bouwQuiz();
+  if (id !== 'welkom' && id !== 'm7') {
+    const nr = map[id];
+    const balEl = document.getElementById('bal-' + nr);
+    if (balEl) balEl.textContent = '✓';
+    const statusEl = document.getElementById('status-' + nr);
+    if (statusEl) statusEl.textContent = 'Bekeken';
+  }
+}
+
+function updateVoortgang() {
+  const modules = ['m1','m2','m3','m4','m5','m6'];
+  const gedaan = modules.filter(m => bezocht.has(m)).length;
+  const pct = Math.round((gedaan / modules.length) * 100);
+  const balk = document.getElementById('voortgang-balk');
+  const tekst = document.getElementById('voortgang-tekst');
+  if (balk) balk.style.width = pct + '%';
+  if (tekst) tekst.textContent = gedaan + ' / ' + modules.length + ' modules';
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function wisselTab(groep, id, knop) {
+  document.querySelectorAll(`[id^="${groep}-"]`).forEach(t => t.classList.remove('actief'));
+  document.getElementById(groep + '-' + id).classList.add('actief');
+  knop.closest('.kdg-kaart').querySelectorAll('.kdg-tab-knop').forEach(k => k.classList.remove('actief'));
+  knop.classList.add('actief');
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+const quizVragen = [
+  {
+    v: "Wat is het verschil tussen een specialiteitsnaam en een generisch geneesmiddel?",
+    opties: [
+      "Een specialiteitsnaam is goedkoper dan het generisch alternatief",
+      "Een specialiteitsnaam is de merknaam van de fabrikant; een generisch geneesmiddel is kwalitatief gelijkwaardig maar goedkoper",
+      "Generische geneesmiddelen zijn minder effectief dan specialiteiten",
+      "Er is geen verschil — het zijn twee namen voor hetzelfde product"
+    ],
+    juist: 1,
+    uitleg: "De specialiteitsnaam is de merknaam waarop de fabrikant patent heeft (bv. Dafalgan®). Het generisch geneesmiddel is kwalitatief gelijkwaardig maar goedkoper (bv. Paracetamol EG®). Artsen en apotheken kiezen steeds vaker voor het goedkopere alternatief."
+  },
+  {
+    v: "Welk type medicatie bestrijdt de oorzaak van een ziekte?",
+    opties: [
+      "Symptomatische medicatie",
+      "Substitutie medicatie",
+      "Causale medicatie",
+      "Profylactische medicatie"
+    ],
+    juist: 2,
+    uitleg: "Causale medicatie pakt de oorzaak van de ziekte aan. Antibiotica bestrijden de ziektekiem (bacterie). Symptomatische medicatie behandelt enkel de gevolgen, zoals koortswering bij infectie."
+  },
+  {
+    v: "Wat beschrijft de farmacokinetiek?",
+    opties: [
+      "Wat het geneesmiddel met het lichaam doet",
+      "Wat het lichaam met het geneesmiddel doet",
+      "De bijwerkingen van een geneesmiddel",
+      "De manier waarop een geneesmiddel wordt verpakt"
+    ],
+    juist: 1,
+    uitleg: "Farmacokinetiek beschrijft wat het lichaam met het geneesmiddel doet: absorptie (opname), distributie (verspreiding), metabolisme (omzetting) en excretie (uitscheiding) — het ADME-model. Farmacodynamiek beschrijft het omgekeerde: wat het geneesmiddel met het lichaam doet."
+  },
+  {
+    v: "Wat is het first-pass effect en welke toedieningswijzen vermijden het?",
+    opties: [
+      "De eerste afbraak van het geneesmiddel door de nieren — vermeden door IV-toediening",
+      "Afbraak van orale medicatie door de lever vóór het de grote circulatie bereikt — vermeden door sublinguaal of rectaal",
+      "De eerste reactie van het lichaam op een nieuw geneesmiddel — vermeden door langzame opbouw van de dosis",
+      "Het effect van een geneesmiddel bij de eerste inname — vermeden door gespreide toediening"
+    ],
+    juist: 1,
+    uitleg: "Het first-pass effect treedt op bij orale inname: het geneesmiddel passeert via het poortsysteem de lever, die een deel afbreekt vóór het de systemische circulatie bereikt. Sublinguaal (via mondslijmvlies) en rectaal (via rectaal slijmvlies) gaan rechtstreeks naar de bloedbaan en vermijden dit effect."
+  },
+  {
+    v: "Wat is de biologische beschikbaarheid van een intraveneus toegediend geneesmiddel?",
+    opties: [
+      "0% — omdat het geneesmiddel direct wordt afgebroken",
+      "Afhankelijk van het soort geneesmiddel",
+      "100% — omdat het direct in de bloedbaan terechtkomt",
+      "50% — omdat de helft in de weefsels wordt opgeslagen"
+    ],
+    juist: 2,
+    uitleg: "Bij intraveneuze toediening komt het geneesmiddel direct in de bloedbaan. Er is geen absorptie via slijmvliezen en geen first-pass effect. De biologische beschikbaarheid is bijgevolg 100%."
+  },
+  {
+    v: "Wat is het therapeutisch venster?",
+    opties: [
+      "De tijdsduur waarin een geneesmiddel effectief is na inname",
+      "De zone tussen de minimale en maximale bloedspiegel waarbij een geneesmiddel effectief is zonder toxiciteit",
+      "Het tijdsinterval tussen twee doses van een geneesmiddel",
+      "De temperatuurzone waarin geneesmiddelen bewaard moeten worden"
+    ],
+    juist: 1,
+    uitleg: "Het therapeutisch venster bepaalt de grenzen van de effectieve bloedspiegel. Onder de minimale grens = subtherapeutisch (te weinig effect). Boven de maximale grens = toxisch (te veel schade). Geneesmiddelen met een smal venster (bv. digoxine, lithium) vereisen strikte monitoring."
+  },
+  {
+    v: "Wat is het verschil tussen een agonist en een antagonist?",
+    opties: [
+      "Een agonist blokkeert de receptor; een antagonist activeert hem",
+      "Een agonist activeert de receptor; een antagonist blokkeert de receptor zonder effect",
+      "Beide activeren receptoren, maar via een ander mechanisme",
+      "Een agonist werkt op enzymen; een antagonist werkt op ionkanalen"
+    ],
+    juist: 1,
+    uitleg: "Een agonist bindt aan een receptor en activeert hem — bootst het lichaamseigen effect na (bv. morfine op opiaat-receptoren). Een antagonist bindt aan de receptor maar veroorzaakt geen effect — blokkeert andere stoffen (bv. naloxon als antidoot bij opiaat-overdosis)."
+  },
+  {
+    v: "Een cliënt heeft sublinguaal medicatie gekregen. Wat is het voornaamste voordeel hiervan?",
+    opties: [
+      "De medicatie werkt langer dan orale medicatie",
+      "Er is geen first-pass effect — de medicatie wordt via het mondslijmvlies snel in de bloedbaan opgenomen",
+      "De medicatie kan worden ingenomen door mensen die niet kunnen slikken én is onderhevig aan het first-pass effect",
+      "De biologische beschikbaarheid is lager dan bij orale inname"
+    ],
+    juist: 1,
+    uitleg: "Sublinguale medicatie lost op onder de tong en wordt opgenomen via het rijkgevasculariseerde mondslijmvlies, rechtstreeks in de bloedbaan. Er is geen first-pass effect → werkt zeer snel. Voorbeeld: nitraten bij angina pectoris."
+  },
+  {
+    v: "Een cliënt vertoont na weken gebruik van een geneesmiddel plotseling bijwerkingen. Welk fenomeen verklaart dit het best?",
+    opties: [
+      "Allergie — de cliënt heeft antistoffen ontwikkeld tegen het geneesmiddel",
+      "Cumulatie — het geneesmiddel heeft zich opgestapeld tot in de toxische zone",
+      "Idiosyncrasie — er is een genetische factor aanwezig die laattijdig wordt geactiveerd",
+      "Intolerantie — het lichaam heeft het geneesmiddel nooit volledig kunnen verdragen"
+    ],
+    juist: 1,
+    uitleg: "Cumulatie (opstapeling) treedt op wanneer de absorptie sneller verloopt dan de excretie, waardoor de concentratie geleidelijk stijgt tot in de toxische zone. Bijwerkingen kunnen pas na weken optreden. Klassiek voorbeeld: digoxine/Lanoxin®. Als hulpverlener moet je hierop bedacht zijn."
+  },
+  {
+    v: "Welke rol heeft de hulpverlener bij medicatiegebruik van een cliënt?",
+    opties: [
+      "De hulpverlener schrijft medicatie voor en past de dosering aan",
+      "De hulpverlener observeert de cliënt, motiveert therapietrouw en meldt bijwerkingen aan het zorgteam",
+      "De hulpverlener zorgt enkel voor de bewaring van de medicatie",
+      "De hulpverlener heeft geen rol bij medicatiegebruik — dit is uitsluitend een taak van de arts en apotheker"
+    ],
+    juist: 1,
+    uitleg: "Als hulpverlener sta je dicht bij de cliënt. Je observeert gedragsveranderingen, signaleert bijwerkingen, motiveert de cliënt tot therapietrouw en rapporteert bevindingen aan het zorgteam. Voorschrijven en aanpassen is enkel voorbehouden aan artsen."
+  }
+];
+
+function bouwQuiz() {
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = '';
+  let score = 0;
+  let beantwoord = 0;
+
+  quizVragen.forEach((v, i) => {
+    const d = document.createElement('div');
+    d.className = 'vraag-kaart';
+    d.innerHTML = `<div class="vraag-num">Vraag ${i+1} van ${quizVragen.length}</div>
+      <div class="vraag-tekst">${v.v}</div>
+      ${v.opties.map((o, j) => `<button class="optie-knop" onclick="checkAntwoord(this, ${j}, ${v.juist}, ${i}, '${v.uitleg.replace(/'/g,"\\'")}', this.closest('.vraag-kaart'))">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}
+      <div class="quiz-feedback" id="fb-${i}" style="display:none;"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function checkAntwoord(knop, gekozen, juist, idx, uitleg, kaart) {
+  if (kaart.classList.contains('beantwoord')) return;
+  kaart.classList.add('beantwoord');
+  kaart.querySelectorAll('.optie-knop').forEach((k, j) => {
+    k.disabled = true;
+    if (j === juist) k.classList.add('juist');
+    else if (j === gekozen && gekozen !== juist) k.classList.add('fout');
+  });
+  const fb = document.getElementById('fb-' + idx);
+  const ok = gekozen === juist;
+  fb.className = 'quiz-feedback ' + (ok ? 'juist' : 'fout');
+  fb.innerHTML = (ok ? '✓ Juist. ' : '✗ Niet juist. ') + uitleg;
+  fb.style.display = 'block';
+
+  // Check score
+  const alleBeantwoord = document.querySelectorAll('.vraag-kaart.beantwoord').length;
+  const aantalJuist = document.querySelectorAll('.optie-knop.juist').length;
+  if (alleBeantwoord === quizVragen.length) {
+    const container = document.getElementById('quiz-container');
+    const scoreDiv = document.createElement('div');
+    scoreDiv.className = 'quiz-score';
+    scoreDiv.innerHTML = `<div class="score-getal">${aantalJuist}/${quizVragen.length}</div>
+      <div class="score-label">${aantalJuist >= 8 ? '🎉 Uitstekend! Je beheerst de stof van dit leerpad.' : aantalJuist >= 6 ? '👍 Goed gedaan. Herhaal de modules waar je fouten maakte.' : '📚 Herhaal de stof en probeer opnieuw.'}</div>
+      <button class="kdg-knop kdg-knop-primair" onclick="document.getElementById('quiz-container').innerHTML=''; bouwQuiz();" style="margin-top:16px;">↺ Opnieuw</button>`;
+    container.appendChild(scoreDiv);
+  }
+}
+</script>
+</body>
+</html>
